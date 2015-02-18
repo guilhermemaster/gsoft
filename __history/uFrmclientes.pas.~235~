@@ -1,0 +1,1375 @@
+unit uFrmclientes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Data.DB, Datasnap.DBClient, uFrmpnte,
+  Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls, Vcl.ComCtrls, Vcl.ToolWin, Vcl.Grids,
+  Vcl.DBGrids, uDmimagens, RzEdit, RzDBEdit, RzCmboBx, RzDBCmbo, RzButton,
+  RzRadChk, RzDBChk, RzDBBnEd, uXDbEdit, uFrmbuscacidade, ppComm, ppRelatv,
+  ppDB, ppDBPipe, dxGDIPlusClasses, ppCtrls, ppPrnabl, ppClass, ppBands,
+  ppCache, ppDesignLayer, ppParameter, ppProd, ppReport, ppVar;
+
+type
+  TForm2 = class(TForm)
+    cdscliente: TClientDataSet;
+    dscliente: TDataSource;
+    coluncdsclienteidcodigo: TIntegerField;
+    coluncdsclientenome: TWideStringField;
+    coluncdsclientecpf: TWideStringField;
+    colunr: TWideStringField;
+    colunr1: TWideStringField;
+    colunrr: TWideStringField;
+    colun_nascimento: TDateField;
+    coluncdsclienteuf: TWideStringField;
+    colun_cadastro: TDateField;
+    colun_civil: TWideStringField;
+    coluncdsclienterg: TWideStringField;
+    coluncdsclientemunicipio: TWideStringField;
+    coluncdsclientebairro: TWideStringField;
+    colun_pessoa: TWideStringField;
+    colun_1: TWideStringField;
+    colun_2: TWideStringField;
+    coluncdsclienteemail: TWideStringField;
+    coluncdsclienterenda: TFloatField;
+    colun_trabalho: TWideStringField;
+    colun_trabalho1: TWideStringField;
+    colun_trabalho2: TWideStringField;
+    colun_trabalho3: TWideStringField;
+    colun_trabalho4: TWideStringField;
+    colun_trabalho5: TWideStringField;
+    colun_trabalho6: TWideStringField;
+    colun_trabalho7: TWideStringField;
+    colun_credito: TFloatField;
+    colun_pessoal_1: TWideStringField;
+    colun_pessoal_2: TWideStringField;
+    colun_pessoa_1: TWideStringField;
+    colun_pessoal_3: TWideStringField;
+    colun_pessoal_4: TWideStringField;
+    colun_pessoa_2: TWideStringField;
+    tlb1: TToolBar;
+    pgc1: TPageControl;
+    ts1: TTabSheet;
+    ts2: TTabSheet;
+    dbgrd1: TDBGrid;
+    btnnovo: TToolButton;
+    btneditar: TToolButton;
+    btngravar: TToolButton;
+    btnexcluir: TToolButton;
+    btndesistir: TToolButton;
+    btninicio: TToolButton;
+    btnanterio: TToolButton;
+    btnproximo: TToolButton;
+    btnultimo: TToolButton;
+    btn10: TToolButton;
+    btn11: TToolButton;
+    chkclientes: TCheckBox;
+    lbl11: TLabel;
+    lbl4: TLabel;
+    lbl1: TLabel;
+    lbl3: TLabel;
+    lbl8: TLabel;
+    lbl10: TLabel;
+    lbl6: TLabel;
+    lbl9: TLabel;
+    lbl5: TLabel;
+    lbl2: TLabel;
+    lbl17: TLabel;
+    lbl34: TLabel;
+    lbl13: TLabel;
+    lbl14: TLabel;
+    lbl15: TLabel;
+    pgc2: TPageControl;
+    ts3: TTabSheet;
+    ts4: TTabSheet;
+    lbl16: TLabel;
+    lbl35: TLabel;
+    lbl12: TLabel;
+    lbl36: TLabel;
+    lbl37: TLabel;
+    lbl38: TLabel;
+    lbl39: TLabel;
+    lbl40: TLabel;
+    lbl41: TLabel;
+    lbl42: TLabel;
+    lbl19: TLabel;
+    lbl18: TLabel;
+    lbl20: TLabel;
+    lbl30: TLabel;
+    lbl33: TLabel;
+    lbl21: TLabel;
+    dbedtcpf: TDBEdit;
+    dbedtnome: TDBEdit;
+    marcacaostatus_cliente: TRzDBCheckBox;
+    cbbtipo_pessoa: TRzDBComboBox;
+    edtdata_cadastro: TRzDBDateTimeEdit;
+    dbedtrg: TDBEdit;
+    edtdata_nascimento: TRzDBDateTimeEdit;
+    cbbestado_civil: TRzDBComboBox;
+    dbedtcep: TDBEdit;
+    dbedtendereco: TDBEdit;
+    dbedtbairro: TDBEdit;
+    dbedttelefone_1: TDBEdit;
+    dbedttelefone_2: TDBEdit;
+    dbedtemail: TDBEdit;
+    dbedtrenda: TDBEdit;
+    dbedtnome_trabalho: TDBEdit;
+    dbedtlimite_credito: TDBEdit;
+    dbedtendereco_trabalho: TDBEdit;
+    dbedtcep_trabalho: TDBEdit;
+    lbl7: TLabel;
+    dbedtbairro_trabalho: TDBEdit;
+    dbedttelefone_trabalho: TDBEdit;
+    dbedtemail_trabalho: TDBEdit;
+    dbedtnome_pessoal_1: TDBEdit;
+    dbedtnome_pessoal_2: TDBEdit;
+    dbedttelefone_pessoal_1: TDBEdit;
+    dbedtvinculo_pessoa_1: TDBEdit;
+    dbedttelefone_pessoal_2: TDBEdit;
+    dbedtvinculo_pessoa_2: TDBEdit;
+    dbedtmunicipio: TxDbButtonEdit;
+    cbbuf: TDBEdit;
+    dbedtmunicipio_trabalho: TxDbButtonEdit;
+    cbbuf_trabalho: TDBEdit;
+    cbb1: TComboBoxEx;
+    cbb2: TComboBoxEx;
+    edt1: TEdit;
+    btn1: TButton;
+    btn2: TButton;
+    edt2: TRzDateTimeEdit;
+    pdbplncliente: TppDBPipeline;
+    Relatoriocliente: TppReport;
+    prmtrlst1: TppParameterList;
+    pdsgnlyrs1: TppDesignLayers;
+    pdsgnlyr1: TppDesignLayer;
+    phdrbnd1: TppHeaderBand;
+    pdtlbnd1: TppDetailBand;
+    pftrbnd1: TppFooterBand;
+    plbl1: TppLabel;
+    pdbtxtidcodigo: TppDBText;
+    pshp1: TppShape;
+    pmg1: TppImage;
+    plbl2: TppLabel;
+    plbl3: TppLabel;
+    pdbtxttipo_pessoa: TppDBText;
+    plbl4: TppLabel;
+    pdbtxtnome: TppDBText;
+    plbl5: TppLabel;
+    pdbtxtcpf: TppDBText;
+    plbl6: TppLabel;
+    pdbtxtendereco: TppDBText;
+    plbl7: TppLabel;
+    plbl8: TppLabel;
+    psystmvrbl1: TppSystemVariable;
+    plbl9: TppLabel;
+    psystmvrbl2: TppSystemVariable;
+    psystmvrbl3: TppSystemVariable;
+    plbl10: TppLabel;
+    pdbtxtcep: TppDBText;
+    plbl11: TppLabel;
+    pdbtxtdata_nascimento: TppDBText;
+    psmrybnd1: TppSummaryBand;
+    plbl12: TppLabel;
+    pdbclc1: TppDBCalc;
+    plbl13: TppLabel;
+    pdbtxttelefone_1: TppDBText;
+    pln1: TppLine;
+    procedure btngravarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnnovoClick(Sender: TObject);
+    procedure btninicioClick(Sender: TObject);
+    procedure btnanterioClick(Sender: TObject);
+    procedure btnproximoClick(Sender: TObject);
+    procedure btnultimoClick(Sender: TObject);
+    procedure btn11Click(Sender: TObject);
+    procedure btneditarClick(Sender: TObject);
+    procedure btnexcluirClick(Sender: TObject);
+    procedure btndesistirClick(Sender: TObject);
+    procedure dbgrd1CellClick(Column: TColumn);
+    procedure dbgrd1DblClick(Sender: TObject);
+    procedure chkclientesClick(Sender: TObject);
+    procedure dbedtcpfKeyPress(Sender: TObject; var Key: Char);
+    procedure dbedtcepKeyPress(Sender: TObject; var Key: Char);
+    procedure dbedttelefone_1KeyPress(Sender: TObject; var Key: Char);
+    procedure dbedttelefone_2KeyPress(Sender: TObject; var Key: Char);
+    procedure dbedtrendaKeyPress(Sender: TObject; var Key: Char);
+    procedure dbedtcep_trabalhoKeyPress(Sender: TObject; var Key: Char);
+    procedure dbedttelefone_trabalhoKeyPress(Sender: TObject; var Key: Char);
+    procedure dbedttelefone_pessoal_1KeyPress(Sender: TObject; var Key: Char);
+    procedure dbedttelefone_pessoal_2KeyPress(Sender: TObject; var Key: Char);
+    procedure dbedtmunicipioButtonClick(Sender: TObject);
+    procedure dbedtmunicipio_trabalhoButtonClick(Sender: TObject);
+    procedure cbbtipo_pessoaExit(Sender: TObject);
+    procedure ts2Show(Sender: TObject);
+    procedure ts2Enter(Sender: TObject);
+    procedure btn1Click(Sender: TObject);
+    procedure cbb1Exit(Sender: TObject);
+    procedure btn2Click(Sender: TObject);
+    procedure btn10Click(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormResize(Sender: TObject);
+    procedure cdsclientePostError(DataSet: TDataSet; E: EDatabaseError;
+      var Action: TDataAction);
+  private
+    procedure gravar();
+    function  cpf(valor : string): Boolean;
+    function  cnpj(cnpj: string):Boolean;
+    function  ValidarEMail(aStr: string): Boolean;
+    procedure novo();
+    procedure estadocivil();
+    procedure tipo_pessoa();
+    procedure limpar();
+    procedure camposTrue();
+    procedure camposFalse();
+    procedure inicio();
+    procedure editar();
+    procedure deletar();
+    procedure busca_porcodigo();
+    procedure busca_pornome();
+
+
+
+
+    { Private declarations }
+  public
+    function procura_por(valor : string) : string;
+    { Public declarations }
+  end;
+
+var
+  Form2: TForm2;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm2.btn10Click(Sender: TObject);
+begin
+ Relatoriocliente.Print;
+end;
+
+procedure TForm2.btn11Click(Sender: TObject);
+begin
+        Close;
+end;
+
+procedure TForm2.btn1Click(Sender: TObject);
+var
+procura : string;
+begin
+      if (cbb1.Text='PROCURA POR') then
+      begin
+         messagebox (0,'Parâmetro de busca errados','GSoft',mb_ok);
+         Exit;
+      end;
+
+         if  (cbb2.Text='CRITÉRIO') then
+      begin
+         messagebox (0,'Parâmetro de busca errados','GSoft',mb_ok);
+         Exit;
+      end;
+
+
+
+           if (cbb1.Text='NOME') OR (cbb1.Text='CPF/CNPJ') OR (cbb1.Text='TELEFONE') then
+            begin
+              if cbb2.Text='Contém' then
+                 begin
+                    cdscliente.CommandText:='select * from cliente where '+procura_por(cbb1.Text)+' like'+QuotedStr('%'+edt1.Text+'%');
+                   end
+                    else
+                      if cbb2.Text='Inicia' then
+                        begin
+                          cdscliente.CommandText:='select * from cliente where '+procura_por(cbb1.Text)+' like'+QuotedStr(edt1.Text+'%');
+                        end
+                          else
+                            if cbb2.Text='Igual' then
+                               begin
+                                 cdscliente.CommandText:='select * from cliente where '+procura_por(cbb1.Text)+' like'+QuotedStr(edt1.Text);
+                               end
+                                else
+                                   begin
+                                      cdscliente.CommandText:='select * from cliente where '+procura_por(cbb1.Text)+' not like'+QuotedStr('%'+edt1.Text+'%');
+                                         end;
+            end
+              else if cbb1.Text='DATA DE NASCIMENTO' then
+                begin
+                    cdscliente.CommandText:='select * from cliente where '+procura_por(cbb1.Text)+cbb2.Text+QuotedStr(edt2.Text);
+
+
+                end
+                  else
+                    begin
+                       cdscliente.CommandText:='select * from cliente where '+procura_por(cbb1.Text)+cbb2.Text+ edt1.Text;
+
+                    end;
+
+
+
+
+
+
+        cdscliente.Close;
+            cdscliente.Open;
+            cdscliente.First;
+
+end;
+
+procedure TForm2.btn2Click(Sender: TObject);
+begin
+            cdscliente.CommandText:='select * from cliente where status_cliente='+QuotedStr('1') ;
+            cdscliente.Close;
+            cdscliente.Open;
+            cdscliente.First;
+
+            edt1.Clear;
+            edt2.Clear;
+end;
+
+procedure TForm2.btnanterioClick(Sender: TObject);
+begin
+           cdscliente.Edit;
+           cdscliente.Prior;
+
+                                  if cbbtipo_pessoa.Text='JURÍDICA' then
+        begin
+          lbl4.Caption:='CNPJ *';
+          lbl10.Caption:='I.E. *';
+        end
+          else
+              begin
+          lbl4.Caption:='CPF *';
+          lbl10.Caption:='RG *';
+        end;
+
+end;
+
+procedure TForm2.btndesistirClick(Sender: TObject);
+begin
+          dbedtnome.Clear;
+            dbedtcpf.Clear;
+             cdscliente.Cancel;
+
+              inicio();
+
+               cbbtipo_pessoa.Clear;
+                cbbestado_civil.Clear;
+                  cbbuf.Clear;
+                    cbbuf_trabalho.Clear;
+end;
+
+procedure TForm2.btneditarClick(Sender: TObject);
+begin
+     editar();
+
+end;
+
+procedure TForm2.btnexcluirClick(Sender: TObject);
+begin
+      deletar();
+end;
+
+procedure TForm2.btngravarClick(Sender: TObject);
+begin
+       gravar();
+end;
+
+procedure TForm2.gravar();
+var
+    emEstoque: Double;
+    sql : TDataSet;
+    query : TStringBuilder;
+    auxData : TDate;
+    auxDataNow : TDate;
+    Val : Integer;
+begin
+         //Obrigatoriedade
+
+             if (cbbtipo_pessoa.Text = '')  then
+               begin
+               //ShowMessage('Campo Tipo de Pessoa é obrigatório');
+                messagebox (0,'Campo Tipo de Pessoa é obrigatório.','GSoft',mb_ok);
+               Exit;
+             end;
+                   if (dbedtcpf.Text = '')  then
+               begin
+               //ShowMessage('Campo CPF é obrigatório');
+                messagebox (0,'Campo CPF é obrigatório.','GSoft',mb_ok);
+               Exit;
+             end;
+
+                  if (dbedtnome.Text = '')  then
+               begin
+               //ShowMessage('Campo NOME é obrigatório');
+                messagebox (0,'Campo NOME é obrigatório.','GSoft',mb_ok);
+               Exit;
+             end;
+
+               if (dbedtrg.Text = '')  then
+               begin
+               //ShowMessage('Campo RG é obrigatório');
+                messagebox (0,'Campo RG é obrigatório.','GSoft',mb_ok);
+               Exit;
+             end;
+
+                   if (edtdata_nascimento.Text = '')  then
+               begin
+               //ShowMessage('Campo Data de Nascimento é obrigatório');
+               messagebox (0,'Campo Data de Nascimento é obrigatório.','GSoft',mb_ok);
+               Exit;
+             end;
+
+                     if (cbbestado_civil.Text = '')  then
+               begin
+               //ShowMessage('Campo Estado Civíl é obrigatório');
+               messagebox (0,'Campo Estado Civíl é obrigatório.','GSoft',mb_ok);
+               Exit;
+             end;
+
+                           if (dbedtcep.Text = '     -    ')  then
+               begin
+               //ShowMessage('Campo CEP é obrigatório');
+               messagebox (0,'Campo CEP é obrigatório.','GSoft',mb_ok);
+               Exit;
+             end;
+
+                            if (dbedtendereco.Text = '')  then
+               begin
+               //ShowMessage('Campo Endereço é obrigatório');
+               messagebox (0,'Campo Endereço é obrigatório.','GSoft',mb_ok);
+               Exit;
+             end;
+
+                            if (dbedtmunicipio.Text = '')  then
+               begin
+               //ShowMessage('Campo Município é obrigatório');
+               messagebox (0,'Campo Município é obrigatório.','GSoft',mb_ok);
+               Exit;
+             end;
+
+
+                      if (dbedtbairro.Text = '')  then
+               begin
+               messagebox (0,'Campo Bairro é obrigatório.','GSoft',mb_ok);
+               Exit;
+             end;
+
+
+                   if (cbbuf.Text = '')  then
+               begin
+               //ShowMessage('Campo Unidade Federativa é obrigatório');
+               messagebox (0,'Campo Unidade Federativa é obrigatório.','GSoft',mb_ok);
+               Exit;
+             end;
+
+
+                    if ( dbedttelefone_1.Text = '(   )   -    ')  then
+               begin
+               //ShowMessage('Campo do Primeiro Telefone é obrigatório');
+                messagebox (0,'Campo do Primeiro Telefone é obrigatório.','GSoft',mb_ok);
+               Exit;
+             end;
+
+                     if ( dbedtemail.Text = '')  then
+               begin
+               //ShowMessage('Campo EMAIL é obrigatório');
+               messagebox (0,'Campo EMAIL é obrigatório.','GSoft',mb_ok);
+               Exit;
+             end;
+
+
+             //Dados trabalhistas
+
+
+                       if (dbedtrenda.Text = '')  then
+               begin
+               //ShowMessage('Campo Renda é obrigatório');
+               messagebox (0,'Campo Renda é obrigatório.','GSoft',mb_ok);
+               Exit;
+             end;
+
+                                 if (dbedtnome_trabalho.Text = '')  then
+               begin
+               //ShowMessage('Campo Renda é obrigatório');
+               messagebox (0,'Campo Nome do Local de Trabalho é obrigatório.','GSoft',mb_ok);
+               Exit;
+             end;
+
+                             if (dbedtendereco_trabalho.Text = '')  then
+               begin
+               //ShowMessage('Campo Renda é obrigatório');
+               messagebox (0,'Campo Endereço do Local de Trabalho é obrigatório.','GSoft',mb_ok);
+               Exit;
+             end;
+
+                             if (dbedtcep_trabalho.Text = '     -    ')  then
+               begin
+               //ShowMessage('Campo Renda é obrigatório');
+               messagebox (0,'Campo CEP do Local de Trabalho é obrigatório.','GSoft',mb_ok);
+               Exit;
+             end;
+
+                             if (cbbuf_trabalho.Text = '')  then
+               begin
+               //ShowMessage('Campo Renda é obrigatório');
+               messagebox (0,'Campo UF do Local de Trabalho é obrigatório.','GSoft',mb_ok);
+               Exit;
+             end;
+
+                             if (dbedtbairro_trabalho.Text = '')  then
+               begin
+               //ShowMessage('Campo Renda é obrigatório');
+               messagebox (0,'Campo Bairro do Local de Trabalho é obrigatório.','GSoft',mb_ok);
+               Exit;
+             end;
+
+                              if (dbedtmunicipio_trabalho.Text = '')  then
+               begin
+               //ShowMessage('Campo Renda é obrigatório');
+               messagebox (0,'Campo Município do Local de Trabalho é obrigatório.','GSoft',mb_ok);
+               Exit;
+             end;
+
+
+                  if (dbedttelefone_trabalho.Text = '(   )   -    ')  then
+               begin
+               //ShowMessage('Campo Renda é obrigatório');
+               messagebox (0,'Campo Telefone do Local de Trabalho é obrigatório.','GSoft',mb_ok);
+               Exit;
+             end;
+                                    if (dbedtemail_trabalho.Text = '')  then
+               begin
+               //ShowMessage('Campo Renda é obrigatório');
+               messagebox (0,'Campo Email do Local de Trabalho é obrigatório.','GSoft',mb_ok);
+               Exit;
+             end;
+
+
+
+
+
+
+      //validação de data
+
+     auxData := StrToDate(edtdata_nascimento.Text);
+     auxDataNow:=Date;
+     if auxData >auxDataNow then
+      begin
+         //ShowMessage('Data inconsistente!!!');
+         messagebox (0,'Data inconsistente!!!','GSoft',mb_ok);
+          exit;
+
+
+       end;
+     //Validação de email
+
+        if not ValidarEMail(dbedtemail.Text)  then
+          begin
+             messagebox (0,'Email não é válido','GSoft',mb_ok);
+               Exit;
+           end;
+     //Validar email do trabalho
+
+            if not ValidarEMail(dbedtemail_trabalho.Text)  then
+          begin
+             messagebox (0,'Email do local de trabalho não é válido','GSoft',mb_ok);
+               Exit;
+           end;
+
+
+
+
+
+  if AnsiCompareText(cbbtipo_pessoa.Text, 'FÍSICA') = 0 then
+    begin
+     if not cpf(dbedtcpf.Text) then
+          begin
+                      messagebox (0,'CPF não é válido','GSoft',mb_ok);
+                        Exit;
+                 end
+
+         end
+          else
+            begin
+                 if not cnpj(dbedtcpf.Text) then
+                    begin
+                        messagebox (0,'CNPJ não é válido','GSoft',mb_ok);
+                           Exit;
+                              end;
+            end;
+
+    if cbbtipo_pessoa.Text = 'JURÍDICA' then
+      begin
+        //verificar CNPJ
+
+          if  ( StrToIntDef(dbedtrg.Text, 0) = 0 ) and (not (dbedtrg.Text = 'ISENTO')) then
+                   begin
+                       messagebox (0,'Inscrições Estaduais nos Parâmentros Invalidos!!!','GSoft',mb_ok);
+                       Exit;
+                   end;
+
+
+        end;
+
+
+                //Cliente em geral
+
+               // cdscliente.Edit;
+               //  Try
+                      cdscliente.Post;
+
+                    //  Except
+
+
+                     // End;
+
+                cdscliente.ApplyUpdates(0);
+
+
+
+                  cdscliente.Insert;
+                  cdscliente.Close;
+                  cdscliente.Open;
+                  cdscliente.Insert;
+
+                   //volta para a primeira aba
+                   pgc1.ActivePage := ts1;
+
+                   //seta o primeiro do dataset de memória
+                   cdscliente.First;
+                    //Campos do menu principal
+                   //habilita o "Editar, novo, inicio, proximo, anterio, ultimo"
+                    btneditar.Enabled:=True;
+                    btnnovo.Enabled:=True;
+                    btninicio.Enabled:=True;
+                    btnproximo.Enabled:=True;
+                    btnanterio.Enabled:=True;
+                    btnultimo.Enabled:=True;
+                  //desabilita o campo "gravar e desistir"
+                    btngravar.Enabled:=False;
+                    btndesistir.Enabled:=False;
+
+                   //Campos de cadastro
+                        camposFalse();
+                  //Limpa os campos "Tipo de pessoa e estado civil"
+                       cbbtipo_pessoa.Clear;
+                       cbbestado_civil.Clear;
+                       cbbuf.Clear;
+                       cbbuf_trabalho.Clear;
+
+end;
+
+procedure TForm2.btninicioClick(Sender: TObject);
+begin
+  cdscliente.Edit;
+  cdscliente.First;
+end;
+
+procedure TForm2.btnnovoClick(Sender: TObject);
+begin
+   novo();
+end;
+
+procedure TForm2.btnproximoClick(Sender: TObject);
+begin
+      cdscliente.Edit;
+      cdscliente.Next;
+
+                       if cbbtipo_pessoa.Text='JURÍDICA' then
+        begin
+          lbl4.Caption:='CNPJ *';
+          lbl10.Caption:='I.E. *';
+        end
+          else
+              begin
+          lbl4.Caption:='CPF *';
+          lbl10.Caption:='RG *';
+        end;
+
+
+end;
+
+procedure TForm2.btnultimoClick(Sender: TObject);
+begin
+            cdscliente.Edit;
+            cdscliente.Last;
+end;
+
+function TForm2.cpf(valor : string): Boolean;
+var
+  num: string;
+  i, t, muda, i2: Integer;
+  recebe, fim, fim2: Integer;
+  fim3: Integer;
+begin
+       num:=valor;
+t:=1;
+fim:=0;
+muda:=10;
+
+
+
+     for i := muda downto 2  do
+       begin
+            recebe:=i*StrToInt(num[t]);
+            t:=t+1;
+            fim:= recebe+fim;
+        end;
+       fim2:=11-(fim mod 11);
+
+
+
+
+
+        muda:=muda+1;
+
+        fim:=0;
+        t:=1;
+      for i := muda downto 2 do
+        begin
+               recebe:=i*strtoint(num[t]);
+               t:=t+1;
+               fim:=recebe+fim;
+        end;
+          fim3:=11-(fim mod 11);
+
+          if (fim2=StrToInt(num[10])) and (fim3=StrToInt(num[11])) then
+            Result:=True
+            else
+            Result:=False;
+
+
+
+
+end;
+
+
+
+function TForm2.cnpj(cnpj: string):Boolean;
+var
+  dig13, dig14 : string;
+  sm, i, r, peso: Integer;
+
+begin
+    if ((CNPJ = '00000000000000') or (CNPJ = '11111111111111') or
+      (CNPJ = '22222222222222') or (CNPJ = '33333333333333') or
+      (CNPJ = '44444444444444') or (CNPJ = '55555555555555') or
+      (CNPJ = '66666666666666') or (CNPJ = '77777777777777') or
+      (CNPJ = '88888888888888') or (CNPJ = '99999999999999') or
+      (length(CNPJ) <> 14))
+     then begin
+            Result := false;
+            exit;
+          end;
+try
+  sm:=0;
+  peso:=2;
+   for i := 12 downto 1 do
+    begin
+       sm := sm + (StrToInt(CNPJ[i]) * peso);
+      peso := peso + 1;
+      if (peso = 10)
+         then peso := 2;
+
+    end;
+    r := sm mod 11;
+    if ((r = 0) or (r = 1))
+       then dig13 := '0'
+    else str((11-r):1, dig13);
+     sm := 0;
+    peso := 2;
+    for i := 13 downto 1 do
+    begin
+      sm := sm + (StrToInt(CNPJ[i]) * peso);
+      peso := peso + 1;
+      if (peso = 10)
+         then peso := 2;
+    end;
+    r := sm mod 11;
+    if ((r = 0) or (r = 1))
+       then dig14 := '0'
+    else str((11-r):1, dig14);
+     if ((dig13 = CNPJ[13]) and (dig14 = CNPJ[14]))
+       then Result := true
+    else Result:= false;
+  except
+    Result := false
+  end;
+
+
+end;
+
+
+
+procedure TForm2.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+         if Key = VK_INSERT then
+          begin
+              novo();
+          end;
+
+
+
+            if Key = VK_RETURN then
+              begin
+                editar();
+              end;
+
+          if ((Shift = [ssCtrl]) And (Key = Ord('S'))) then
+            begin
+              gravar();
+            end;
+
+          if Key=VK_DELETE then
+              begin
+                deletar();
+              end;
+
+           if Key=VK_DELETE then
+            begin
+              deletar();
+            end;
+
+              if ((Shift = [ssCtrl]) And (Key = Ord('P'))) then
+                begin
+                   RelatorioCliente.Print;
+                end;
+
+      if Key = VK_ESCAPE then
+      begin
+                 dbedtnome.Clear;
+            dbedtcpf.Clear;
+             cdscliente.Cancel;
+
+              inicio();
+
+               cbbtipo_pessoa.Clear;
+                cbbestado_civil.Clear;
+                  cbbuf.Clear;
+                    cbbuf_trabalho.Clear;
+      end;
+end;
+
+procedure TForm2.FormResize(Sender: TObject);
+begin
+//
+end;
+
+procedure TForm2.FormShow(Sender: TObject);
+begin
+
+
+           cdscliente.CommandText:='select * from cliente where status_cliente='+QuotedStr('1') ;
+             cdscliente.Close;
+           cdscliente.Open;
+            cdscliente.First;
+           inicio();
+             pgc1.ActivePage := ts1;
+             pgc2.ActivePage := ts3;
+
+                       if cbbtipo_pessoa.Text='JURÍDICA' then
+        begin
+          lbl4.Caption:='CNPJ *';
+          lbl10.Caption:='I.E. *';
+        end
+          else
+              begin
+          lbl4.Caption:='CPF *';
+          lbl10.Caption:='RG *';
+        end;
+
+        edt2.Visible:=False;
+
+
+end;
+
+function  TForm2.ValidarEMail(aStr: string): Boolean;
+begin
+ aStr := Trim(UpperCase(aStr));
+ if Pos('@', aStr) > 1 then
+ begin
+   Delete(aStr, 1, pos('@', aStr));
+   Result := (Length(aStr) > 0) and (Pos('.', aStr) > 2);
+ end
+ else
+   Result := False;
+end;
+procedure TForm2.novo();
+begin
+    pgc1.ActivePage := ts2;
+
+  //limpar();
+
+  btnnovo.Enabled:=False;
+  btngravar.Enabled:=True;
+  btndesistir.Enabled:=True;
+
+    btninicio.Enabled:=False;
+    btnproximo.Enabled:=False;
+    btnanterio.Enabled:=False;
+    btnultimo.Enabled:=False;
+    btneditar.Enabled:=False;
+    btnexcluir.Enabled:=False;
+
+          camposTrue();
+
+            estadocivil();
+              tipo_pessoa();
+
+
+
+
+
+
+                  cdscliente.Append;
+                  cdscliente.FieldByName('status_cliente').Text := '1';
+                  chkclientes.Checked;
+
+                     edtdata_cadastro.Date:=Date;
+                     edtdata_cadastro.Enabled:=False;
+end;
+procedure TForm2.estadocivil();
+begin
+            cbbestado_civil.Items.Add('SOLTEIRO(A)');
+            cbbestado_civil.Items.Add('CASADO(A)');
+            cbbestado_civil.Items.Add('SEPARAD0(A)');
+            cbbestado_civil.Items.Add('VIÚVO(A)');
+
+end;
+procedure TForm2.tipo_pessoa();
+begin
+               cbbtipo_pessoa.Items.Add('FÍSICA');
+                cbbtipo_pessoa.Items.Add('JURÍDICA');
+end;
+
+
+procedure TForm2.ts2Enter(Sender: TObject);
+begin
+                               if cbbtipo_pessoa.Text='JURÍDICA' then
+        begin
+          lbl4.Caption:='CNPJ *';
+          lbl10.Caption:='I.E. *';
+        end
+          else
+              begin
+          lbl4.Caption:='CPF *';
+          lbl10.Caption:='RG *';
+        end;
+
+end;
+
+procedure TForm2.ts2Show(Sender: TObject);
+begin
+      if cbbtipo_pessoa.Text='JURÍDICA' then
+        begin
+          lbl4.Caption:='CNPJ *';
+          lbl10.Caption:='I.E. *';
+        end
+          else
+              begin
+          lbl4.Caption:='CPF *';
+          lbl10.Caption:='RG *';
+        end;
+
+end;
+
+procedure TForm2.limpar();
+begin
+
+      dbedtnome.Clear;
+      dbedtcpf.Clear;
+      {
+      dbedtendereco.Clear;
+      marcacaostatus_cliente.Clear;
+
+      edtdata_cadastro.Clear;
+      edtdata_nascimento.Clear;
+
+      cbbestado_civil.Clear;
+
+      dbedtrg.Clear;
+      dbedtrg.Clear;
+      dbedtlimite_credito.Clear;
+
+      dbedtendereco.Clear;
+      dbedtuf.Clear;
+      dbedtemail.Clear;
+      dbedtcep.Clear;
+      dbedttelefone_1.Clear;
+      dbedtemail_geral.Clear;
+      }
+
+end;
+procedure TForm2.camposTrue();
+begin
+
+        cbbtipo_pessoa.Enabled:=True;
+        dbedtcpf.Enabled:=True;
+        dbedtnome.Enabled:=True;
+        dbedtrg.Enabled:=True;
+        edtdata_nascimento.Enabled:=True;
+        cbbestado_civil.Enabled:=True;
+        dbedtcep.Enabled:=True;
+        dbedtendereco.Enabled:=True;
+        dbedtmunicipio.Enabled:=True;
+       //cbbuf.Enabled:=True;
+        dbedttelefone_1.Enabled:=True;
+        dbedttelefone_2.Enabled:=True;
+        dbedtemail.Enabled:=True;
+        marcacaostatus_cliente.Enabled:=True;
+        dbedtbairro.Enabled:=True;
+
+        dbedtrenda.Enabled:=True;
+        dbedtnome_trabalho.Enabled:=True;
+        dbedtendereco_trabalho.Enabled:=True;
+        dbedtcep_trabalho.Enabled:=True;
+        //cbbuf_trabalho.Enabled:=True;
+        dbedtbairro_trabalho.Enabled:=True;
+        dbedtmunicipio_trabalho.Enabled:=True;
+        dbedttelefone_trabalho.Enabled:=True;
+        dbedtemail_trabalho.Enabled:=True;
+
+
+        dbedtnome_pessoal_1.Enabled:=True;
+        dbedttelefone_pessoal_1.Enabled:=True;
+        dbedtvinculo_pessoa_1.Enabled:=True;
+
+
+        dbedtnome_pessoal_2.Enabled:=True;
+        dbedttelefone_pessoal_2.Enabled:=True;
+        dbedtvinculo_pessoa_2.Enabled:=True;
+end;
+procedure TForm2.cbb1Exit(Sender: TObject);
+begin
+      if cbb1.Text='DATA DE NASCIMENTO' then
+        begin
+          edt2.Visible:=True;
+          edt1.Visible:=False;
+          busca_porcodigo;
+        end;
+
+       if cbb1.Text  = 'CÓDIGO' then
+        BEGIN
+          busca_porcodigo;
+          edt1.Visible:=True;
+          edt2.Visible:=False;
+        END;
+
+          if cbb1.Text  = 'CPF/CNPJ' then
+        BEGIN
+          busca_pornome;
+          edt1.Visible:=True;
+           edt2.Visible:=False;
+        END;
+
+        if cbb1.Text  = 'TELEFONE' then
+        BEGIN
+          busca_pornome;
+           edt1.Visible:=True;
+           edt2.Visible:=False;
+        END;
+
+
+         if cbb1.Text  = 'NOME' then
+        BEGIN
+          busca_pornome;
+           edt2.Visible:=False;
+        END;
+
+end;
+
+procedure TForm2.cbbtipo_pessoaExit(Sender: TObject);
+begin
+          if cbbtipo_pessoa.Text='JURÍDICA' then
+        begin
+          lbl4.Caption:='CNPJ *';
+          lbl10.Caption:='I.E. *';
+          cbbestado_civil.Enabled:=False;
+          cbbestado_civil.Text:='Não contém';
+        end
+          else
+              begin
+          cbbestado_civil.Clear;
+          lbl4.Caption:='CPF *';
+          lbl10.Caption:='RG *';
+          estadocivil();
+          cbbestado_civil.Enabled:=True;
+        end;
+
+end;
+
+procedure TForm2.cdsclientePostError(DataSet: TDataSet; E: EDatabaseError;
+  var Action: TDataAction);
+begin
+  if Pos('Key violation.', e.Message) > 0 then
+    begin
+       messagebox (0,'Usuário já cadastrado!!','GSoft',mb_ok);
+      if cdscliente.State <> dsBrowse then
+      begin
+        cdscliente.Cancel;
+        cdscliente.Append;
+      end
+      else
+        cdscliente.Append;
+    end;
+end;
+
+procedure TForm2.chkclientesClick(Sender: TObject);
+begin
+              if (chkclientes.Checked) then
+        begin
+               cdscliente.CommandText:='select * from cliente ';
+               cdscliente.Close;
+               cdscliente.Open;
+        end
+          else
+          begin
+               cdscliente.CommandText:='select * from cliente where status_cliente='+QuotedStr('1') ;
+               cdscliente.Close;
+               cdscliente.Open;
+          end;
+end;
+
+procedure TForm2.camposFalse();
+begin
+        cbbtipo_pessoa.Enabled:=False;
+        dbedtcpf.Enabled:=False;
+        dbedtnome.Enabled:=False;
+        dbedtrg.Enabled:=False;
+        edtdata_nascimento.Enabled:=False;
+        cbbestado_civil.Enabled:=False;
+        dbedtcep.Enabled:=False;
+        dbedtendereco.Enabled:=False;
+        dbedtmunicipio.Enabled:=False;
+        //cbbuf.Enabled:=False;
+        dbedttelefone_1.Enabled:=False;
+        dbedttelefone_2.Enabled:=False;
+        dbedtemail.Enabled:=False;
+        marcacaostatus_cliente.Enabled:=False;
+        dbedtbairro.Enabled:=False;
+
+        dbedtrenda.Enabled:=False;
+        dbedtnome_trabalho.Enabled:=False;
+        dbedtendereco_trabalho.Enabled:=False;
+        dbedtcep_trabalho.Enabled:=False;
+        //cbbuf_trabalho.Enabled:=False;
+        dbedtbairro_trabalho.Enabled:=False;
+        dbedtmunicipio_trabalho.Enabled:=False;
+        dbedttelefone_trabalho.Enabled:=False;
+        dbedtemail_trabalho.Enabled:=False;
+
+
+        dbedtnome_pessoal_1.Enabled:=False;
+        dbedttelefone_pessoal_1.Enabled:=False;
+        dbedtvinculo_pessoa_1.Enabled:=False;
+
+
+        dbedtnome_pessoal_2.Enabled:=False;
+        dbedttelefone_pessoal_2.Enabled:=False;
+        dbedtvinculo_pessoa_2.Enabled:=False;
+
+end;
+procedure TForm2.inicio();
+begin
+      btnnovo.Enabled:=True;
+      btneditar.Enabled:=True;
+      btngravar.Enabled:=False;
+      btnexcluir.Enabled:=True;
+      btndesistir.Enabled:=False;
+
+      btninicio.Enabled:=True;
+      btnanterio.Enabled:=True;
+      btnproximo.Enabled:=True;
+      btnultimo.Enabled:=True;
+
+      //campos
+      camposFalse();
+
+
+
+
+end;
+procedure TForm2.editar();
+begin
+      cdscliente.Edit;
+      pgc1.ActivePage := ts2;
+
+      dbedtnome.Enabled:=True;
+      dbedtcpf.Enabled:=True;
+      marcacaostatus_cliente.Enabled:=True;
+
+
+
+        btngravar.Enabled:=True;
+        btndesistir.Enabled:=True;
+        btneditar.Enabled:=False;
+
+            estadocivil();
+                  tipo_pessoa();
+
+                      camposTrue();
+end;
+procedure TForm2.dbedtcepKeyPress(Sender: TObject; var Key: Char);
+begin
+                  if not (key in ['0'..'9','.',#8]) then
+
+                         Key:=#0;
+end;
+
+procedure TForm2.dbedtcep_trabalhoKeyPress(Sender: TObject; var Key: Char);
+begin
+                if not (key in ['0'..'9','.',#8]) then
+
+                         Key:=#0;
+end;
+
+procedure TForm2.dbedtcpfKeyPress(Sender: TObject; var Key: Char);
+begin
+  if not (key in ['0'..'9','.',#8]) then
+
+       Key:=#0;
+end;
+
+procedure TForm2.dbedtmunicipioButtonClick(Sender: TObject);
+begin
+          Form3.ShowModal;
+          dbedtmunicipio.Text:=Form3.cidadenome;
+          cbbuf.Text:=Form3.estadonome;
+end;
+
+procedure TForm2.dbedtmunicipio_trabalhoButtonClick(Sender: TObject);
+begin
+          Form3.ShowModal;
+          dbedtmunicipio_trabalho.Text:=Form3.cidadenome;
+          cbbuf_trabalho.Text:=Form3.estadonome;
+end;
+
+procedure TForm2.dbedtrendaKeyPress(Sender: TObject; var Key: Char);
+begin
+                if not (key in ['0'..'9','.',#8]) then
+
+                         Key:=#0;
+end;
+
+procedure TForm2.dbedttelefone_1KeyPress(Sender: TObject; var Key: Char);
+begin
+                    if not (key in ['0'..'9','.',#8]) then
+
+                         Key:=#0;
+end;
+
+procedure TForm2.dbedttelefone_2KeyPress(Sender: TObject; var Key: Char);
+begin
+                 if not (key in ['0'..'9','.',#8]) then
+
+                         Key:=#0;
+end;
+
+procedure TForm2.dbedttelefone_pessoal_1KeyPress(Sender: TObject;
+  var Key: Char);
+begin
+                  if not (key in ['0'..'9','.',#8]) then
+
+                         Key:=#0;
+end;
+
+procedure TForm2.dbedttelefone_pessoal_2KeyPress(Sender: TObject;
+  var Key: Char);
+begin
+                     if not (key in ['0'..'9','.',#8]) then
+
+                         Key:=#0;
+end;
+
+procedure TForm2.dbedttelefone_trabalhoKeyPress(Sender: TObject; var Key: Char);
+begin
+                   if not (key in ['0'..'9','.',#8]) then
+
+                         Key:=#0;
+end;
+
+procedure TForm2.dbgrd1CellClick(Column: TColumn);
+begin
+          btneditar.Enabled:=True;
+end;
+
+procedure TForm2.dbgrd1DblClick(Sender: TObject);
+begin
+           pgc1.ActivePage := ts2;
+           cdscliente.Edit;
+           btngravar.Enabled:=True;
+           btngravar.Enabled:=False;
+end;
+
+procedure TForm2.deletar();
+
+begin
+
+
+      try
+          cdscliente.Delete;
+           cdscliente.ApplyUpdates(0);
+             cdscliente.RefreshRecord;
+      except
+
+
+           messagebox (0,'Não pode ser deletado','GSoft',mb_ok);
+
+
+      end;
+   end;
+
+function TForm2.procura_por(valor : string) : string;
+begin
+     if valor='CÓDIGO' then
+        begin
+          Result:='idcodigo';
+        end
+        else
+          if valor='NOME' then
+            begin
+                    Result:='nome';
+            end
+              else
+                if valor='CPF/CNPJ' then
+                  begin
+                    Result:='cpf';
+                  end
+                    else
+                      if valor='TELEFONE' then
+                        begin
+                             Result:='telefone_1';
+                        end
+                          else
+                             begin
+                               Result:='data_nascimento';
+                                   end;
+
+end;
+
+procedure TForm2.busca_porcodigo();
+begin
+  cbb2.Clear;
+  cbb2.Items.Add('=');
+  cbb2.Items.Add('>=');
+  cbb2.Items.Add('<=');
+  cbb2.Items.Add('>');
+  cbb2.Items.Add('<');
+  cbb2.Items.Add('<>');
+
+end;
+
+procedure TForm2.busca_pornome();
+begin
+  cbb2.Clear;
+  cbb2.Items.Add('Contém');
+  cbb2.Items.Add('Inicia');
+  cbb2.Items.Add('Igual');
+  cbb2.Items.Add('Não Contém');
+
+
+end;
+
+end.

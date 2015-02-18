@@ -1,0 +1,129 @@
+object Form3: TForm3
+  Left = 0
+  Top = 0
+  AutoSize = True
+  Caption = 'Buscar Cidade'
+  ClientHeight = 356
+  ClientWidth = 588
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnClose = FormClose
+  OnKeyDown = FormKeyDown
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lbl4: TLabel
+    Left = 0
+    Top = 0
+    Width = 81
+    Height = 16
+    Caption = 'Buscar Cidade'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object edtbuscar: TEdit
+    Left = 0
+    Top = 16
+    Width = 507
+    Height = 21
+    CharCase = ecUpperCase
+    TabOrder = 0
+    OnKeyDown = edtbuscarKeyDown
+  end
+  object btn2: TButton
+    Left = 513
+    Top = 12
+    Width = 75
+    Height = 25
+    Caption = 'Limpar'
+    TabOrder = 1
+    OnClick = btn2Click
+  end
+  object dbgrd1: TDBGrid
+    Left = 0
+    Top = 59
+    Width = 588
+    Height = 297
+    DataSource = dscidades_estados
+    TabOrder = 2
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    OnKeyDown = dbgrd1KeyDown
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'id'
+        Title.Caption = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'nome'
+        Title.Caption = 'Nome da Cidade'
+        Width = 206
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'codigo_ibge'
+        Title.Caption = 'C'#243'digo Nacional da Cidade'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'nome_1'
+        Title.Caption = 'Nome do Estado'
+        Width = 150
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'sigla'
+        Title.Caption = 'Sigla do Estado'
+        Visible = True
+      end>
+  end
+  object cdscidades_estados: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dsp_cidades_estados'
+    RemoteServer = DataModule1.conponte
+    Left = 528
+    Top = 72
+    object colun_estadosid: TIntegerField
+      FieldName = 'id'
+    end
+    object colun_estadosnome: TWideStringField
+      FieldName = 'nome'
+      Size = 200
+    end
+    object colun_estadoscodigo_ibge: TIntegerField
+      FieldName = 'codigo_ibge'
+    end
+    object colun_estadosnome_1: TWideStringField
+      FieldName = 'nome_1'
+      Size = 200
+    end
+    object colun_estadossigla: TWideStringField
+      FieldName = 'sigla'
+      Size = 200
+    end
+  end
+  object dscidades_estados: TDataSource
+    DataSet = cdscidades_estados
+    Left = 528
+    Top = 176
+  end
+end

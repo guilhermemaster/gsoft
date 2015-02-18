@@ -1,0 +1,114 @@
+object TuFrmcompraporxml: TTuFrmcompraporxml
+  Left = 0
+  Top = 0
+  Caption = 'Compra por XML'
+  ClientHeight = 313
+  ClientWidth = 683
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object btn1: TButton
+    Left = 127
+    Top = 8
+    Width = 113
+    Height = 41
+    Caption = 'Carregar XML'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 0
+    OnClick = btn1Click
+  end
+  object btn2: TButton
+    Left = 8
+    Top = 8
+    Width = 113
+    Height = 41
+    Caption = 'Procura XML'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 1
+    OnClick = btn2Click
+  end
+  object dbgrd1: TDBGrid
+    Left = 8
+    Top = 55
+    Width = 673
+    Height = 250
+    DataSource = dsxml
+    TabOrder = 2
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object ListBox1: TListBox
+    Left = 480
+    Top = 32
+    Width = 185
+    Height = 193
+    ItemHeight = 13
+    TabOrder = 3
+  end
+  object Button1: TButton
+    Left = 336
+    Top = 8
+    Width = 75
+    Height = 25
+    Caption = 'Button1'
+    TabOrder = 4
+    OnClick = Button1Click
+  end
+  object Memo1: TMemo
+    Left = 55
+    Top = 88
+    Width = 185
+    Height = 89
+    Lines.Strings = (
+      'Memo1')
+    TabOrder = 5
+  end
+  object cdsxml: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 496
+    Top = 104
+  end
+  object dsxml: TDataSource
+    DataSet = cdsxml
+    Left = 488
+    Top = 160
+  end
+  object dlgOpen1: TOpenDialog
+    Left = 400
+    Top = 104
+  end
+  object XMLDocument1: TXMLDocument
+    Active = True
+    FileName = 
+      'C:\Users\Windows\Downloads\NFe_XML_26012015150917\NFe_3514110717' +
+      '0938001766551130001074511880056248.xml'
+    Left = 304
+    Top = 152
+    DOMVendorDesc = 'MSXML'
+  end
+  object XMLDocument2: TXMLDocument
+    Left = 376
+    Top = 24
+    DOMVendorDesc = 'MSXML'
+  end
+end

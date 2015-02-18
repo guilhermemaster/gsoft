@@ -1,0 +1,42 @@
+unit uFrmbuscarestado;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids,
+  Data.DB, Datasnap.DBClient;
+
+type
+  TTufrmbuscarestado = class(TForm)
+    edt1: TEdit;
+    btn1: TButton;
+    cdsestados: TClientDataSet;
+    dsestados: TDataSource;
+    dbgrd1: TDBGrid;
+    lbl11: TLabel;
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Tufrmbuscarestado: TTufrmbuscarestado;
+
+implementation
+
+{$R *.dfm}
+
+procedure TTufrmbuscarestado.FormShow(Sender: TObject);
+begin
+
+            cdsestados.CommandText:='select * from estados ';
+
+            cdsestados.Close;
+            cdsestados.Open;
+            cdsestados.First;
+end;
+
+end.

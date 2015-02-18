@@ -1,0 +1,26 @@
+unit uDmimagens;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Vcl.ImgList, Vcl.Controls;
+
+type
+  TDataModule2 = class(TDataModule)
+    imgmenu: TImageList;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DataModule2: TDataModule2;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

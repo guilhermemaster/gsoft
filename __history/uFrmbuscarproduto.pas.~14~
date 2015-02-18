@@ -1,0 +1,110 @@
+unit uFrmbuscarproduto;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids,
+  Data.DB, Datasnap.DBClient;
+
+type
+  TTuFrmbuscarproduto = class(TForm)
+    lbl11: TLabel;
+    edt1: TEdit;
+    btn1: TButton;
+    cdsbuscaprodutos: TClientDataSet;
+    dsbuscaprodutos: TDataSource;
+    dbgrd1: TDBGrid;
+    coluncdsbuscaprodutoscodigo: TIntegerField;
+    coluncdsbuscaprodutosdescricao: TWideStringField;
+    coluncdsbuscaprodutosespecie: TWideStringField;
+    colun_cadastro: TDateField;
+    colun_produto: TWideStringField;
+    coluncdsbuscaprodutoscomplemento: TWideStringField;
+    coluncdsbuscaprodutosmarca: TWideStringField;
+    coluncdsbuscaprodutosfabricante: TWideStringField;
+    coluncdsbuscaprodutosfornecedor: TWideStringField;
+    colun_barra: TWideStringField;
+    coluncdsbuscaprodutosicms: TWideStringField;
+    colun_loja: TFloatField;
+    colun_deposito: TFloatField;
+    coluncdsbuscaprodutoscompra: TFloatField;
+    coluncdsbuscaprodutosvenda: TFloatField;
+    coluncdsbuscaprodutospromocao: TFloatField;
+    colun_reajuste: TDateField;
+    colun_venda: TDateField;
+    colun_max: TFloatField;
+    colun_produto1: TDateField;
+    procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure dbgrd1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure btn1Click(Sender: TObject);
+    procedure edt1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  TuFrmbuscarproduto: TTuFrmbuscarproduto;
+
+implementation
+
+{$R *.dfm}
+
+procedure TTuFrmbuscarproduto.btn1Click(Sender: TObject);
+begin
+             cdsbuscaprodutos.CommandText:='select * from produtos where status_produto like'+QuotedStr('1');
+             cdsbuscaprodutos.Close;
+             cdsbuscaprodutos.Open;
+             cdsbuscaprodutos.First;
+end;
+
+procedure TTuFrmbuscarproduto.dbgrd1KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+
+
+                if Key=VK_RETURN then
+              begin
+                 numero:=coluncdsestadosid.AsString;
+                 nome:=coluncdsestadosnome.AsString;
+                 sigla:=coluncdsestadossigla.AsString;
+                 Close;
+              end;
+
+            if Key = VK_ESCAPE then
+             begin
+               Close;
+             end;
+end;
+
+procedure TTuFrmbuscarproduto.edt1KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+         if Key=VK_RETURN then
+            begin
+            cdsbuscaprodutos.CommandText:='sselect * from produtos where status_produto='+QuotedStr('1')+' and descricao like '+QuotedStr('%'+edt1.Text+'%');
+
+            cdsbuscaprodutos.Close;
+            cdsbuscaprodutos.Open;
+            cdsbuscaprodutos.First;
+            end;
+end;
+
+procedure TTuFrmbuscarproduto.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+            edt1.Clear;
+end;
+
+procedure TTuFrmbuscarproduto.FormShow(Sender: TObject);
+begin
+            cdsbuscaprodutos.CommandText:='select * from produtos where status_produto like'+QuotedStr('1');
+            cdsbuscaprodutos.Close;
+            cdsbuscaprodutos.Open;
+            cdsbuscaprodutos.First;
+end;
+
+end.

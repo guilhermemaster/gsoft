@@ -1,0 +1,70 @@
+object TuFrmbuscarfornecedor: TTuFrmbuscarfornecedor
+  Left = 0
+  Top = 0
+  Caption = 'Buscar Fornecedor'
+  ClientHeight = 356
+  ClientWidth = 588
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lbl4: TLabel
+    Left = 1
+    Top = 2
+    Width = 107
+    Height = 16
+    Caption = 'Buscar Fornecedor'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object edt1: TEdit
+    Left = 1
+    Top = 24
+    Width = 505
+    Height = 21
+    TabOrder = 0
+  end
+  object btn1: TButton
+    Left = 512
+    Top = 20
+    Width = 75
+    Height = 25
+    Caption = 'Limpar'
+    TabOrder = 1
+  end
+  object dbgrd1: TDBGrid
+    Left = 1
+    Top = 51
+    Width = 320
+    Height = 120
+    DataSource = dsbuscarfornecedor
+    TabOrder = 2
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object cdsbuscarfornecedor: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dsp_fornecedor'
+    RemoteServer = ponte.conponte
+    Left = 512
+    Top = 72
+  end
+  object dsbuscarfornecedor: TDataSource
+    DataSet = cdsbuscarfornecedor
+    Left = 512
+    Top = 136
+  end
+end

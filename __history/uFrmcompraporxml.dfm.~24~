@@ -1,0 +1,121 @@
+object TuFrmcompraporxml: TTuFrmcompraporxml
+  Left = 0
+  Top = 0
+  Caption = 'Compra por XML'
+  ClientHeight = 313
+  ClientWidth = 683
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lbl3: TLabel
+    Left = 16
+    Top = 8
+    Width = 54
+    Height = 16
+    Caption = 'Emitente '
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label1: TLabel
+    Left = 16
+    Top = 94
+    Width = 65
+    Height = 16
+    Caption = 'Produtos'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object DBGrid1: TDBGrid
+    Left = 16
+    Top = 32
+    Width = 641
+    Height = 57
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object DBGrid2: TDBGrid
+    Left = 16
+    Top = 116
+    Width = 641
+    Height = 165
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object carrega: TButton
+    Left = 16
+    Top = 287
+    Width = 75
+    Height = 25
+    Caption = 'Carregar XML'
+    TabOrder = 2
+  end
+  object dlgOpen1: TOpenDialog
+    Left = 624
+    Top = 96
+  end
+  object ACBrNFe1: TACBrNFe
+    Configuracoes.Geral.PathSalvar = 'C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\bin\'
+    Configuracoes.Geral.ExibirErroSchema = True
+    Configuracoes.Geral.FormatoAlerta = 'TAG:%TAGNIVEL% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.'
+    Configuracoes.Geral.RetirarAcentos = True
+    Configuracoes.Geral.ValidarDigest = False
+    Configuracoes.WebServices.UF = 'SP'
+    Configuracoes.WebServices.AguardarConsultaRet = 0
+    Configuracoes.WebServices.IntervaloTentativas = 0
+    Configuracoes.WebServices.AjustaAguardaConsultaRet = False
+    Left = 624
+    Top = 32
+  end
+  object cdsmemory_itens: TClientDataSet
+    Aggregates = <>
+    CommandText = #39#39
+    Params = <>
+    Left = 622
+    Top = 148
+    object strngfld_itensproduto: TStringField
+      FieldKind = fkInternalCalc
+      FieldName = 'produto'
+    end
+    object colunMemoryQuantidade: TFloatField
+      FieldName = 'Quantidade'
+    end
+    object colun_itensvalorunitario: TFloatField
+      FieldKind = fkInternalCalc
+      FieldName = 'valorunitario'
+      DisplayFormat = '#,0.00'
+    end
+    object colun_itensvalortotal: TFloatField
+      FieldKind = fkInternalCalc
+      FieldName = 'valortotal'
+      DisplayFormat = '#,0.00'
+    end
+  end
+  object dsmemory_itens: TDataSource
+    AutoEdit = False
+    DataSet = cdsmemory_itens
+    Left = 622
+    Top = 212
+  end
+end

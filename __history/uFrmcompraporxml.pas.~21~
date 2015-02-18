@@ -1,0 +1,122 @@
+unit uFrmcompraporxml;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.DBGrids, Data.DB,
+  Datasnap.DBClient, Vcl.StdCtrls, ACBrBase, ACBrNFe, ACBrNFSe,
+  ACBrNFeDANFEClass, ACBrNFeDANFeESCPOS, Xml.xmldom, Xml.XMLIntf,
+  Xml.Win.msxmldom, Xml.XMLDoc;
+
+type
+  TTuFrmcompraporxml = class(TForm)
+    btn1: TButton;
+    btn2: TButton;
+    cdsxml: TClientDataSet;
+    dsxml: TDataSource;
+    dlgOpen1: TOpenDialog;
+    XMLDocument1: TXMLDocument;
+    Button1: TButton;
+    XMLDocument2: TXMLDocument;
+    Memo1: TMemo;
+
+    procedure btn2Click(Sender: TObject);
+    procedure btn1Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    local: string;
+    { Public declarations }
+  end;
+
+var
+  TuFrmcompraporxml: TTuFrmcompraporxml;
+
+implementation
+
+{$R *.dfm}
+
+procedure TTuFrmcompraporxml.btn1Click(Sender: TObject);
+begin
+//cdsxml.LoadFromFile(local);
+
+
+
+end;
+
+procedure TTuFrmcompraporxml.btn2Click(Sender: TObject);
+begin
+
+ with TOpenDialog.Create(nil) do
+ begin
+   try
+     if Execute then
+     begin
+       local:=FileName;
+     end;
+   finally
+     Free;
+   end;
+ end;
+
+
+end;
+
+procedure TTuFrmcompraporxml.Button1Click(Sender: TObject);
+{
+var
+   Node : IXMLNode;
+begin
+   Node := XMLDocument1.DocumentElement.ChildNodes.FindNode('pessoa');
+
+      ListBox1.Items.Add('Nome.....: ' + Node.ChildNodes['nome'].Text);
+      ListBox1.Items.Add('Idade....: ' + Node.ChildNodes['idade'].Text);
+      ListBox1.Items.Add('Profissao: ' + Node.ChildNodes['profissao'].Text);
+
+end;
+  }
+    var
+    vXMLDoc: TXMLDocument;
+    NodePai,NodeSec,NodeTmp: IXMLNode;
+    nome, codigo: WideString;
+    begin
+       vXMLDoc := TXMLDocument.Create(self);
+
+  // Le conteúdo do arquivo XML informado
+      vXMLDoc.LoadFromFile(local);
+       Memo1.lines.Add( '-------------------------------------------------');
+       Memo1.lines.Add( 'Vamos inserir num campo memo (apenas para ver o resultado do teste');
+       Memo1.lines.Add( VXMLDoc.XML.Text +#13+#13 );
+
+  // Aqui eu peço para encontrar a primeira ocorrencia da Tag <det>>
+  NodePai := vXMLDoc.DocumentElement.childNodes.First.ChildNodes.FindNode('det');
+  // Esse nó vai ser usado no LOOP
+  NodeSec := NodePai;
+  // Posiciona o primeiro elemento encontrado
+  NodeSec.ChildNodes.First;
+  repeat
+    // referencia a tag <prod> dentro de <det>
+    NodeTmp  := NodeSec.ChildNodes['prod'];
+    // da pra ver que é um XML resumido da NFe (so temos uma tag <prod> para cada <det> então não precisaria da linha abaixo
+    // agora se tivéssemos mais de uma seria o caso de posicionar também na primeira ocorrencia.
+    NodeTmp.ChildNodes.First;
+    repeat
+      // pega os dados que vc quiser dentro da tag <prod>
+      nome := NodeTmp.ChildNodes['cProd'].text;     // posso ler assim
+      codigo := NodeTmp.ChildValues['cEan'];        // ou assim
+
+      // vamos inserir no Memo os dados
+      Memo1.Lines.Add('-----------------------------------------------');
+      Memo1.Lines.Add( nome+' ---- '+codigo );
+
+      // vai para a proxima ocorrência <prod> (se houvesse)
+      NodeTmp := NodeTmp.NextSibling;
+    until NodeTmp = nil;
+    // vai para a proxima ocorrência <det>
+    NodeSec := NodeSec.NextSibling;
+  until NodeSec = nil;
+    end;
+
+end.

@@ -1,0 +1,89 @@
+unit uFrmpnte;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, DBXDevartPostgreSQL, Data.DB, Data.SqlExpr,
+  Datasnap.Provider, Data.FMTBcd, Datasnap.DBClient, Datasnap.Win.TConnect;
+
+type
+  Tponte = class(TDataModule)
+    dspcliente: TDataSetProvider;
+    qry_cliente: TSQLDataSet;
+    conponte: TLocalConnection;
+    sqlqryparametros: TSQLQuery;
+    qry_cidade_estados: TSQLDataSet;
+    dsp_cidades_estados: TDataSetProvider;
+    colun_cidade_estadosid: TIntegerField;
+    colun_cidade_estadosnome: TWideStringField;
+    colun_cidade_estadoscodigo_ibge: TIntegerField;
+    colun_cidade_estadosnome_1: TWideStringField;
+    colun_cidade_estadossigla: TWideStringField;
+    qry_produtos: TSQLDataSet;
+    dspprosutos: TDataSetProvider;
+    qry_estados: TSQLDataSet;
+    dspestados: TDataSetProvider;
+    colun_estadosid: TIntegerField;
+    colun_estadosnome: TWideStringField;
+    colun_estadossigla: TWideStringField;
+    colun_produtoscodigo: TIntegerField;
+    colun_produtosdescricao: TWideStringField;
+    colun_produtosespecie: TWideStringField;
+    colun_produtosdata_cadastro: TDateField;
+    colun_produtosstatus_produto: TWideStringField;
+    colun_produtoscomplemento: TWideStringField;
+    colun_produtosmarca: TWideStringField;
+    colun_produtosfabricante: TWideStringField;
+    colun_produtosfornecedor: TWideStringField;
+    colun_produtoscod_barra: TWideStringField;
+    colun_produtosicms: TWideStringField;
+    colun_produtossaldo_loja: TFloatField;
+    colun_produtossaldo_deposito: TFloatField;
+    colun_produtoscompra: TFloatField;
+    colun_produtosvenda: TFloatField;
+    colun_produtospromocao: TFloatField;
+    colun_produtosultimo_reajuste: TDateField;
+    colun_produtosultima_venda: TDateField;
+    colun_produtosdes_max: TFloatField;
+    colun_produtosvalidade_produto: TDateField;
+    qry_cidades: TSQLDataSet;
+    dspcidades: TDataSetProvider;
+    colun_cidadesid: TIntegerField;
+    colun_cidadesnome: TWideStringField;
+    colun_cidadessigla: TWideStringField;
+    colun_cidadesnome_1: TWideStringField;
+    colun_cidadescodigo_ibge: TIntegerField;
+    con1: TSQLConnection;
+    qry_fornecedor: TSQLDataSet;
+    dsp_fornecedor: TDataSetProvider;
+    colun_fornecedoridfornecedor: TIntegerField;
+    colun_fornecedornome: TWideStringField;
+    colun_fornecedorcep: TWideStringField;
+    colun_fornecedorendereco: TWideStringField;
+    colun_fornecedorcidade: TWideStringField;
+    colun_fornecedoruf: TWideStringField;
+    colun_fornecedorcomissao: TFloatField;
+    colun_fornecedorcnpj: TWideStringField;
+    colun_fornecedorinsc_estadual: TWideStringField;
+    colun_fornecedoremail: TWideStringField;
+    colun_fornecedortelefone_1: TWideStringField;
+    colun_fornecedortelefone_2: TWideStringField;
+    colun_fornecedordata_cadastro: TDateField;
+    colun_fornecedorstatus_fornecedor: TWideStringField;
+    colun_fornecedorobser: TWideStringField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ponte: Tponte;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

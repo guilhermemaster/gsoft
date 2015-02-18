@@ -1,0 +1,431 @@
+object ponte: Tponte
+  OldCreateOrder = False
+  Height = 358
+  Width = 795
+  object dspcliente: TDataSetProvider
+    DataSet = qry_cliente
+    Constraints = False
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 96
+    Top = 104
+  end
+  object qry_cliente: TSQLDataSet
+    CommandText = 'select * from cliente'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = con1
+    Left = 24
+    Top = 104
+  end
+  object conponte: TLocalConnection
+    Left = 376
+    Top = 296
+  end
+  object sqlqryparametros: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = con1
+    Left = 480
+    Top = 297
+  end
+  object qry_cidade_estados: TSQLDataSet
+    CommandText = 
+      'select cidades.id, cidades.nome, cidades.codigo_ibge, '#13#10'estados.' +
+      'nome, estados.sigla'#13#10'from cidades'#13#10'join estados on '#13#10'cidades.est' +
+      'ado_id=estados.id'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = con1
+    Left = 224
+    Top = 16
+    object colun_cidade_estadosid: TIntegerField
+      FieldName = 'id'
+    end
+    object colun_cidade_estadosnome: TWideStringField
+      FieldName = 'nome'
+      Size = 200
+    end
+    object colun_cidade_estadoscodigo_ibge: TIntegerField
+      FieldName = 'codigo_ibge'
+    end
+    object colun_cidade_estadosnome_1: TWideStringField
+      FieldName = 'nome_1'
+      Size = 200
+    end
+    object colun_cidade_estadossigla: TWideStringField
+      FieldName = 'sigla'
+      Size = 200
+    end
+  end
+  object dsp_cidades_estados: TDataSetProvider
+    DataSet = qry_cidade_estados
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 336
+    Top = 16
+  end
+  object qry_produtos: TSQLDataSet
+    CommandText = 'select * from produtos'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = con1
+    Left = 192
+    Top = 104
+    object colun_produtoscodigo: TIntegerField
+      FieldName = 'codigo'
+    end
+    object colun_produtosdescricao: TWideStringField
+      FieldName = 'descricao'
+      Size = 150
+    end
+    object colun_produtosespecie: TWideStringField
+      FieldName = 'especie'
+      Size = 150
+    end
+    object colun_produtosdata_cadastro: TDateField
+      FieldName = 'data_cadastro'
+    end
+    object colun_produtosstatus_produto: TWideStringField
+      FieldName = 'status_produto'
+      Size = 45
+    end
+    object colun_produtoscomplemento: TWideStringField
+      FieldName = 'complemento'
+      Size = 300
+    end
+    object colun_produtosmarca: TWideStringField
+      FieldName = 'marca'
+      Size = 150
+    end
+    object colun_produtosfabricante: TWideStringField
+      FieldName = 'fabricante'
+      Size = 150
+    end
+    object colun_produtosfornecedor: TWideStringField
+      FieldName = 'fornecedor'
+      Size = 150
+    end
+    object colun_produtoscod_barra: TWideStringField
+      FieldName = 'cod_barra'
+      Size = 150
+    end
+    object colun_produtosicms: TWideStringField
+      FieldName = 'icms'
+      Size = 150
+    end
+    object colun_produtossaldo_loja: TFloatField
+      FieldName = 'saldo_loja'
+    end
+    object colun_produtossaldo_deposito: TFloatField
+      FieldName = 'saldo_deposito'
+    end
+    object colun_produtoscompra: TFloatField
+      FieldName = 'compra'
+    end
+    object colun_produtosvenda: TFloatField
+      FieldName = 'venda'
+    end
+    object colun_produtospromocao: TFloatField
+      FieldName = 'promocao'
+    end
+    object colun_produtosultimo_reajuste: TDateField
+      FieldName = 'ultimo_reajuste'
+    end
+    object colun_produtosultima_venda: TDateField
+      FieldName = 'ultima_venda'
+    end
+    object colun_produtosdes_max: TFloatField
+      FieldName = 'des_max'
+    end
+    object colun_produtosvalidade_produto: TDateField
+      FieldName = 'validade_produto'
+    end
+  end
+  object dspprosutos: TDataSetProvider
+    DataSet = qry_produtos
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 272
+    Top = 104
+  end
+  object qry_estados: TSQLDataSet
+    CommandText = 'select * from estados'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = con1
+    Left = 456
+    Top = 16
+    object colun_estadosid: TIntegerField
+      FieldName = 'id'
+    end
+    object colun_estadosnome: TWideStringField
+      FieldName = 'nome'
+      Size = 200
+    end
+    object colun_estadossigla: TWideStringField
+      FieldName = 'sigla'
+      Size = 200
+    end
+  end
+  object dspestados: TDataSetProvider
+    DataSet = qry_estados
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 544
+    Top = 16
+  end
+  object qry_cidades: TSQLDataSet
+    CommandText = 
+      'select '#13#10'cidades.id, cidades.nome, cidades.codigo_ibge, estados.' +
+      'sigla, estados.nome'#13#10'from cidades'#13#10'join estados on '#13#10'cidades.est' +
+      'ado_id=estados.id'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = con1
+    Left = 616
+    Top = 16
+    object colun_cidadesid: TIntegerField
+      FieldName = 'id'
+    end
+    object colun_cidadesnome: TWideStringField
+      FieldName = 'nome'
+      Size = 200
+    end
+    object colun_cidadessigla: TWideStringField
+      FieldName = 'sigla'
+      Size = 200
+    end
+    object colun_cidadesnome_1: TWideStringField
+      FieldName = 'nome_1'
+      Size = 200
+    end
+    object colun_cidadescodigo_ibge: TIntegerField
+      FieldName = 'codigo_ibge'
+    end
+  end
+  object dspcidades: TDataSetProvider
+    DataSet = qry_cidades
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 704
+    Top = 16
+  end
+  object con1: TSQLConnection
+    DriverName = 'DevartPostgreSQL'
+    LoginPrompt = False
+    Params.Strings = (
+      'DriverUnit=DBXDevartPostgreSQL'
+      
+        'DriverPackageLoader=TDBXDynalinkDriverLoader,DBXCommonDriver180.' +
+        'bpl'
+      
+        'MetaDataPackageLoader=TDBXDevartPostgreSQLMetaDataCommandFactory' +
+        ',DbxDevartPostgreSQLDriver180.bpl'
+      'ProductName=DevartPostgreSQL'
+      'GetDriverFunc=getSQLDriverPostgreSQL'
+      'LibraryName=dbexppgsql40.dll'
+      'LocaleCode=0000'
+      'IsolationLevel=ReadCommitted'
+      'MaxBlobSize=-1'
+      'FetchAll=True'
+      'UseQuoteChar=False'
+      'UseUnicode=True'
+      'HostName=localhost'
+      'Database=Novo'
+      'User_Name=postgres'
+      'Password=q1w2e3r4')
+    Connected = True
+    Left = 48
+    Top = 16
+  end
+  object qry_fornecedor: TSQLDataSet
+    CommandText = 'select * from fornecedores'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = con1
+    Left = 192
+    Top = 160
+    object colun_fornecedoridfornecedor: TIntegerField
+      FieldName = 'idfornecedor'
+    end
+    object colun_fornecedornome: TWideStringField
+      FieldName = 'nome'
+      Size = 150
+    end
+    object colun_fornecedorcep: TWideStringField
+      FieldName = 'cep'
+      Size = 100
+    end
+    object colun_fornecedorendereco: TWideStringField
+      FieldName = 'endereco'
+      Size = 150
+    end
+    object colun_fornecedorcidade: TWideStringField
+      FieldName = 'cidade'
+      Size = 200
+    end
+    object colun_fornecedoruf: TWideStringField
+      FieldName = 'uf'
+      Size = 150
+    end
+    object colun_fornecedorcomissao: TFloatField
+      FieldName = 'comissao'
+    end
+    object colun_fornecedorcnpj: TWideStringField
+      FieldName = 'cnpj'
+    end
+    object colun_fornecedorinsc_estadual: TWideStringField
+      FieldName = 'insc_estadual'
+      Size = 200
+    end
+    object colun_fornecedoremail: TWideStringField
+      FieldName = 'email'
+      Size = 150
+    end
+    object colun_fornecedortelefone_1: TWideStringField
+      FieldName = 'telefone_1'
+      Size = 50
+    end
+    object colun_fornecedortelefone_2: TWideStringField
+      FieldName = 'telefone_2'
+      Size = 50
+    end
+    object colun_fornecedordata_cadastro: TDateField
+      FieldName = 'data_cadastro'
+    end
+    object colun_fornecedorstatus_fornecedor: TWideStringField
+      FieldName = 'status_fornecedor'
+    end
+    object colun_fornecedorobser: TWideStringField
+      FieldName = 'obser'
+      Size = 300
+    end
+  end
+  object dsp_fornecedor: TDataSetProvider
+    DataSet = qry_fornecedor
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 280
+    Top = 160
+  end
+  object qrycompra_produto: TSQLDataSet
+    CommandText = 'select * from compra_produto'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = con1
+    Left = 456
+    Top = 104
+    object colun_produtonumero_nota: TIntegerField
+      FieldName = 'numero_nota'
+    end
+    object colun_produtodata_entrada: TDateField
+      FieldName = 'data_entrada'
+    end
+    object colun_produtodata_emissao: TDateField
+      FieldName = 'data_emissao'
+    end
+    object colun_produtomodelo: TWideStringField
+      FieldName = 'modelo'
+      Size = 50
+    end
+    object colun_produtochave_nfe: TWideStringField
+      FieldName = 'chave_nfe'
+      Size = 200
+    end
+    object colun_produtofornecedor: TWideStringField
+      FieldName = 'fornecedor'
+      Size = 200
+    end
+    object colun_produtocnpj_fornecedor: TWideStringField
+      FieldName = 'cnpj_fornecedor'
+    end
+    object colun_produtovalor_da_total_nota: TFloatField
+      FieldName = 'valor_da_total_nota'
+    end
+    object colun_produtodesconto: TFloatField
+      FieldName = 'desconto'
+    end
+  end
+  object dspcompra_produto: TDataSetProvider
+    DataSet = qrycompra_produto
+    Left = 553
+    Top = 104
+  end
+  object qry_intens_tabela: TSQLDataSet
+    CommandText = 'select * from intens_nota'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = con1
+    Left = 456
+    Top = 160
+    object colun_intens_tabelanumero_da_nota_referencia: TIntegerField
+      FieldName = 'numero_da_nota_referencia'
+    end
+    object colun_intens_tabelaitem: TWideStringField
+      FieldName = 'item'
+      Size = 150
+    end
+    object colun_intens_tabelaquantidade: TIntegerField
+      FieldName = 'quantidade'
+    end
+  end
+  object dsp_intens_tabela: TDataSetProvider
+    DataSet = qry_intens_tabela
+    Left = 552
+    Top = 160
+  end
+  object qryconsultaestadofornecedor: TSQLDataSet
+    CommandText = 
+      'select fornecedores.uf, estados.id from fornecedores '#13#10'join esta' +
+      'dos on estados.sigla=fornecedores.uf'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = con1
+    Left = 448
+    Top = 216
+    object colunqryconsultaestadofornecedoruf: TWideStringField
+      FieldName = 'uf'
+      Size = 150
+    end
+    object colunqryconsultaestadofornecedorid: TIntegerField
+      FieldName = 'id'
+    end
+  end
+  object dspconsultaestadofornecedor: TDataSetProvider
+    DataSet = qryconsultaestadofornecedor
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 560
+    Top = 216
+  end
+  object qry_kardex: TSQLDataSet
+    CommandText = 'select * from kardex'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = con1
+    Left = 16
+    Top = 224
+    object colun_kardexidlancamneto: TIntegerField
+      FieldName = 'idlancamneto'
+    end
+    object colun_kardexnota_referente: TIntegerField
+      FieldName = 'nota_referente'
+    end
+    object colun_kardexproduto: TWideStringField
+      FieldName = 'produto'
+      Size = 300
+    end
+    object colun_kardexdata_lancamento: TDateField
+      FieldName = 'data_lancamento'
+    end
+    object colun_kardexestoque: TFloatField
+      FieldName = 'estoque'
+    end
+    object colun_kardextipo: TWideStringField
+      FieldName = 'tipo'
+    end
+    object colun_kardexquantidade: TIntegerField
+      FieldName = 'quantidade'
+    end
+  end
+  object dspkardex: TDataSetProvider
+    DataSet = qry_kardex
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 88
+    Top = 224
+  end
+end

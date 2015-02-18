@@ -1,0 +1,39 @@
+program Gsoft;
+
+uses
+  Vcl.Forms,
+  uFrminicio in 'uFrminicio.pas' {Form1},
+  uFrmclientes in 'uFrmclientes.pas' {Form2},
+  uFrmpnte in 'uFrmpnte.pas' {ponte: TDataModule},
+  Vcl.Themes,
+  Vcl.Styles,
+  uDmimagens in 'uDmimagens.pas' {DataModule2: TDataModule},
+  uFrmbuscacidade in 'uFrmbuscacidade.pas' {Form3},
+  uFrmlayout in 'uFrmlayout.pas' {Form4},
+  uFrmcadastrodeprodutos in 'uFrmcadastrodeprodutos.pas' {Form5},
+  uFrmcadastrodemunicipios in 'uFrmcadastrodemunicipios.pas' {FuFrmcadastrodemunicipios},
+  uFrmbuscarestado in 'uFrmbuscarestado.pas' {Tufrmbuscarestado},
+  uFrmcadastrofornecedor in 'uFrmcadastrofornecedor.pas' {TFurmcadastrofornecedor},
+  uFrmbuscarfornecedor in 'uFrmbuscarfornecedor.pas' {TuFrmbuscarfornecedor},
+  uFrmcompraproduto in 'uFrmcompraproduto.pas' {TuFrmcompraproduto};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  TStyleManager.TrySetStyle('Sapphire Kamri');
+  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TForm2, Form2);
+  Application.CreateForm(Tponte, ponte);
+  Application.CreateForm(TDataModule2, DataModule2);
+  Application.CreateForm(TForm3, Form3);
+  Application.CreateForm(TForm4, Form4);
+  Application.CreateForm(TForm5, Form5);
+  Application.CreateForm(TFuFrmcadastrodemunicipios, FuFrmcadastrodemunicipios);
+  Application.CreateForm(TTufrmbuscarestado, Tufrmbuscarestado);
+  Application.CreateForm(TTFurmcadastrofornecedor, TFurmcadastrofornecedor);
+  Application.CreateForm(TTuFrmbuscarfornecedor, TuFrmbuscarfornecedor);
+  Application.CreateForm(TTuFrmcompraproduto, TuFrmcompraproduto);
+  Application.Run;
+end.
