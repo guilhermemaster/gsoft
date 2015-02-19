@@ -1,5 +1,5 @@
 object Form6: TForm6
-  Left = 0
+  Left = 146
   Top = 0
   Caption = 'Importa NFe Compra '
   ClientHeight = 458
@@ -11,6 +11,7 @@ object Form6: TForm6
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesigned
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -381,7 +382,7 @@ object Form6: TForm6
   end
   object Button2: TButton
     Left = 409
-    Top = 414
+    Top = 418
     Width = 162
     Height = 42
     Caption = 'Finalizar importa'#231#227'o'
@@ -651,6 +652,69 @@ object Form6: TForm6
     end
     object cdsprodutosvalidade_produto: TDateField
       FieldName = 'validade_produto'
+    end
+  end
+  object cdsfornecedor: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dsp_fornecedor'
+    RemoteServer = ponte.conponte
+    Left = 224
+    Top = 176
+    object cdsfornecedoridfornecedor: TIntegerField
+      FieldName = 'idfornecedor'
+    end
+    object cdsfornecedornome: TWideStringField
+      FieldName = 'nome'
+      Size = 150
+    end
+    object cdsfornecedorcep: TWideStringField
+      FieldName = 'cep'
+      Size = 100
+    end
+    object cdsfornecedorendereco: TWideStringField
+      FieldName = 'endereco'
+      Size = 150
+    end
+    object cdsfornecedorcidade: TWideStringField
+      FieldName = 'cidade'
+      Size = 200
+    end
+    object cdsfornecedoruf: TWideStringField
+      FieldName = 'uf'
+      Size = 150
+    end
+    object cdsfornecedorcomissao: TFloatField
+      FieldName = 'comissao'
+    end
+    object cdsfornecedorcnpj: TWideStringField
+      FieldName = 'cnpj'
+    end
+    object cdsfornecedorinsc_estadual: TWideStringField
+      FieldName = 'insc_estadual'
+      Size = 200
+    end
+    object cdsfornecedoremail: TWideStringField
+      FieldName = 'email'
+      Size = 150
+    end
+    object cdsfornecedortelefone_1: TWideStringField
+      FieldName = 'telefone_1'
+      Size = 50
+    end
+    object cdsfornecedortelefone_2: TWideStringField
+      FieldName = 'telefone_2'
+      Size = 50
+    end
+    object cdsfornecedordata_cadastro: TDateField
+      FieldName = 'data_cadastro'
+    end
+    object cdsfornecedorstatus_fornecedor: TWideStringField
+      FieldName = 'status_fornecedor'
+    end
+    object cdsfornecedorobser: TWideStringField
+      FieldName = 'obser'
+      Size = 300
     end
   end
 end

@@ -3,8 +3,6 @@ inherited Form5: TForm5
   Caption = 'Cadastro de Produtos'
   Position = poScreenCenter
   OnClose = FormClose
-  ExplicitWidth = 713
-  ExplicitHeight = 445
   PixelsPerInch = 96
   TextHeight = 13
   inherited tlb1: TToolBar
@@ -45,7 +43,10 @@ inherited Form5: TForm5
       ActivePage = ts2
       ExplicitWidth = 697
       inherited ts1: TTabSheet
+        ExplicitLeft = 0
+        ExplicitTop = 0
         ExplicitWidth = 689
+        ExplicitHeight = 0
         inherited edt2: TEdit
           Left = 300
           Top = 24
@@ -302,6 +303,10 @@ inherited Form5: TForm5
           TabOrder = 0
           object ts3: TTabSheet
             Caption = 'Estoque'
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object lbl12: TLabel
               Left = 3
               Top = 3
@@ -437,7 +442,6 @@ inherited Form5: TForm5
               ParentShowHint = False
               ShowHint = True
               TabOrder = 2
-              Date = 42048.000000000000000000
               EditType = etDate
             end
             object cbbvenda: TxDbEdit
@@ -649,7 +653,6 @@ inherited Form5: TForm5
           ParentShowHint = False
           ShowHint = True
           TabOrder = 3
-          Date = 42047.000000000000000000
           EditType = etDate
         end
         object cbbespecie: TDBEdit
@@ -715,20 +718,6 @@ inherited Form5: TForm5
           CaractereDecimal = #0
           Padrao = False
         end
-        object dbncm: TDBEdit
-          Left = 327
-          Top = 141
-          Width = 121
-          Height = 21
-          Hint = 'ICMS'
-          CharCase = ecUpperCase
-          DataField = 'ncm'
-          DataSource = dsprodutos
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 10
-          OnKeyPress = cbbicmsKeyPress
-        end
         object dbcean: TDBEdit
           Left = 454
           Top = 141
@@ -740,8 +729,31 @@ inherited Form5: TForm5
           DataSource = dsprodutos
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 11
+          TabOrder = 10
           OnKeyPress = cbbicmsKeyPress
+        end
+        object dbncm: TxDbButtonEdit
+          Left = 327
+          Top = 141
+          Width = 121
+          Height = 21
+          Color = clWhite
+          FocusColor = 13431548
+          ParentShowHint = False
+          ReadOnlyColor = clBtnFace
+          ShowHint = True
+          TabOrder = 11
+          ButtonHint = 'Pressione <F8> para consultar.'
+          ButtonKind = bkFind
+          ButtonShortCut = 119
+          AltBtnWidth = 15
+          ButtonWidth = 15
+          OnButtonClick = dbncmButtonClick
+          EnterPressF8 = False
+          EnterPressConsulta = False
+          Numerico = False
+          CaractereDecimal = #0
+          Padrao = False
         end
       end
     end

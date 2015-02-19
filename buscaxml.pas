@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, ACBrNFe, Vcl.Grids,
-  Vcl.DBGrids, Data.DB, Datasnap.DBClient, uFrmpnte, uFrmcadastrodeprodutos;
+  Vcl.DBGrids, Data.DB, Datasnap.DBClient, uFrmpnte, uFrmcadastrodeprodutos, uFrmcadastrofornecedor;
 
 type
   TForm6 = class(TForm)
@@ -87,6 +87,22 @@ type
     cdsprodutosdes_max: TFloatField;
     cdsprodutosvalidade_produto: TDateField;
     cdsmemory_itensN: TStringField;
+    cdsfornecedor: TClientDataSet;
+    cdsfornecedoridfornecedor: TIntegerField;
+    cdsfornecedornome: TWideStringField;
+    cdsfornecedorcep: TWideStringField;
+    cdsfornecedorendereco: TWideStringField;
+    cdsfornecedorcidade: TWideStringField;
+    cdsfornecedoruf: TWideStringField;
+    cdsfornecedorcomissao: TFloatField;
+    cdsfornecedorcnpj: TWideStringField;
+    cdsfornecedorinsc_estadual: TWideStringField;
+    cdsfornecedoremail: TWideStringField;
+    cdsfornecedortelefone_1: TWideStringField;
+    cdsfornecedortelefone_2: TWideStringField;
+    cdsfornecedordata_cadastro: TDateField;
+    cdsfornecedorstatus_fornecedor: TWideStringField;
+    cdsfornecedorobser: TWideStringField;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -106,6 +122,8 @@ type
     procedure carregadest();
     procedure carregainfornota();
     procedure insercaokardex();
+    function exiteCNPJ(cnpj : String): Boolean;
+    function ValidaCNPJExistentes(): Boolean;
 
 
     { Public declarations }
@@ -121,7 +139,6 @@ procedure TForm6.Button1Click(Sender: TObject);
 begin
    if OpenDialog1.Execute then
    begin
-   cdsmemory_itens.CreateDataSet;
    cdsmemory_itens.Insert;
 
    ACBrNFe1.NotasFiscais.Clear;
@@ -135,6 +152,14 @@ end;
 
 procedure TForm6.Button2Click(Sender: TObject);
 begin
+while not ValidaCNPJExistentes() do
+  begin
+       //ValidaCeanExistentes();
+       //Form5.ShowModal;
+       TFurmcadastrofornecedor.ShowModal;
+  end;
+
+
 while not ValidaCeanExistentes() do
   begin
        //ValidaCeanExistentes();
@@ -153,8 +178,15 @@ begin
         cdsprodutos.Open;
         cdsprodutos.First;
 
+        cdsfornecedor.CommandText:='select * from fornecedores where status_fornecedor='+QuotedStr('1');
+        cdsfornecedor.Close;
+        cdsfornecedor.Open;
+        cdsfornecedor.First;
+
         Button2.Enabled:=False;
 
+        cdsmemory_itens.CreateDataSet;
+        cdsmemory_itens.Open;
 end;
 
 procedure TForm6.primordial;
@@ -223,8 +255,51 @@ begin
 
 end;
 
+function TForm6.exiteCNPJ(cnpj : String): Boolean;
+begin
+   cdsfornecedor.commandText:='select * from fornecedores where cnpj='+QuotedStr(cnpj);
+   cdsfornecedor.close;
+   cdsfornecedor.open;
+
+   Result:=(cdsfornecedor.recordcount>0);
+end;
+
+function TForm6.ValidaCNPJExistentes(): Boolean;
+var
+  itens : Integer;
+
+begin
+  cdsmemory_itens.First;
+
+  while not (cdsmemory_itens.Eof) do
+  begin
+    if not exiteCNPJ(ACBrNFe1.NotasFiscais.Items[0].NFe.Emit.CNPJCPF) then
+		begin
+			itens := itens+1;
+		end;
+
+		cdsmemory_itens.Next;
+  end;
+
+  if itens =1 then
+  begin
+
+     Showmessage('itens da nota não cadastrados no sistema:');
+     Result:=False;
+
+  end
+    else
+    begin
+      Result:=True;
+
+
+    end;
+
+end;
+
 procedure TForm6.carregaemit();
 begin
+//Carrega informações do emitente
   cnpjemit.Text:=ACBrNFe1.NotasFiscais.Items[0].NFe.Emit.CNPJCPF;
   nomeemit.Text:= ACBrNFe1.NotasFiscais.Items[0].NFe.Emit.xNome;
   fantasiaemit.Text:=ACBrNFe1.NotasFiscais.Items[0].NFe.Emit.xFant;
@@ -301,6 +376,7 @@ end;
 procedure TForm6.carregadest();
 begin
   cnpjdest.Text:=ACBrNFe1.NotasFiscais.Items[0].NFe.Dest.CNPJCPF;
+  ShowMessage('CNPJ do destinatário'+cnpjdest.Text);
   nomedest.Text:=ACBrNFe1.NotasFiscais.Items[0].NFe.Dest.xNome;
   emaildest.Text:=ACBrNFe1.NotasFiscais.Items[0].NFe.Dest.Email;
   iedest.Text:= ACBrNFe1.NotasFiscais.Items[0].NFe.Dest.IE;

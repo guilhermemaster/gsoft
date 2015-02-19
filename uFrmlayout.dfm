@@ -173,6 +173,10 @@ object Form4: TForm4
       object ts2: TTabSheet
         Caption = 'Cadastro'
         ImageIndex = 1
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
       end
     end
   end

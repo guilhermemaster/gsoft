@@ -103,6 +103,15 @@ type
     qry_produtosultima_venda: TDateField;
     qry_produtosdes_max: TFloatField;
     qry_produtosvalidade_produto: TDateField;
+    qry_ncm: TSQLDataSet;
+    dsncm: TDataSetProvider;
+    qry_ncmc_codigo: TWideStringField;
+    qry_ncmc_descr: TWideStringField;
+    qry_ncmc_ex: TFMTBCDField;
+    qry_ncmc_tabela: TWideStringField;
+    qry_ncmc_aliqnac: TFMTBCDField;
+    qry_ncmc_aliqimp: TFMTBCDField;
+    qry_ncmsr_recno: TFMTBCDField;
   private
     { Private declarations }
   public

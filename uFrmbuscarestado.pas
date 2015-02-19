@@ -39,59 +39,72 @@ implementation
 
 procedure TTufrmbuscarestado.btn1Click(Sender: TObject);
 begin
-             cdsestados.CommandText:='select * from estados ';
-
-             cdsestados.Close;
-             cdsestados.Open;
-             cdsestados.First;
+//inicializa a busca quando e clicado mostrando todos os estados
+  cdsestados.CommandText:='select * from estados ';
+  cdsestados.Close;
+  cdsestados.Open;
+  cdsestados.First;
 end;
 
 procedure TTufrmbuscarestado.dbgrd1KeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
-
-
 begin
-            if Key=VK_RETURN then
-              begin
-                 numero:=coluncdsestadosid.AsString;
-                 nome:=coluncdsestadosnome.AsString;
-                 sigla:=coluncdsestadossigla.AsString;
-                 Close;
-              end;
+//puxa os valores selecionados para a variavel global e fecha a tela
+  if Key=VK_RETURN then
+  begin
+    numero:=coluncdsestadosid.AsString;
+    nome:=coluncdsestadosnome.AsString;
+    sigla:=coluncdsestadossigla.AsString;
+    Close;
+  end;
 
-            if Key = VK_ESCAPE then
-             begin
-               Close;
-             end;
+  //fecha a tela
+  if Key = VK_ESCAPE then
+  begin
+    Close;
+  end;
 end;
 
 procedure TTufrmbuscarestado.edt1KeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-          if Key=VK_RETURN then
-            begin
-            cdsestados.CommandText:='select * from estados where nome like '+QuotedStr('%'+edt1.Text+'%');
+//Ao aberta enter e feita a busca com o que tem digitado
+  if Key=VK_RETURN then
+  begin
+    cdsestados.CommandText:='select * from estados where nome like '+QuotedStr('%'+edt1.Text+'%');
+    cdsestados.Close;
+    cdsestados.Open;
+    cdsestados.First;
+  end;
 
-            cdsestados.Close;
-            cdsestados.Open;
-            cdsestados.First;
-            end;
+    //vai passando de célula por célula
+  if Key = VK_PRIOR then
+  begin
+    cdsestados.Prior;
+  end;
+
+  //vai passando de célula por célula
+  if Key = VK_NEXT then
+  begin
+    cdsestados.Next;
+  end;
 
 end;
 
 procedure TTufrmbuscarestado.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-           edt1.Clear;
+//limpa o campo de busca
+  edt1.Clear;
 end;
 
 procedure TTufrmbuscarestado.FormShow(Sender: TObject);
+//Faz um select inicial
 begin
-
-            cdsestados.CommandText:='select * from estados ';
-            cdsestados.Close;
-            cdsestados.Open;
-            cdsestados.First;
+  cdsestados.CommandText:='select * from estados ';
+  cdsestados.Close;
+  cdsestados.Open;
+  cdsestados.First;
 end;
 
 end.

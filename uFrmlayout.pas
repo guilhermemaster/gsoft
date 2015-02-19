@@ -51,28 +51,28 @@ implementation
 
 procedure TForm4.btn11Click(Sender: TObject);
 begin
-      Close;
+  Close;
 end;
 
 procedure TForm4.FormShow(Sender: TObject);
 begin
-               pgc1.ActivePage := ts1;
-
+//Toda vez que for iniciado ele ira seta primeiro a primeira aba
+  pgc1.ActivePage := ts1;
 end;
 
 procedure TForm4.inicio();
 begin
-      btnnovo.Enabled:=True;
-      btneditar.Enabled:=True;
-      btngravar.Enabled:=False;
-      btnexcluir.Enabled:=True;
-      btndesistir.Enabled:=False;
+//Traz os botões para a forma inicial
+  btnnovo.Enabled:=True;
+  btneditar.Enabled:=True;
+  btngravar.Enabled:=False;
+  btnexcluir.Enabled:=True;
+  btndesistir.Enabled:=False;
 
-
-      btninicio.Enabled:=True;
-      btnanterio.Enabled:=True;
-      btnproximo.Enabled:=True;
-      btnultimo.Enabled:=True;
+  btninicio.Enabled:=True;
+  btnanterio.Enabled:=True;
+  btnproximo.Enabled:=True;
+  btnultimo.Enabled:=True;
 end;
 
 

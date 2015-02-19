@@ -13,4 +13,25 @@ object Form7: TForm7
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
+  object GroupBox1: TGroupBox
+    Left = 16
+    Top = 24
+    Width = 481
+    Height = 265
+    Caption = '  Item  '
+    TabOrder = 0
+    object lbl11: TLabel
+      Left = 11
+      Top = 22
+      Width = 62
+      Height = 16
+      Caption = 'N'#186' da Nota'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+  end
 end

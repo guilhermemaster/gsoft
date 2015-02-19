@@ -1,8 +1,6 @@
 inherited FuFrmcadastrodemunicipios: TFuFrmcadastrodemunicipios
   Caption = 'Cadastro de Munic'#237'pios'
   Position = poScreenCenter
-  ExplicitWidth = 713
-  ExplicitHeight = 445
   PixelsPerInch = 96
   TextHeight = 13
   inherited tlb1: TToolBar
@@ -39,6 +37,7 @@ inherited FuFrmcadastrodemunicipios: TFuFrmcadastrodemunicipios
   end
   inherited pnl1: TPanel
     inherited pgc1: TPageControl
+      ActivePage = ts2
       inherited ts1: TTabSheet
         inherited cbb1: TComboBoxEx
           ItemsEx = <

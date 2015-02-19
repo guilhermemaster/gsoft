@@ -9,7 +9,7 @@ uses
   Data.DB, Datasnap.DBClient, Vcl.DBCtrls, RzDBEdit, RzButton, RzRadChk, RzDBChk,
   RzCmboBx, RzDBCmbo, ppDesignLayer, ppParameter, ppProd, ppClass, ppReport,
   ppComm, ppRelatv, ppDB, ppDBPipe, ppVar, ppCtrls, dxGDIPlusClasses, ppBands,
-  ppPrnabl, ppCache, uXDbEdit, uFrmbuscarfornecedor, RzDBBnEd;
+  ppPrnabl, ppCache, uXDbEdit, uFrmbuscarfornecedor, RzDBBnEd, uFrmbuscaNCM;
 
 type
   TForm5 = class(TForm4)
@@ -91,7 +91,6 @@ type
     psystmvrbl3: TppSystemVariable;
     cbbfornecedor: TxDbButtonEdit;
     Label1: TLabel;
-    dbncm: TDBEdit;
     Label2: TLabel;
     dbcean: TDBEdit;
     cdsprodutoscodigo: TIntegerField;
@@ -117,6 +116,7 @@ type
     cdsprodutosultima_venda: TDateField;
     cdsprodutosdes_max: TFloatField;
     cdsprodutosvalidade_produto: TDateField;
+    dbncm: TxDbButtonEdit;
     procedure FormShow(Sender: TObject);
     procedure btnnovoClick(Sender: TObject);
     procedure btndesistirClick(Sender: TObject);
@@ -142,6 +142,7 @@ type
     procedure btn13Click(Sender: TObject);
     procedure dbgrd1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure cbbfornecedorButtonClick(Sender: TObject);
+    procedure dbncmButtonClick(Sender: TObject);
   private
     procedure novo();
     procedure desisti();
@@ -601,6 +602,13 @@ begin
                 begin
                    edita();
                 end;
+end;
+
+procedure TForm5.dbncmButtonClick(Sender: TObject);
+begin
+  inherited;
+  buscaNCM.ShowModal;
+  dbncm.text:=buscaNCM.numero;
 end;
 
 procedure TForm5.deletar();

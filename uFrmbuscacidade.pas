@@ -21,7 +21,6 @@ type
     colun_estadosnome_1: TWideStringField;
     colun_estadossigla: TWideStringField;
     procedure FormShow(Sender: TObject);
-    procedure btn1Click(Sender: TObject);
     procedure btn2Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure dbgrd1ColEnter(Sender: TObject);
@@ -44,21 +43,13 @@ implementation
 
 {$R *.dfm}
 
-procedure TForm3.btn1Click(Sender: TObject);
-begin
-
-        cdscidades_estados.CommandText:='select * from cidades join estados on cidades.estado_id=estados.id where cidades.nome LIKE '+QuotedStr('%'+edtbuscar.Text+'%');
-            cdscidades_estados.Close;
-            cdscidades_estados.Open;
-            cdscidades_estados.First;
-
-            end;
-
+//Limpar campo de busca
 procedure TForm3.btn2Click(Sender: TObject);
 begin
     edtbuscar.Clear;
 end;
 
+//setar os vampos selecionados nas vatiaveis publicas
 procedure TForm3.dbgrd1ColEnter(Sender: TObject);
 begin
       cidadenome := colun_estadosnome.AsString;
@@ -70,61 +61,52 @@ end;
 procedure TForm3.dbgrd1KeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-                if Key = VK_F8 then
-                begin
-                  edtbuscar.SetFocus;
-                end;
+  //senta para o campo de texto
+  if Key = VK_F8 then
+  begin
+    edtbuscar.SetFocus;
+  end;
 
-             if Key = VK_ESCAPE then
-             begin
-               Close;
-             end;
+  //fechar tela
+  if Key = VK_ESCAPE then
+  begin
+    Close;
+  end;
 
-             if Key=VK_RETURN then
-              begin
-                          cidadenome := colun_estadosnome.AsString;
-                          estadonome :=  colun_estadossigla.AsString;
-                          Close;
-              end;
+  //setar os vampos selecionados nas vatiaveis publicas e fechar a tela
+  if Key=VK_RETURN then
+  begin
+    cidadenome := colun_estadosnome.AsString;
+    estadonome :=  colun_estadossigla.AsString;
+    Close;
+  end;
 
 end;
 
 procedure TForm3.edtbuscarKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-       if Key = VK_RETURN then
-          begin
-             cdscidades_estados.CommandText:='select * from cidades join estados on cidades.estado_id=estados.id where cidades.nome LIKE '+QuotedStr('%'+edtbuscar.Text+'%');
-            cdscidades_estados.Close;
-            cdscidades_estados.Open;
-            cdscidades_estados.First;
 
-          end;
+//faz a busca no que foi digitado
+  if Key = VK_RETURN then
+  begin
+    cdscidades_estados.CommandText:='select * from cidades join estados on cidades.estado_id=estados.id where cidades.nome LIKE '+QuotedStr('%'+edtbuscar.Text+'%');
+    cdscidades_estados.Close;
+    cdscidades_estados.Open;
+    cdscidades_estados.First;
+  end;
 
+  //vai passando de célula por célula
+  if Key = VK_PRIOR then
+  begin
+    cdscidades_estados.Prior;
+  end;
 
-
-        if Key = VK_PRIOR then
-        begin
-          cdscidades_estados.Prior;
-        end;
-
-             if Key = VK_NEXT then
-        begin
-          cdscidades_estados.Next;
-        end;
-
-              if Key = VK_HOME then
-        begin
-          cdscidades_estados.First;
-        end;
-
-            if Key = VK_HOME then
-        begin
-          cdscidades_estados.Last;
-        end;
-
-
-
+  //vai passando de célula por célula
+  if Key = VK_NEXT then
+  begin
+    cdscidades_estados.Next;
+  end;
 
 
 
@@ -132,31 +114,31 @@ end;
 
 procedure TForm3.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-              edtbuscar.Clear;
+  //quando fechado a tela, limpar o campo de busca
+  edtbuscar.Clear;
 end;
 
 
 
 procedure TForm3.FormShow(Sender: TObject);
 begin
-
-         cdscidades_estados.CommandText:='select * from cidades join estados on cidades.estado_id=estados.id';
-
-         cdscidades_estados.Close;
-         cdscidades_estados.Open;
-         cdscidades_estados.First;
-
-         edtbuscar.SetFocus;
-
-       end;
+  {
+  Inicializa com um join entre duas tabelas trazendo o primeiro dentre elas e setando
+  o foco no campo de busca
+  }
+  cdscidades_estados.CommandText:='select * from cidades join estados on cidades.estado_id=estados.id';
+  cdscidades_estados.Close;
+  cdscidades_estados.Open;
+  cdscidades_estados.First;
+  edtbuscar.SetFocus;
+end;
 
 procedure TForm3.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
+  //Fecha a tela
 begin
   if Key = VK_ESCAPE then
     Close;
-
-
 end;
 
 end.
