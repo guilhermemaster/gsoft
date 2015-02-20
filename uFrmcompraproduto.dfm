@@ -12,6 +12,7 @@ object TuFrmcompraproduto: TTuFrmcompraproduto
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -135,7 +136,7 @@ object TuFrmcompraproduto: TTuFrmcompraproduto
       OnKeyPress = edtchave_nfeKeyPress
     end
     object cbbfornecedor: TxDbButtonEdit
-      Left = 743
+      Left = 746
       Top = 33
       Width = 121
       Height = 21
@@ -441,20 +442,6 @@ object TuFrmcompraproduto: TTuFrmcompraproduto
         ParentFont = False
       end
     end
-    object btn4: TButton
-      Left = 717
-      Top = 57
-      Width = 143
-      Height = 40
-      Caption = 'Carregar XML'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 9
-    end
   end
   object dbgrd1: TDBGrid
     Left = 0
@@ -545,15 +532,101 @@ object TuFrmcompraproduto: TTuFrmcompraproduto
     RemoteServer = ponte.conponte
     Left = 888
     Top = 112
-    object colun_notanumero_da_nota_referencia: TIntegerField
+    object cdsitens_notanumero_da_nota_referencia: TIntegerField
       FieldName = 'numero_da_nota_referencia'
     end
-    object colun_notaitem: TWideStringField
+    object cdsitens_notaucom: TWideStringField
+      FieldName = 'ucom'
+      Size = 150
+    end
+    object cdsitens_notaqcom: TWideStringField
+      FieldName = 'qcom'
+      Size = 150
+    end
+    object cdsitens_notavuncom: TWideStringField
+      FieldName = 'vuncom'
+      Size = 45
+    end
+    object cdsitens_notavprod: TWideStringField
+      FieldName = 'vprod'
+      Size = 150
+    end
+    object cdsitens_notaceantrib: TWideStringField
+      FieldName = 'ceantrib'
+      Size = 150
+    end
+    object cdsitens_notautrib: TWideStringField
+      FieldName = 'utrib'
+      Size = 150
+    end
+    object cdsitens_notaqtrib: TWideStringField
+      FieldName = 'qtrib'
+      Size = 150
+    end
+    object cdsitens_notavdntrib: TWideStringField
+      FieldName = 'vdntrib'
+      Size = 150
+    end
+    object cdsitens_notaicms_orig: TWideStringField
+      FieldName = 'icms_orig'
+      Size = 150
+    end
+    object cdsitens_notaicms_cst: TWideStringField
+      FieldName = 'icms_cst'
+      Size = 150
+    end
+    object cdsitens_notaicms_modbc: TWideStringField
+      FieldName = 'icms_modbc'
+      Size = 150
+    end
+    object cdsitens_notaicms_picms: TWideStringField
+      FieldName = 'icms_picms'
+      Size = 150
+    end
+    object cdsitens_notaicms_vicms: TWideStringField
+      FieldName = 'icms_vicms'
+      Size = 150
+    end
+    object cdsitens_notapis_cst: TWideStringField
+      FieldName = 'pis_cst'
+      Size = 150
+    end
+    object cdsitens_notapis_vbc: TWideStringField
+      FieldName = 'pis_vbc'
+      Size = 150
+    end
+    object cdsitens_notapis_ppis: TWideStringField
+      FieldName = 'pis_ppis'
+      Size = 150
+    end
+    object cdsitens_notapis_vpis: TWideStringField
+      FieldName = 'pis_vpis'
+      Size = 150
+    end
+    object cdsitens_notaconfins_cst: TWideStringField
+      FieldName = 'confins_cst'
+      Size = 150
+    end
+    object cdsitens_notaconfins_vbc: TWideStringField
+      FieldName = 'confins_vbc'
+      Size = 150
+    end
+    object cdsitens_notaconfins_pcofins: TWideStringField
+      FieldName = 'confins_pcofins'
+      Size = 150
+    end
+    object cdsitens_notaconfins_vconfins: TWideStringField
+      FieldName = 'confins_vconfins'
+      Size = 150
+    end
+    object cdsitens_notaitem: TWideStringField
       FieldName = 'item'
       Size = 150
     end
-    object colun_notaquantidade: TIntegerField
+    object cdsitens_notaquantidade: TFMTBCDField
       FieldName = 'quantidade'
+      Precision = 19
+      Size = 0
     end
   end
   object dsitens_nota: TDataSource
@@ -1571,73 +1644,85 @@ object TuFrmcompraproduto: TTuFrmcompraproduto
     RemoteServer = ponte.conponte
     Left = 216
     Top = 128
-    object coluncdsprodutocodigo: TIntegerField
+    object cdsprodutocodigo: TIntegerField
       FieldName = 'codigo'
     end
-    object coluncdsprodutodescricao: TWideStringField
+    object cdsprodutodescricao: TWideStringField
       FieldName = 'descricao'
       Size = 150
     end
-    object coluncdsprodutoespecie: TWideStringField
+    object cdsprodutocfop: TWideStringField
+      FieldName = 'cfop'
+      Size = 150
+    end
+    object cdsprodutoespecie: TWideStringField
       FieldName = 'especie'
       Size = 150
     end
-    object colun_cadastro: TDateField
+    object cdsprodutodata_cadastro: TDateField
       FieldName = 'data_cadastro'
     end
-    object colun_produto: TWideStringField
+    object cdsprodutostatus_produto: TWideStringField
       FieldName = 'status_produto'
       Size = 45
     end
-    object coluncdsprodutocomplemento: TWideStringField
+    object cdsprodutocomplemento: TWideStringField
       FieldName = 'complemento'
       Size = 300
     end
-    object coluncdsprodutomarca: TWideStringField
+    object cdsprodutomarca: TWideStringField
       FieldName = 'marca'
       Size = 150
     end
-    object coluncdsprodutofabricante: TWideStringField
+    object cdsprodutofabricante: TWideStringField
       FieldName = 'fabricante'
       Size = 150
     end
-    object coluncdsprodutofornecedor: TWideStringField
+    object cdsprodutofornecedor: TWideStringField
       FieldName = 'fornecedor'
       Size = 150
     end
-    object colun_barra: TWideStringField
+    object cdsprodutocod_barra: TWideStringField
       FieldName = 'cod_barra'
       Size = 150
     end
-    object coluncdsprodutoicms: TWideStringField
-      FieldName = 'icms'
+    object cdsprodutosit_tributaria: TWideStringField
+      FieldName = 'sit_tributaria'
       Size = 150
     end
-    object colun_loja: TFloatField
+    object cdsprodutoncm: TWideStringField
+      FieldName = 'ncm'
+      Size = 50
+    end
+    object cdsprodutocean: TWideStringField
+      FieldName = 'cean'
+      Size = 100
+    end
+    object cdsprodutosaldo_loja: TFloatField
       FieldName = 'saldo_loja'
     end
-    object colun_deposito: TFloatField
+    object cdsprodutosaldo_deposito: TFloatField
       FieldName = 'saldo_deposito'
     end
-    object coluncdsprodutocompra: TFloatField
+    object cdsprodutocompra: TFloatField
       FieldName = 'compra'
     end
-    object coluncdsprodutovenda: TFloatField
+    object cdsprodutovenda: TFloatField
       FieldName = 'venda'
     end
-    object coluncdsprodutopromocao: TFloatField
+    object cdsprodutopromocao: TFloatField
       FieldName = 'promocao'
     end
-    object colun_reajuste: TDateField
+    object cdsprodutoultimo_reajuste: TDateField
       FieldName = 'ultimo_reajuste'
     end
-    object colun_venda: TDateField
+    object cdsprodutoultima_venda: TDateField
       FieldName = 'ultima_venda'
     end
-    object colun_max: TFloatField
+    object cdsprodutodes_max: TFloatField
       FieldName = 'des_max'
     end
-    object colun_produto1: TDateField
+    object cdsprodutovalidade_produto: TDateField
       FieldName = 'validade_produto'
     end
   end

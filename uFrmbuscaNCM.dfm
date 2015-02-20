@@ -1,9 +1,10 @@
 object buscaNCM: TbuscaNCM
   Left = 0
   Top = 0
+  AutoSize = True
   Caption = 'Buscar NCM'
-  ClientHeight = 348
-  ClientWidth = 505
+  ClientHeight = 329
+  ClientWidth = 727
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,8 +16,8 @@ object buscaNCM: TbuscaNCM
   PixelsPerInch = 96
   TextHeight = 13
   object lbl11: TLabel
-    Left = 2
-    Top = 8
+    Left = 107
+    Top = 0
     Width = 72
     Height = 16
     Caption = 'Buscar NCM '
@@ -28,8 +29,8 @@ object buscaNCM: TbuscaNCM
     ParentFont = False
   end
   object Edit1: TEdit
-    Left = 2
-    Top = 26
+    Left = 107
+    Top = 18
     Width = 416
     Height = 21
     CharCase = ecUpperCase
@@ -37,17 +38,17 @@ object buscaNCM: TbuscaNCM
     OnKeyDown = Edit1KeyDown
   end
   object Button1: TButton
-    Left = 424
-    Top = 22
+    Left = 529
+    Top = 14
     Width = 75
     Height = 25
     Caption = 'Limpar'
     TabOrder = 1
   end
   object DBGrid1: TDBGrid
-    Left = 2
-    Top = 53
-    Width = 497
+    Left = 0
+    Top = 45
+    Width = 727
     Height = 284
     DataSource = ds_ncm
     TabOrder = 2
@@ -70,9 +71,34 @@ object buscaNCM: TbuscaNCM
         Title.Caption = 'Descri'#231#227'o'
         Width = 400
         Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'c_ex'
+        Title.Caption = 'C'#243'digo de exporta'#231#227'o'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'c_tabela'
+        Title.Caption = 'C'#243'digo interno'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'c_aliqnac'
+        Title.Caption = 'Percentual da al'#237'quota nacional'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'c_aliqimp'
+        Title.Caption = 'Al'#237'quota de importa'#231#227'o'
+        Visible = True
       end>
   end
   object cdsncm: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dsncm'

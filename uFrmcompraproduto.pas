@@ -103,9 +103,6 @@ type
     plbl4: TppLabel;
     pdbtxtQuantidade: TppDBText;
     pdbtxtvalorunitario: TppDBText;
-    colun_notanumero_da_nota_referencia: TIntegerField;
-    colun_notaitem: TWideStringField;
-    colun_notaquantidade: TIntegerField;
     edtnumero_nota: TDBEdit;
     colun_produtonumero_nota: TIntegerField;
     colun_produtodata_entrada: TDateField;
@@ -123,27 +120,53 @@ type
     coluncdsconsultanumeroestadoid: TIntegerField;
     cdsproduto: TClientDataSet;
     dsproduto: TDataSource;
-    coluncdsprodutocodigo: TIntegerField;
-    coluncdsprodutodescricao: TWideStringField;
-    coluncdsprodutoespecie: TWideStringField;
-    colun_cadastro: TDateField;
-    colun_produto: TWideStringField;
-    coluncdsprodutocomplemento: TWideStringField;
-    coluncdsprodutomarca: TWideStringField;
-    coluncdsprodutofabricante: TWideStringField;
-    coluncdsprodutofornecedor: TWideStringField;
-    colun_barra: TWideStringField;
-    coluncdsprodutoicms: TWideStringField;
-    colun_loja: TFloatField;
-    colun_deposito: TFloatField;
-    coluncdsprodutocompra: TFloatField;
-    coluncdsprodutovenda: TFloatField;
-    coluncdsprodutopromocao: TFloatField;
-    colun_reajuste: TDateField;
-    colun_venda: TDateField;
-    colun_max: TFloatField;
-    colun_produto1: TDateField;
-    btn4: TButton;
+    cdsprodutocodigo: TIntegerField;
+    cdsprodutodescricao: TWideStringField;
+    cdsprodutocfop: TWideStringField;
+    cdsprodutoespecie: TWideStringField;
+    cdsprodutodata_cadastro: TDateField;
+    cdsprodutostatus_produto: TWideStringField;
+    cdsprodutocomplemento: TWideStringField;
+    cdsprodutomarca: TWideStringField;
+    cdsprodutofabricante: TWideStringField;
+    cdsprodutofornecedor: TWideStringField;
+    cdsprodutocod_barra: TWideStringField;
+    cdsprodutosit_tributaria: TWideStringField;
+    cdsprodutoncm: TWideStringField;
+    cdsprodutocean: TWideStringField;
+    cdsprodutosaldo_loja: TFloatField;
+    cdsprodutosaldo_deposito: TFloatField;
+    cdsprodutocompra: TFloatField;
+    cdsprodutovenda: TFloatField;
+    cdsprodutopromocao: TFloatField;
+    cdsprodutoultimo_reajuste: TDateField;
+    cdsprodutoultima_venda: TDateField;
+    cdsprodutodes_max: TFloatField;
+    cdsprodutovalidade_produto: TDateField;
+    cdsitens_notanumero_da_nota_referencia: TIntegerField;
+    cdsitens_notaucom: TWideStringField;
+    cdsitens_notaqcom: TWideStringField;
+    cdsitens_notavuncom: TWideStringField;
+    cdsitens_notavprod: TWideStringField;
+    cdsitens_notaceantrib: TWideStringField;
+    cdsitens_notautrib: TWideStringField;
+    cdsitens_notaqtrib: TWideStringField;
+    cdsitens_notavdntrib: TWideStringField;
+    cdsitens_notaicms_orig: TWideStringField;
+    cdsitens_notaicms_cst: TWideStringField;
+    cdsitens_notaicms_modbc: TWideStringField;
+    cdsitens_notaicms_picms: TWideStringField;
+    cdsitens_notaicms_vicms: TWideStringField;
+    cdsitens_notapis_cst: TWideStringField;
+    cdsitens_notapis_vbc: TWideStringField;
+    cdsitens_notapis_ppis: TWideStringField;
+    cdsitens_notapis_vpis: TWideStringField;
+    cdsitens_notaconfins_cst: TWideStringField;
+    cdsitens_notaconfins_vbc: TWideStringField;
+    cdsitens_notaconfins_pcofins: TWideStringField;
+    cdsitens_notaconfins_vconfins: TWideStringField;
+    cdsitens_notaitem: TWideStringField;
+    cdsitens_notaquantidade: TFMTBCDField;
     procedure FormShow(Sender: TObject);
     procedure btn1Click(Sender: TObject);
     procedure btnfinalizaClick(Sender: TObject);
@@ -160,6 +183,7 @@ type
     procedure edtmodeloKeyPress(Sender: TObject; var Key: Char);
     procedure edtchave_nfeKeyPress(Sender: TObject; var Key: Char);
     procedure edtdescontoKeyPress(Sender: TObject; var Key: Char);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     procedure sub_total();
     function validarNFe(nfe, cnpj: string): Boolean;
@@ -200,13 +224,19 @@ begin
 
  
 
-  cdsmemory_itens.CreateDataSet;
+     if cdsmemory_itens.Active then
+   begin
+    cdsmemory_itens.EmptyDataSet;
+   end
+    else
+      begin
+       cdsmemory_itens.CreateDataSet;
+      end;
+
   cdsmemory_itens.Insert;
 
   cdscompra_produto.Append;
-   {
-  cdsitens_nota.Append;
-  }
+edtnumero_nota.SetFocus;
 end;
 
 procedure TTuFrmcompraproduto.btnfinalizaClick(Sender: TObject);
@@ -308,7 +338,7 @@ begin
     sub_total();
   end;
 
-    if Key = VK_END then
+    if Key = VK_ESCAPE then
   begin
     edtdesconto.SetFocus;
   end;
@@ -318,9 +348,7 @@ end;
 procedure TTuFrmcompraproduto.btn2Click(Sender: TObject);
 begin
   // cdsmemory_itens.Close;
-  cdsmemory_itens.Close;
-
-  cdscompra_produto.Cancel;
+  cdsmemory_itens.EmptyDataSet;
   {
   cdsitens_nota.Cancel;
    }
@@ -480,7 +508,7 @@ begin
       cdsproduto.First;
 
 
-      antes:= FloatToStr(colun_deposito.AsFloat);
+      antes:= FloatToStr(cdsprodutosaldo_deposito.AsFloat);
       depois:= StringReplace(antes, ',', '.', [rfReplaceAll, rfIgnoreCase]);
 
 
@@ -630,6 +658,16 @@ begin
   end;
 end;
 
+
+procedure TTuFrmcompraproduto.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+
+     if cdsmemory_itens.Active then
+     begin
+        cdsmemory_itens.EmptyDataSet;
+     end;
+end;
 
 procedure TTuFrmcompraproduto.FormShow(Sender: TObject);
 begin

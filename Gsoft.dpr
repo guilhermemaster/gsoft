@@ -18,9 +18,9 @@ uses
   uFrmlayout in 'uFrmlayout.pas' {Form4},
   uFrmpnte in 'uFrmpnte.pas' {ponte: TDataModule},
   uFrmkardex in 'uFrmkardex.pas' {TuFrmkardex},
-  buscaxml in 'buscaxml.pas' {Form6},
   uFrminforprod in 'uFrminforprod.pas' {Form7},
-  uFrmbuscaNCM in 'uFrmbuscaNCM.pas' {TTuFrmNCM};
+  uFrmbuscaNCM in 'uFrmbuscaNCM.pas' {buscaNCM},
+  buscaxml in 'buscaxml.pas' {Form6};
 
 {$R *.res}
 
@@ -72,6 +72,8 @@ begin
   Application.CreateForm(TTuFrmkardex, TuFrmkardex);
   Application.CreateForm(TForm6, Form6);
   Application.CreateForm(TForm7, Form7);
-  Application.CreateForm(TTTuFrmNCM, TTuFrmNCM);
+  Application.CreateForm(TbuscaNCM, buscaNCM);
+  Application.CreateForm(TForm6, Form6);
+  Application.CreateForm(TForm6, Form6);
   Application.Run;
 end.

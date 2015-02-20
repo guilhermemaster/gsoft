@@ -55,9 +55,6 @@ type
     dspcompra_produto: TDataSetProvider;
     qry_intens_tabela: TSQLDataSet;
     dsp_intens_tabela: TDataSetProvider;
-    colun_intens_tabelanumero_da_nota_referencia: TIntegerField;
-    colun_intens_tabelaitem: TWideStringField;
-    colun_intens_tabelaquantidade: TIntegerField;
     colun_produtonumero_nota: TIntegerField;
     colun_produtodata_entrada: TDateField;
     colun_produtodata_emissao: TDateField;
@@ -112,6 +109,30 @@ type
     qry_ncmc_aliqnac: TFMTBCDField;
     qry_ncmc_aliqimp: TFMTBCDField;
     qry_ncmsr_recno: TFMTBCDField;
+    qry_intens_tabelanumero_da_nota_referencia: TIntegerField;
+    qry_intens_tabelaucom: TWideStringField;
+    qry_intens_tabelaqcom: TWideStringField;
+    qry_intens_tabelavuncom: TWideStringField;
+    qry_intens_tabelavprod: TWideStringField;
+    qry_intens_tabelaceantrib: TWideStringField;
+    qry_intens_tabelautrib: TWideStringField;
+    qry_intens_tabelaqtrib: TWideStringField;
+    qry_intens_tabelavdntrib: TWideStringField;
+    qry_intens_tabelaicms_orig: TWideStringField;
+    qry_intens_tabelaicms_cst: TWideStringField;
+    qry_intens_tabelaicms_modbc: TWideStringField;
+    qry_intens_tabelaicms_picms: TWideStringField;
+    qry_intens_tabelaicms_vicms: TWideStringField;
+    qry_intens_tabelapis_cst: TWideStringField;
+    qry_intens_tabelapis_vbc: TWideStringField;
+    qry_intens_tabelapis_ppis: TWideStringField;
+    qry_intens_tabelapis_vpis: TWideStringField;
+    qry_intens_tabelaconfins_cst: TWideStringField;
+    qry_intens_tabelaconfins_vbc: TWideStringField;
+    qry_intens_tabelaconfins_pcofins: TWideStringField;
+    qry_intens_tabelaconfins_vconfins: TWideStringField;
+    qry_intens_tabelaitem: TWideStringField;
+    qry_intens_tabelaquantidade: TFMTBCDField;
   private
     { Private declarations }
   public

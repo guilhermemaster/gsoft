@@ -1,9 +1,10 @@
 object TuFrmkardex: TTuFrmkardex
   Left = 0
   Top = 0
+  AutoSize = True
   Caption = 'Kardex'
-  ClientHeight = 347
-  ClientWidth = 496
+  ClientHeight = 353
+  ClientWidth = 497
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

@@ -3,6 +3,8 @@ inherited Form5: TForm5
   Caption = 'Cadastro de Produtos'
   Position = poScreenCenter
   OnClose = FormClose
+  ExplicitWidth = 713
+  ExplicitHeight = 445
   PixelsPerInch = 96
   TextHeight = 13
   inherited tlb1: TToolBar
@@ -43,10 +45,7 @@ inherited Form5: TForm5
       ActivePage = ts2
       ExplicitWidth = 697
       inherited ts1: TTabSheet
-        ExplicitLeft = 0
-        ExplicitTop = 0
         ExplicitWidth = 689
-        ExplicitHeight = 0
         inherited edt2: TEdit
           Left = 300
           Top = 24
@@ -202,7 +201,7 @@ inherited Form5: TForm5
           ParentFont = False
         end
         object lbl4: TLabel
-          Left = 3
+          Left = 392
           Top = 52
           Width = 83
           Height = 16
@@ -215,7 +214,7 @@ inherited Form5: TForm5
           ParentFont = False
         end
         object lbl5: TLabel
-          Left = 194
+          Left = 3
           Top = 52
           Width = 39
           Height = 16
@@ -228,7 +227,7 @@ inherited Form5: TForm5
           ParentFont = False
         end
         object lbl6: TLabel
-          Left = 327
+          Left = 136
           Top = 52
           Width = 64
           Height = 16
@@ -241,7 +240,7 @@ inherited Form5: TForm5
           ParentFont = False
         end
         object lbl7: TLabel
-          Left = 454
+          Left = 263
           Top = 52
           Width = 77
           Height = 16
@@ -254,8 +253,8 @@ inherited Form5: TForm5
           ParentFont = False
         end
         object lbl8: TLabel
-          Left = 194
-          Top = 119
+          Left = 3
+          Top = 103
           Width = 83
           Height = 16
           Caption = 'C'#243'd. de Barra '
@@ -267,8 +266,8 @@ inherited Form5: TForm5
           ParentFont = False
         end
         object Label1: TLabel
-          Left = 327
-          Top = 119
+          Left = 136
+          Top = 103
           Width = 38
           Height = 16
           Caption = 'NCM *'
@@ -280,8 +279,8 @@ inherited Form5: TForm5
           ParentFont = False
         end
         object Label2: TLabel
-          Left = 454
-          Top = 119
+          Left = 263
+          Top = 103
           Width = 43
           Height = 16
           Caption = 'CEAN *'
@@ -294,19 +293,15 @@ inherited Form5: TForm5
         end
         object pgc2: TPageControl
           Left = 3
-          Top = 176
+          Top = 152
           Width = 683
-          Height = 139
-          ActivePage = ts4
+          Height = 163
+          ActivePage = ts3
           ParentShowHint = False
           ShowHint = False
           TabOrder = 0
           object ts3: TTabSheet
             Caption = 'Estoque'
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object lbl12: TLabel
               Left = 3
               Top = 3
@@ -601,21 +596,8 @@ inherited Form5: TForm5
           ShowHint = True
           TabOrder = 1
         end
-        object mmocomplemento: TRzDBMemo
-          Left = 3
-          Top = 74
-          Width = 185
-          Height = 89
-          Hint = 'Complemento sobre o produto'
-          DataField = 'complemento'
-          DataSource = dsprodutos
-          MaxLength = 200
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 9
-        end
         object cbbfabricante: TDBEdit
-          Left = 327
+          Left = 136
           Top = 74
           Width = 121
           Height = 21
@@ -628,8 +610,8 @@ inherited Form5: TForm5
           TabOrder = 6
         end
         object cbbcod_barra: TDBEdit
-          Left = 194
-          Top = 141
+          Left = 3
+          Top = 125
           Width = 121
           Height = 21
           Hint = 'C'#243'd. de barra do produto'
@@ -669,7 +651,7 @@ inherited Form5: TForm5
           TabOrder = 2
         end
         object cbbmarca: TDBEdit
-          Left = 194
+          Left = 3
           Top = 74
           Width = 121
           Height = 21
@@ -694,7 +676,7 @@ inherited Form5: TForm5
           TabOrder = 4
         end
         object cbbfornecedor: TxDbButtonEdit
-          Left = 454
+          Left = 263
           Top = 74
           Width = 121
           Height = 21
@@ -719,8 +701,8 @@ inherited Form5: TForm5
           Padrao = False
         end
         object dbcean: TDBEdit
-          Left = 454
-          Top = 141
+          Left = 263
+          Top = 125
           Width = 83
           Height = 21
           Hint = 'ICMS'
@@ -729,20 +711,22 @@ inherited Form5: TForm5
           DataSource = dsprodutos
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 10
+          TabOrder = 9
           OnKeyPress = cbbicmsKeyPress
         end
         object dbncm: TxDbButtonEdit
-          Left = 327
-          Top = 141
+          Left = 136
+          Top = 125
           Width = 121
           Height = 21
+          DataSource = dsprodutos
+          DataField = 'ncm'
           Color = clWhite
           FocusColor = 13431548
           ParentShowHint = False
           ReadOnlyColor = clBtnFace
           ShowHint = True
-          TabOrder = 11
+          TabOrder = 10
           ButtonHint = 'Pressione <F8> para consultar.'
           ButtonKind = bkFind
           ButtonShortCut = 119
@@ -755,6 +739,15 @@ inherited Form5: TForm5
           CaractereDecimal = #0
           Padrao = False
         end
+        object mmocomplemento: TDBEdit
+          Left = 392
+          Top = 74
+          Width = 272
+          Height = 21
+          DataField = 'complemento'
+          DataSource = dsprodutos
+          TabOrder = 11
+        end
       end
     end
   end
@@ -763,8 +756,8 @@ inherited Form5: TForm5
     Params = <>
     ProviderName = 'dspprosutos'
     RemoteServer = ponte.conponte
-    Left = 208
-    Top = 64
+    Left = 648
+    Top = 120
     object cdsprodutoscodigo: TIntegerField
       FieldName = 'codigo'
     end
@@ -849,14 +842,14 @@ inherited Form5: TForm5
   end
   object dsprodutos: TDataSource
     DataSet = cdsprodutos
-    Left = 208
-    Top = 112
+    Left = 648
+    Top = 168
   end
   object pdbplnprodutos: TppDBPipeline
     DataSource = dsprodutos
     UserName = 'pdbplnprodutos'
-    Left = 200
-    Top = 160
+    Left = 640
+    Top = 216
   end
   object RelatorioProdutos: TppReport
     AutoStop = False
@@ -908,8 +901,8 @@ inherited Form5: TForm5
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
-    Left = 200
-    Top = 224
+    Left = 648
+    Top = 280
     Version = '15.03'
     mmColumnWidth = 0
     DataPipelineName = 'pdbplnprodutos'

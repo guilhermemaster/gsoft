@@ -561,18 +561,18 @@ end;
 
 procedure TTFurmcadastrofornecedor.campofalse();
  begin
-   edtnome.Enabled:=True;
-   marcacaostatus_fornecedor.Enabled:=True;
-   edtcep.Enabled:=True;
-   edtendereco.Enabled:=True;
-   edtcidade.Enabled:=True;
-   edtcomissao.Enabled:=True;
-   edtcnpj.Enabled:=True;
-   edtinsc_estadual.Enabled:=True;
-   edtemail.Enabled:=True;
-   edtstatus_fornecedor.Enabled:=True;
-   edttelefone_2.Enabled:=True;
-   mmoobser.Enabled:=True;
+   edtnome.Enabled:=False;
+   marcacaostatus_fornecedor.Enabled:=False;
+   edtcep.Enabled:=False;
+   edtendereco.Enabled:=False;
+   edtcidade.Enabled:=False;
+   edtcomissao.Enabled:=False;
+   edtcnpj.Enabled:=False;
+   edtinsc_estadual.Enabled:=False;
+   edtemail.Enabled:=False;
+   edtstatus_fornecedor.Enabled:=False;
+   edttelefone_2.Enabled:=False;
+   mmoobser.Enabled:=False;
  end;
 
  procedure TTFurmcadastrofornecedor.busca_porcodigo();

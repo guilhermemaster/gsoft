@@ -18,15 +18,15 @@ object ponte: Tponte
     Top = 104
   end
   object conponte: TLocalConnection
-    Left = 376
-    Top = 296
+    Left = 320
+    Top = 304
   end
   object sqlqryparametros: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = con1
-    Left = 480
-    Top = 297
+    Left = 408
+    Top = 305
   end
   object qry_cidade_estados: TSQLDataSet
     CommandText = 
@@ -365,15 +365,101 @@ object ponte: Tponte
     SQLConnection = con1
     Left = 456
     Top = 160
-    object colun_intens_tabelanumero_da_nota_referencia: TIntegerField
+    object qry_intens_tabelanumero_da_nota_referencia: TIntegerField
       FieldName = 'numero_da_nota_referencia'
     end
-    object colun_intens_tabelaitem: TWideStringField
+    object qry_intens_tabelaucom: TWideStringField
+      FieldName = 'ucom'
+      Size = 150
+    end
+    object qry_intens_tabelaqcom: TWideStringField
+      FieldName = 'qcom'
+      Size = 150
+    end
+    object qry_intens_tabelavuncom: TWideStringField
+      FieldName = 'vuncom'
+      Size = 45
+    end
+    object qry_intens_tabelavprod: TWideStringField
+      FieldName = 'vprod'
+      Size = 150
+    end
+    object qry_intens_tabelaceantrib: TWideStringField
+      FieldName = 'ceantrib'
+      Size = 150
+    end
+    object qry_intens_tabelautrib: TWideStringField
+      FieldName = 'utrib'
+      Size = 150
+    end
+    object qry_intens_tabelaqtrib: TWideStringField
+      FieldName = 'qtrib'
+      Size = 150
+    end
+    object qry_intens_tabelavdntrib: TWideStringField
+      FieldName = 'vdntrib'
+      Size = 150
+    end
+    object qry_intens_tabelaicms_orig: TWideStringField
+      FieldName = 'icms_orig'
+      Size = 150
+    end
+    object qry_intens_tabelaicms_cst: TWideStringField
+      FieldName = 'icms_cst'
+      Size = 150
+    end
+    object qry_intens_tabelaicms_modbc: TWideStringField
+      FieldName = 'icms_modbc'
+      Size = 150
+    end
+    object qry_intens_tabelaicms_picms: TWideStringField
+      FieldName = 'icms_picms'
+      Size = 150
+    end
+    object qry_intens_tabelaicms_vicms: TWideStringField
+      FieldName = 'icms_vicms'
+      Size = 150
+    end
+    object qry_intens_tabelapis_cst: TWideStringField
+      FieldName = 'pis_cst'
+      Size = 150
+    end
+    object qry_intens_tabelapis_vbc: TWideStringField
+      FieldName = 'pis_vbc'
+      Size = 150
+    end
+    object qry_intens_tabelapis_ppis: TWideStringField
+      FieldName = 'pis_ppis'
+      Size = 150
+    end
+    object qry_intens_tabelapis_vpis: TWideStringField
+      FieldName = 'pis_vpis'
+      Size = 150
+    end
+    object qry_intens_tabelaconfins_cst: TWideStringField
+      FieldName = 'confins_cst'
+      Size = 150
+    end
+    object qry_intens_tabelaconfins_vbc: TWideStringField
+      FieldName = 'confins_vbc'
+      Size = 150
+    end
+    object qry_intens_tabelaconfins_pcofins: TWideStringField
+      FieldName = 'confins_pcofins'
+      Size = 150
+    end
+    object qry_intens_tabelaconfins_vconfins: TWideStringField
+      FieldName = 'confins_vconfins'
+      Size = 150
+    end
+    object qry_intens_tabelaitem: TWideStringField
       FieldName = 'item'
       Size = 150
     end
-    object colun_intens_tabelaquantidade: TIntegerField
+    object qry_intens_tabelaquantidade: TFMTBCDField
       FieldName = 'quantidade'
+      Precision = 19
+      Size = 0
     end
   end
   object dsp_intens_tabela: TDataSetProvider
@@ -445,8 +531,8 @@ object ponte: Tponte
     MaxBlobSize = -1
     Params = <>
     SQLConnection = con1
-    Left = 24
-    Top = 296
+    Left = 16
+    Top = 288
     object qry_ncmc_codigo: TWideStringField
       FieldName = 'c_codigo'
       Size = 8

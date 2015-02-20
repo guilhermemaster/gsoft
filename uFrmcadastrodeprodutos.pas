@@ -25,7 +25,6 @@ type
     lbl2: TLabel;
     lbl3: TLabel;
     lbl4: TLabel;
-    mmocomplemento: TRzDBMemo;
     lbl5: TLabel;
     lbl6: TLabel;
     cbbfabricante: TDBEdit;
@@ -117,6 +116,7 @@ type
     cdsprodutosdes_max: TFloatField;
     cdsprodutosvalidade_produto: TDateField;
     dbncm: TxDbButtonEdit;
+    mmocomplemento: TDBEdit;
     procedure FormShow(Sender: TObject);
     procedure btnnovoClick(Sender: TObject);
     procedure btndesistirClick(Sender: TObject);

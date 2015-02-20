@@ -26,15 +26,6 @@ type
     procedure DBGrid1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure FormShow(Sender: TObject);
-
-
-
-
-    //procedure FormShow(Sender: TObject);
-    //procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    //procedure Edit1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    //procedure DBGrid1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-
   private
     { Private declarations }
   public
@@ -48,74 +39,6 @@ var
 implementation
 
 {$R *.dfm}
-
- {
-procedure TForm8.DBGrid1KeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-
-begin
-//puxa os valores selecionados para a variavel global e fecha a tela
-  if Key=VK_RETURN then
-  begin
-    numero:=cdsncmc_codigo.AsString;
-    Close;
-  end;
-
-  //fecha a tela
-  if Key = VK_ESCAPE then
-  begin
-    Close;
-  end;
-end;
-{
-procedure TForm8.Edit1KeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-
-//Ao aberta enter e feita a busca com o que tem digitado
-  if Key=VK_RETURN then
-  begin
-    cdsncm.CommandText:='select * from  a_tabncm where c_descr like  '+QuotedStr('%'+Edit1.Text+'%');
-    cdsncm.Close;
-    cdsncm.Open;
-    cdsncm.First;
-  end;
-
-    //vai passando de célula por célula
-  if Key = VK_PRIOR then
-  begin
-    cdsncm.Prior;
-  end;
-
-  //vai passando de célula por célula
-  if Key = VK_NEXT then
-  begin
-    cdsncm.Next;
-  end;
-
-end;
- }
-
-{
-procedure TForm8.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-
-  Edit1.Clear;
-end;
-
-procedure TForm8.FormShow(Sender: TObject);
-begin
-  cdsncm.CommandText:='select * from  a_tabncm ';
-  cdsncm.Close;
-  cdsncm.Open;
-  cdsncm.First;
-end;
-}
-
-
-
-
-
 
 procedure TbuscaNCM.DBGrid1KeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);

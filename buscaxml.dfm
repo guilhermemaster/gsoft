@@ -1,9 +1,10 @@
 object Form6: TForm6
   Left = 146
   Top = 0
+  AutoSize = True
   Caption = 'Importa NFe Compra '
-  ClientHeight = 458
-  ClientWidth = 725
+  ClientHeight = 440
+  ClientWidth = 713
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,13 +12,14 @@ object Form6: TForm6
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poDesigned
+  Position = poScreenCenter
+  OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Label8: TLabel
-    Left = 8
-    Top = 221
+    Left = 0
+    Top = 205
     Width = 85
     Height = 16
     Caption = 'Itens da Nota: '
@@ -29,8 +31,8 @@ object Form6: TForm6
     ParentFont = False
   end
   object DBGrid2: TDBGrid
-    Left = 8
-    Top = 243
+    Left = 0
+    Top = 227
     Width = 713
     Height = 169
     DataSource = dsmemory_itens
@@ -75,8 +77,8 @@ object Form6: TForm6
       end>
   end
   object Button1: TButton
-    Left = 577
-    Top = 414
+    Left = 569
+    Top = 398
     Width = 141
     Height = 42
     Caption = 'Carregar NF-e'
@@ -92,8 +94,8 @@ object Form6: TForm6
     OnClick = Button1Click
   end
   object GroupBox1: TGroupBox
-    Left = 8
-    Top = 16
+    Left = 0
+    Top = 0
     Width = 321
     Height = 199
     Caption = '  Fornecedor  '
@@ -289,8 +291,8 @@ object Form6: TForm6
     end
   end
   object GroupBox2: TGroupBox
-    Left = 335
-    Top = 110
+    Left = 327
+    Top = 94
     Width = 386
     Height = 105
     Caption = '  Destinat'#225'rio  '
@@ -381,8 +383,8 @@ object Form6: TForm6
     end
   end
   object Button2: TButton
-    Left = 409
-    Top = 418
+    Left = 401
+    Top = 398
     Width = 162
     Height = 42
     Caption = 'Finalizar importa'#231#227'o'
@@ -398,8 +400,8 @@ object Form6: TForm6
     OnClick = Button2Click
   end
   object GroupBox3: TGroupBox
-    Left = 335
-    Top = 16
+    Left = 327
+    Top = 0
     Width = 386
     Height = 88
     Caption = '  Inf. da Nota  '
@@ -510,6 +512,15 @@ object Form6: TForm6
       TabOrder = 4
     end
   end
+  object Button3: TButton
+    Left = 280
+    Top = 408
+    Width = 75
+    Height = 25
+    Caption = 'Button3'
+    TabOrder = 6
+    OnClick = Button3Click
+  end
   object ACBrNFe1: TACBrNFe
     Configuracoes.Geral.PathSalvar = 'C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\bin\'
     Configuracoes.Geral.ExibirErroSchema = True
@@ -536,7 +547,10 @@ object Form6: TForm6
   object cdsmemory_itens: TClientDataSet
     Aggregates = <>
     CommandText = #39#39
+    FieldDefs = <>
+    IndexDefs = <>
     Params = <>
+    StoreDefs = True
     Left = 486
     Top = 228
     object cdsmemory_itensN: TStringField

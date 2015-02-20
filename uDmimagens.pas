@@ -8,6 +8,7 @@ uses
 type
   TDataModule2 = class(TDataModule)
     imgmenu: TImageList;
+    img72: TImageList;
   private
     { Private declarations }
   public

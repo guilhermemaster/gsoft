@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, ACBrNFe, Vcl.Grids,
-  Vcl.DBGrids, Data.DB, Datasnap.DBClient, uFrmpnte, uFrmcadastrodeprodutos, uFrmcadastrofornecedor;
+  Vcl.DBGrids, Data.DB, Datasnap.DBClient, uFrmpnte, uFrmcadastrodeprodutos,
+  uFrmcadastrofornecedor, uFrminforprod;
 
 type
   TForm6 = class(TForm)
@@ -103,6 +104,7 @@ type
     cdsfornecedordata_cadastro: TDateField;
     cdsfornecedorstatus_fornecedor: TWideStringField;
     cdsfornecedorobser: TWideStringField;
+    Button3: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -110,10 +112,13 @@ type
     procedure DBGrid2ColEnter(Sender: TObject);
     procedure cdsmemory_itenscodigoprodutoGetText(Sender: TField;
       var Text: string; DisplayText: Boolean);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
   public
-    vizu : string;
+
+    vizu, pis, confins, cean, prod, iof, icms: string;
     procedure primordial();
     procedure produtosfinal();
     function exitecean(cean : String): Boolean;
@@ -124,6 +129,7 @@ type
     procedure insercaokardex();
     function exiteCNPJ(cnpj : String): Boolean;
     function ValidaCNPJExistentes(): Boolean;
+    procedure limparcampos();
 
 
     { Public declarations }
@@ -139,7 +145,22 @@ procedure TForm6.Button1Click(Sender: TObject);
 begin
    if OpenDialog1.Execute then
    begin
-   cdsmemory_itens.Insert;
+   //cdsmemory_itens.Insert;
+
+   if cdsmemory_itens.Active then
+   begin
+    cdsmemory_itens.EmptyDataSet;
+   end
+    else
+      begin
+       cdsmemory_itens.CreateDataSet;
+      end;
+
+
+
+
+   //cdsmemory_itens.Open;
+
 
    ACBrNFe1.NotasFiscais.Clear;
    Acbrnfe1.NotasFiscais.LoadFromFile(OpenDialog1.FileName);
@@ -162,13 +183,28 @@ while not ValidaCNPJExistentes() do
 
 while not ValidaCeanExistentes() do
   begin
-       //ValidaCeanExistentes();
-       Form5.ShowModal;
+    //ValidaCeanExistentes();
+    Form5.ShowModal;
   end;
    //4971850787518
    insercaokardex();
-    Button2.Enabled:=False;
+   Button2.Enabled:=False;
 
+end;
+
+procedure TForm6.Button3Click(Sender: TObject);
+begin
+   cdsmemory_itens.Close;
+end;
+
+procedure TForm6.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+// cdsmemory_itens.Close;
+    if cdsmemory_itens.Active then
+     begin
+        cdsmemory_itens.EmptyDataSet;
+     end;
+ limparcampos();
 end;
 
 procedure TForm6.FormShow(Sender: TObject);
@@ -185,8 +221,7 @@ begin
 
         Button2.Enabled:=False;
 
-        cdsmemory_itens.CreateDataSet;
-        cdsmemory_itens.Open;
+  
 end;
 
 procedure TForm6.primordial;
@@ -284,7 +319,7 @@ begin
   if itens =1 then
   begin
 
-     Showmessage('itens da nota não cadastrados no sistema:');
+     Showmessage('CNPJ do cliente não cadastrado');
      Result:=False;
 
   end
@@ -338,32 +373,29 @@ procedure TForm6.DBGrid2CellClick(Column: TColumn);
 var
 i : Integer;
 text : string;
-icms : string;
-iof : string;
-pis, confins : string;
+
 
 
 begin
- //ShowMessage(vizu);
+
      i:=cdsmemory_itens.FieldByName('Nº').AsInteger;
      i:=i-1;
- //i:=0;
-
-    strngfld_itensproduto.AsString := ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.xProd;
-    cdsmemory_itensquantida.AsFloat:=ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.qCom;
-    colun_itensvalorunitario.AsFloat:=ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.vUnCom;
-    cdsmemory_itenscean.AsString:=ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.cEAN;
+ //traz informações sobre o produto quando clicado
+    cean:=ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.cEAN;
+    prod:=ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.xProd;
     icms:=FloatToStr(ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Imposto.ICMS.vICMS);
     iof:=FloatToStr(ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Imposto.II.vIOF);
     pis:=FloatToStr(ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Imposto.PIS.vPIS);
     confins:=FloatToStr(ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Imposto.COFINS.vCOFINS);
-
-    text:= 'CEAN do produto: '+ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.cEAN+' | '+
-    'Produto: ' +ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.xProd+' | '+
+     Form7.ShowModal;
+    {
+    text:= 'CEAN do produto: '+cean+' | '+
+    'Produto: ' +prod+' | '+
      'ICMS do produto: '+icms+' | '+'IOF do Produto: '+iof+' | '+'PIS do Produto: '+pis+' | '+
      'CONFINS do Produto: '+confins;
 
     ShowMessage(text);
+    }
 end;
 
 procedure TForm6.DBGrid2ColEnter(Sender: TObject);
@@ -376,12 +408,14 @@ end;
 procedure TForm6.carregadest();
 begin
   cnpjdest.Text:=ACBrNFe1.NotasFiscais.Items[0].NFe.Dest.CNPJCPF;
-  ShowMessage('CNPJ do destinatário'+cnpjdest.Text);
+  //mostra cpf/cnpj do destinatário
+  ShowMessage('CNPJ do destinatário: '+cnpjdest.Text);
   nomedest.Text:=ACBrNFe1.NotasFiscais.Items[0].NFe.Dest.xNome;
   emaildest.Text:=ACBrNFe1.NotasFiscais.Items[0].NFe.Dest.Email;
   iedest.Text:= ACBrNFe1.NotasFiscais.Items[0].NFe.Dest.IE;
 end;
 
+//faz a inserção no kardex assim como o update na tabela de produtos
 procedure TForm6.insercaokardex();
 var
   sql: TDataSet;
@@ -398,11 +432,14 @@ begin
       cdsprodutos.Open;
       cdsprodutos.First;
 
+      //captura valores anteriores do deposito
       antes:= FloatToStr(cdsprodutossaldo_deposito.AsFloat+cdsmemory_itensquantida.AsFloat);
       depois:= StringReplace(antes, ',', '.', [rfReplaceAll, rfIgnoreCase]);
 
+      //captura a data atual
       data := Now;
 
+      //inserção na tabela de kardex
       query := TStringBuilder.Create;
       query.AppendFormat
       ('insert into kardex (nota_referente, produto, data_lancamento, estoque, tipo, quantidade) values(%d, %s, %s, %s, %s, %d)',
@@ -415,7 +452,7 @@ begin
 
 
 
-
+      //update no estoque do produto
       query := TStringBuilder.Create;
       query.AppendFormat
        ('update produtos set saldo_deposito=%s where cean=%s ',
@@ -426,14 +463,33 @@ begin
       ponte.sqlqryparametros.ExecSQL();
       FreeAndNil(query);
 
-
-
-
-
-
-
       cdsmemory_itens.Next;
     end;
+end;
+
+procedure TForm6.limparcampos();
+begin
+  cnpjemit.clear;
+  ieemit.clear;
+  nomeemit.Clear;
+  fantasiaemit.Clear;
+  emitende.Clear;
+  numemit.Clear;
+  bairroemit.Clear;
+  ufemit.Clear;
+  cepemit.Clear;
+
+  numeronota.Clear;
+  serienota.Clear;
+  totalnota.Clear;
+  datanota.Clear;
+  tributonota.Clear;
+
+  cnpjdest.Clear;
+  iedest.Clear;
+  nomedest.Clear;
+  emaildest.Clear;
+
 end;
 
 end.

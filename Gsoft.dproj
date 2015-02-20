@@ -143,16 +143,16 @@
             <Form>TuFrmkardex</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="buscaxml.pas">
-            <Form>Form6</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="uFrminforprod.pas">
             <Form>Form7</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="uFrmbuscaNCM.pas">
-            <Form>TTuFrmNCM</Form>
+            <Form>buscaNCM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="buscaxml.pas">
+            <Form>Form6</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">
