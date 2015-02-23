@@ -25,6 +25,7 @@ type
     ToolButton1: TToolButton;
     ToolButton2: TToolButton;
     Image1: TImage;
+    ToolButton3: TToolButton;
     procedure FormShow(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
@@ -39,6 +40,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure ToolButton1Click(Sender: TObject);
     procedure ToolButton2Click(Sender: TObject);
+    procedure ToolButton3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -166,6 +168,11 @@ end;
 procedure TForm1.ToolButton2Click(Sender: TObject);
 begin
   TFurmcadastrofornecedor.ShowModal;
+end;
+
+procedure TForm1.ToolButton3Click(Sender: TObject);
+begin
+Form6.ShowModal;
 end;
 
 end.

@@ -92,6 +92,8 @@ type
     Label1: TLabel;
     Label2: TLabel;
     dbcean: TDBEdit;
+    dbncm: TxDbButtonEdit;
+    mmocomplemento: TDBEdit;
     cdsprodutoscodigo: TIntegerField;
     cdsprodutosdescricao: TWideStringField;
     cdsprodutoscfop: TWideStringField;
@@ -115,8 +117,6 @@ type
     cdsprodutosultima_venda: TDateField;
     cdsprodutosdes_max: TFloatField;
     cdsprodutosvalidade_produto: TDateField;
-    dbncm: TxDbButtonEdit;
-    mmocomplemento: TDBEdit;
     procedure FormShow(Sender: TObject);
     procedure btnnovoClick(Sender: TObject);
     procedure btndesistirClick(Sender: TObject);
@@ -143,6 +143,7 @@ type
     procedure dbgrd1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure cbbfornecedorButtonClick(Sender: TObject);
     procedure dbncmButtonClick(Sender: TObject);
+    procedure dbgrd1DblClick(Sender: TObject);
   private
     procedure novo();
     procedure desisti();
@@ -586,12 +587,15 @@ begin
 
 
       campotrue();
+end;
 
-
-
-
-
-
+procedure TForm5.dbgrd1DblClick(Sender: TObject);
+begin
+  inherited;
+           pgc1.ActivePage := ts2;
+           cdsprodutos.Edit;
+           btngravar.Enabled:=True;
+           btngravar.Enabled:=False;
 end;
 
 procedure TForm5.dbgrd1KeyDown(Sender: TObject; var Key: Word;

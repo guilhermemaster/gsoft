@@ -14,10 +14,6 @@ type
   TTuFrmkardex = class(TForm)
     pnl1: TPanel;
     lbl1: TLabel;
-    lbl2: TLabel;
-    edtinicial1: TxDateTimeEdit;
-    lbl3: TLabel;
-    edtinicial2: TxDateTimeEdit;
     lbl4: TLabel;
     cbbtipo: TComboBox;
     btn1: TButton;
@@ -113,32 +109,8 @@ begin
 
           end;
 
-                  if not (edtinicial1.Text='') then
-          begin
-            if (passo = 2) or (passo=1) then
-            begin
-              data:='and data_lancamento >='+QuotedStr(edtinicial1.Text);
-            end
-              else
-                begin
-                    data:=' data_lancamento >='+QuotedStr(edtinicial1.Text);
-                    passo:=passo+1;
-                end;
 
-          end;
 
-                  if not (edtinicial2.Text='') then
-          begin
-            if (passo = 3) or (passo=1) then
-            begin
-              data2:='and data_lancamento <='+QuotedStr('%'+edtinicial2.Text+'%');
-            end
-              else
-                begin
-                    data2:=' data_lancamento <='+QuotedStr('%'+edtinicial2.Text+'%');
-                end;
-
-          end;
 
           if passo = 0 then
           begin
@@ -171,8 +143,6 @@ end;
 procedure TTuFrmkardex.btn2Click(Sender: TObject);
 begin
       btncbbproduto.Clear;
-      edtinicial1.Clear;
-      edtinicial2.Clear;
       cbbtipo.Clear;
 
 

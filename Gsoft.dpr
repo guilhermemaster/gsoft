@@ -20,7 +20,8 @@ uses
   uFrmkardex in 'uFrmkardex.pas' {TuFrmkardex},
   uFrminforprod in 'uFrminforprod.pas' {Form7},
   uFrmbuscaNCM in 'uFrmbuscaNCM.pas' {buscaNCM},
-  buscaxml in 'buscaxml.pas' {Form6};
+  buscaxml in 'buscaxml.pas' {Form6},
+  uFrmrapidofornecedor in 'uFrmrapidofornecedor.pas' {TuFrmrapidofornecedor};
 
 {$R *.res}
 
@@ -75,5 +76,6 @@ begin
   Application.CreateForm(TbuscaNCM, buscaNCM);
   Application.CreateForm(TForm6, Form6);
   Application.CreateForm(TForm6, Form6);
+  Application.CreateForm(TTuFrmrapidofornecedor, TuFrmrapidofornecedor);
   Application.Run;
 end.

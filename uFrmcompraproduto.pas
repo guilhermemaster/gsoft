@@ -308,18 +308,18 @@ end;
 procedure TTuFrmcompraproduto.dbgrd1KeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  // aqui
+
   if Key = VK_F1 then
   begin
     cdsmemory_itens.Open;
     cdsmemory_itens.Insert;
     TuFrmbuscarproduto.ShowModal;
 
-    //colunMemoryNumerodaNotaFiscal.AsInteger := StrToInt(edtnumero_nota.Text);
+
     strngfld_itensproduto.AsString := TuFrmbuscarproduto.produto;
     colun_itensvalorunitario.AsFloat := StrToFloat(TuFrmbuscarproduto.valor);
 
-    // press:=press+1;
+
   end;
 
   if Key = VK_F2 then
@@ -347,11 +347,9 @@ end;
 
 procedure TTuFrmcompraproduto.btn2Click(Sender: TObject);
 begin
-  // cdsmemory_itens.Close;
+
   cdsmemory_itens.EmptyDataSet;
-  {
-  cdsitens_nota.Cancel;
-   }
+
   edtnumero_nota.Enabled := False;
   edtdata_entrada.Enabled := False;
   edtdata_emissao.Enabled := False;
@@ -490,7 +488,7 @@ begin
       cdsconsultanumeroestado.First;
 
 
-      //anos_passa:=DateToStr(data);
+
       anos_passa:=data_emissao;
       numero_estado:= IntToStr(coluncdsconsultanumeroestadoid.AsInteger);
 
@@ -571,18 +569,13 @@ begin
   plbltotalbruto.Text := total;
   Relatoriorecibo.Print;
 
+ cdsmemory_itens.Close;
+ cdscompra_produto.Cancel;
+ cdsitens_nota.Cancel;
 
+ limpar();
 
-
-    cdsmemory_itens.Close;
-
-    cdscompra_produto.Cancel;
-
-    cdsitens_nota.Cancel;
-
-    limpar();
-
-  end;
+end;
 
 
 
@@ -632,10 +625,10 @@ end;
 procedure TTuFrmcompraproduto.edtdescontoKeyPress(Sender: TObject;
   var Key: Char);
 begin
-          if not(Key in ['0' .. '9', '.', #8]) then
-          begin
-            Key := #0;
-          end;
+  if not(Key in ['0' .. '9', '.', #8]) then
+  begin
+    Key := #0;
+  end;
 end;
 
 procedure TTuFrmcompraproduto.edtmodeloExit(Sender: TObject);
@@ -695,11 +688,6 @@ begin
 
   cdsconsultanumeroestado.Close;
   cdsconsultanumeroestado.Open;
-
-  {
-  cdsitens_nota.Close;
-  cdsitens_nota.Open;
-   }
 end;
 
 procedure TTuFrmcompraproduto.sub_total();
@@ -727,7 +715,6 @@ begin
   i := 0;
 
   data:=colun_produtodata_emissao.AsDateTime;
-  //DecodeDate(data, ano, mess, dia);
 
 
 
@@ -755,9 +742,7 @@ begin
     i:=i+1;
   end;
 
- //ShowMessage(anos_passa[8]);
-  //ShowMessage(anos_passa[9]);
-  //verificação do mes e ano
+
   if  anos_passa[9] = nfe[3] then
   begin
     i:=i+1;
@@ -859,15 +844,11 @@ begin
           i:=20;
           Break;
       end;
-
        w:=w+1;
        j:=j+1;
     end;
 
-
-
-
-  if i = 22 then
+if i = 22 then
   begin
     Result := True;
   end

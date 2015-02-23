@@ -1,6 +1,8 @@
 inherited FuFrmcadastrodemunicipios: TFuFrmcadastrodemunicipios
   Caption = 'Cadastro de Munic'#237'pios'
   Position = poScreenCenter
+  ExplicitWidth = 713
+  ExplicitHeight = 445
   PixelsPerInch = 96
   TextHeight = 13
   inherited tlb1: TToolBar
@@ -37,7 +39,6 @@ inherited FuFrmcadastrodemunicipios: TFuFrmcadastrodemunicipios
   end
   inherited pnl1: TPanel
     inherited pgc1: TPageControl
-      ActivePage = ts2
       inherited ts1: TTabSheet
         inherited cbb1: TComboBoxEx
           ItemsEx = <
@@ -60,7 +61,7 @@ inherited FuFrmcadastrodemunicipios: TFuFrmcadastrodemunicipios
         end
         object dbgrd1: TDBGrid
           Left = 0
-          Top = 51
+          Top = 50
           Width = 682
           Height = 262
           DataSource = dsmunicipio
@@ -70,6 +71,7 @@ inherited FuFrmcadastrodemunicipios: TFuFrmcadastrodemunicipios
           TitleFont.Height = -11
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
+          OnDblClick = dbgrd1DblClick
           Columns = <
             item
               Expanded = False

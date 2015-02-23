@@ -39,7 +39,12 @@ inherited TFurmcadastrofornecedor: TTFurmcadastrofornecedor
   end
   inherited pnl1: TPanel
     inherited pgc1: TPageControl
+      ActivePage = ts2
       inherited ts1: TTabSheet
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         inherited cbb1: TComboBoxEx
           ItemsEx = <
             item
@@ -79,6 +84,7 @@ inherited TFurmcadastrofornecedor: TTFurmcadastrofornecedor
           TitleFont.Height = -11
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
+          OnDblClick = dbgrd1DblClick
           Columns = <
             item
               Expanded = False
@@ -351,7 +357,7 @@ inherited TFurmcadastrofornecedor: TTFurmcadastrofornecedor
         end
         object edtcomissao: TDBEdit
           Left = 3
-          Top = 114
+          Top = 118
           Width = 121
           Height = 21
           Hint = 'Comiss'#227'o para o fornecedor'
@@ -360,11 +366,11 @@ inherited TFurmcadastrofornecedor: TTFurmcadastrofornecedor
           DataSource = dsfornecedor
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 5
+          TabOrder = 6
         end
         object edtemail: TDBEdit
           Left = 431
-          Top = 114
+          Top = 118
           Width = 179
           Height = 21
           Hint = 'Email do fornecedor'
@@ -373,7 +379,7 @@ inherited TFurmcadastrofornecedor: TTFurmcadastrofornecedor
           DataSource = dsfornecedor
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 8
+          TabOrder = 9
         end
         object edtstatus_fornecedor: TDBEdit
           Left = 3
@@ -386,7 +392,7 @@ inherited TFurmcadastrofornecedor: TTFurmcadastrofornecedor
           DataSource = dsfornecedor
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 9
+          TabOrder = 10
         end
         object mmoobser: TRzDBMemo
           Left = 3
@@ -398,7 +404,7 @@ inherited TFurmcadastrofornecedor: TTFurmcadastrofornecedor
           DataSource = dsfornecedor
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 12
+          TabOrder = 13
         end
         object edtnome: TDBEdit
           Left = 3
@@ -428,7 +434,7 @@ inherited TFurmcadastrofornecedor: TTFurmcadastrofornecedor
         end
         object edtcnpj: TDBEdit
           Left = 151
-          Top = 114
+          Top = 118
           Width = 142
           Height = 21
           Hint = 'CNPJ do fornecedor'
@@ -437,7 +443,7 @@ inherited TFurmcadastrofornecedor: TTFurmcadastrofornecedor
           DataSource = dsfornecedor
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 6
+          TabOrder = 7
           OnKeyPress = edtcnpjKeyPress
         end
         object edttelefone_2: TDBEdit
@@ -451,7 +457,7 @@ inherited TFurmcadastrofornecedor: TTFurmcadastrofornecedor
           DataSource = dsfornecedor
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 10
+          TabOrder = 11
         end
         object marcacaostatus_fornecedor: TRzDBCheckBox
           Left = 300
@@ -470,7 +476,7 @@ inherited TFurmcadastrofornecedor: TTFurmcadastrofornecedor
         end
         object edtinsc_estadual: TDBEdit
           Left = 299
-          Top = 114
+          Top = 118
           Width = 121
           Height = 21
           Hint = 'Inscri'#231#227'o estadual do fornecedor'
@@ -479,7 +485,7 @@ inherited TFurmcadastrofornecedor: TTFurmcadastrofornecedor
           DataSource = dsfornecedor
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 7
+          TabOrder = 8
         end
         object edtuf: TDBEdit
           Left = 558
@@ -493,7 +499,7 @@ inherited TFurmcadastrofornecedor: TTFurmcadastrofornecedor
           Enabled = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 4
+          TabOrder = 5
         end
         object edtdata_cadastro: TRzDBDateTimeEdit
           Left = 300
@@ -506,7 +512,7 @@ inherited TFurmcadastrofornecedor: TTFurmcadastrofornecedor
           Enabled = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 11
+          TabOrder = 12
           EditType = etDate
         end
         object edtcidade: TxDbButtonEdit
@@ -522,7 +528,7 @@ inherited TFurmcadastrofornecedor: TTFurmcadastrofornecedor
           ParentShowHint = False
           ReadOnlyColor = clBtnFace
           ShowHint = True
-          TabOrder = 13
+          TabOrder = 4
           ButtonHint = 'Pressione (F8) para consultar.'
           ButtonKind = bkFind
           ButtonShortCut = 119

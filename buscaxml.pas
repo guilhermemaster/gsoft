@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, ACBrNFe, Vcl.Grids,
   Vcl.DBGrids, Data.DB, Datasnap.DBClient, uFrmpnte, uFrmcadastrodeprodutos,
-  uFrmcadastrofornecedor, uFrminforprod;
+  uFrmcadastrofornecedor, uFrminforprod, uFrmrapidofornecedor;
 
 type
   TForm6 = class(TForm)
@@ -35,8 +35,8 @@ type
     dsmemory_itens: TDataSource;
     cdsmemory_itens: TClientDataSet;
     strngfld_itensproduto: TStringField;
-    colunMemoryQuantidade: TFloatField;
-    colun_itensvalorunitario: TFloatField;
+    cdsmemory_itensolunMemoryQuantidade: TFloatField;
+    cdsmemory_itensolun_itensvalorunitario: TFloatField;
     cdsmemory_itenscodigoproduto: TStringField;
     cdsmemory_itensquantida: TStringField;
     Button2: TButton;
@@ -104,11 +104,9 @@ type
     cdsfornecedordata_cadastro: TDateField;
     cdsfornecedorstatus_fornecedor: TWideStringField;
     cdsfornecedorobser: TWideStringField;
-    Button3: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure DBGrid2CellClick(Column: TColumn);
     procedure DBGrid2ColEnter(Sender: TObject);
     procedure cdsmemory_itenscodigoprodutoGetText(Sender: TField;
       var Text: string; DisplayText: Boolean);
@@ -119,6 +117,7 @@ type
   public
 
     vizu, pis, confins, cean, prod, iof, icms: string;
+    cnpj_emit:string;
     procedure primordial();
     procedure produtosfinal();
     function exitecean(cean : String): Boolean;
@@ -177,14 +176,20 @@ while not ValidaCNPJExistentes() do
   begin
        //ValidaCeanExistentes();
        //Form5.ShowModal;
-       TFurmcadastrofornecedor.ShowModal;
+       //TFurmcadastrofornecedor.ShowModal;
+
+
+       TuFrmrapidofornecedor.ShowModal;
+
   end;
 
 
 while not ValidaCeanExistentes() do
   begin
     //ValidaCeanExistentes();
-    Form5.ShowModal;
+    //Form5.ShowModal;
+    ShowMessage('Cadastre os produtos da lista!!');
+    exit;
   end;
    //4971850787518
    insercaokardex();
@@ -237,19 +242,21 @@ end;
 procedure TForm6.produtosfinal();
 var
 i : Integer;
+j: Integer;
 begin
-
+      //j:=ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Count;
+      j:=1;
      for i := 0 to ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Count - 1 do
    begin
     cdsmemory_itens.Open;
     cdsmemory_itens.Insert;
-
-    cdsmemory_itensN.AsString:=IntToStr(ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Count);
+     cdsmemory_itensN.AsString:=IntToStr(j);
+    //cdsmemory_itensN.AsString:=IntToStr(ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Count);
     strngfld_itensproduto.AsString := ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.xProd;
     cdsmemory_itensquantida.AsFloat:=ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.qCom;
-    colun_itensvalorunitario.AsFloat:=ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.vUnCom;
+    cdsmemory_itensolun_itensvalorunitario.AsFloat:=ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.vUnCom;
     cdsmemory_itenscean.AsString:=ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.cEAN;
-
+      j:=j+1;
    end;
 
 end;
@@ -369,40 +376,25 @@ begin
      //ShowMessage(vizu);
 end;
 
-procedure TForm6.DBGrid2CellClick(Column: TColumn);
+procedure TForm6.DBGrid2ColEnter(Sender: TObject);
 var
 i : Integer;
 text : string;
 
-
-
 begin
-
+     //i:=0;
      i:=cdsmemory_itens.FieldByName('Nº').AsInteger;
      i:=i-1;
- //traz informações sobre o produto quando clicado
+    //traz informações sobre o produto quando clicado
     cean:=ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.cEAN;
     prod:=ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.xProd;
     icms:=FloatToStr(ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Imposto.ICMS.vICMS);
     iof:=FloatToStr(ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Imposto.II.vIOF);
     pis:=FloatToStr(ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Imposto.PIS.vPIS);
     confins:=FloatToStr(ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Imposto.COFINS.vCOFINS);
-     Form7.ShowModal;
-    {
-    text:= 'CEAN do produto: '+cean+' | '+
-    'Produto: ' +prod+' | '+
-     'ICMS do produto: '+icms+' | '+'IOF do Produto: '+iof+' | '+'PIS do Produto: '+pis+' | '+
-     'CONFINS do Produto: '+confins;
+    Form7.ShowModal;
 
-    ShowMessage(text);
-    }
-end;
-
-procedure TForm6.DBGrid2ColEnter(Sender: TObject);
-begin
-  //messagebox (0,'Campo Tipo de Pessoa é obrigatório.','GSoft',mb_ok);
-  //aqui
-
+    // Showmessage(cdsmemory_itens.f);
 end;
 
 procedure TForm6.carregadest();

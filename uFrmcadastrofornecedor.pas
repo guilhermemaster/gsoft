@@ -109,6 +109,7 @@ type
     procedure btn10Click(Sender: TObject);
     procedure cbb1Exit(Sender: TObject);
     procedure btn12Click(Sender: TObject);
+    procedure dbgrd1DblClick(Sender: TObject);
   private
     procedure novo();
     procedure editar();
@@ -259,6 +260,15 @@ begin
   inherited;
      cdsfornecedor.Edit;
      cdsfornecedor.Last;
+end;
+
+procedure TTFurmcadastrofornecedor.dbgrd1DblClick(Sender: TObject);
+begin
+  inherited;
+           pgc1.ActivePage := ts2;
+           cdsfornecedor.Edit;
+           btngravar.Enabled:=True;
+           btngravar.Enabled:=False;
 end;
 
 procedure TTFurmcadastrofornecedor.deletar();

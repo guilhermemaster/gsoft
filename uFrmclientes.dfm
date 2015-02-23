@@ -115,7 +115,7 @@ object Form2: TForm2
     Top = 55
     Width = 707
     Height = 362
-    ActivePage = ts2
+    ActivePage = ts1
     TabOrder = 1
     object ts1: TTabSheet
       Caption = 'Listar'
@@ -246,7 +246,6 @@ object Form2: TForm2
             Caption = 'TELEFONE'
           end>
         TabOrder = 2
-        Text = 'PROCURA POR'
         OnExit = cbb1Exit
       end
       object cbb2: TComboBoxEx
@@ -256,7 +255,6 @@ object Form2: TForm2
         Height = 22
         ItemsEx = <>
         TabOrder = 3
-        Text = 'CRIT'#201'RIO'
       end
       object edt1: TEdit
         Left = 305
@@ -512,7 +510,7 @@ object Form2: TForm2
         Width = 646
         Height = 159
         ActivePage = ts3
-        TabOrder = 3
+        TabOrder = 15
         object ts3: TTabSheet
           Caption = 'Dados do Trabalho'
           object lbl16: TLabel
@@ -997,8 +995,7 @@ object Form2: TForm2
         DataField = 'data_cadastro'
         CharCase = ecUpperCase
         Enabled = False
-        TabOrder = 4
-        Date = 41989.000000000000000000
+        TabOrder = 16
         EditType = etDate
       end
       object dbedtrg: TDBEdit
@@ -1012,7 +1009,7 @@ object Form2: TForm2
         DataSource = dscliente
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 5
+        TabOrder = 4
       end
       object edtdata_nascimento: TRzDBDateTimeEdit
         Left = 259
@@ -1025,8 +1022,7 @@ object Form2: TForm2
         CharCase = ecUpperCase
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 6
-        Date = 41828.000000000000000000
+        TabOrder = 5
         EditType = etDate
       end
       object cbbestado_civil: TRzDBComboBox
@@ -1039,7 +1035,7 @@ object Form2: TForm2
         DataSource = dscliente
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 7
+        TabOrder = 6
       end
       object dbedtcep: TDBEdit
         Left = 3
@@ -1052,7 +1048,7 @@ object Form2: TForm2
         DataSource = dscliente
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 8
+        TabOrder = 7
         OnKeyPress = dbedtcepKeyPress
       end
       object dbedtendereco: TDBEdit
@@ -1066,7 +1062,7 @@ object Form2: TForm2
         DataSource = dscliente
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 9
+        TabOrder = 8
       end
       object dbedtbairro: TDBEdit
         Left = 452
@@ -1079,11 +1075,11 @@ object Form2: TForm2
         DataSource = dscliente
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 12
+        TabOrder = 11
       end
       object dbedttelefone_1: TDBEdit
-        Left = 3
-        Top = 143
+        Left = 5
+        Top = 144
         Width = 121
         Height = 21
         Hint = 'Telefone 1'
@@ -1092,7 +1088,7 @@ object Form2: TForm2
         DataSource = dscliente
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 13
+        TabOrder = 12
         OnKeyPress = dbedttelefone_1KeyPress
       end
       object dbedttelefone_2: TDBEdit
@@ -1106,7 +1102,7 @@ object Form2: TForm2
         DataSource = dscliente
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 14
+        TabOrder = 13
         OnKeyPress = dbedttelefone_2KeyPress
       end
       object dbedtemail: TDBEdit
@@ -1120,7 +1116,7 @@ object Form2: TForm2
         DataSource = dscliente
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 15
+        TabOrder = 14
       end
       object dbedtmunicipio: TxDbButtonEdit
         Left = 269
@@ -1135,7 +1131,7 @@ object Form2: TForm2
         ParentShowHint = False
         ReadOnlyColor = clBtnFace
         ShowHint = True
-        TabOrder = 10
+        TabOrder = 9
         ButtonHint = 'Pressione (F8) para consultar.'
         ButtonKind = bkFind
         ButtonShortCut = 119
@@ -1160,7 +1156,7 @@ object Form2: TForm2
         Enabled = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 11
+        TabOrder = 10
       end
       object marcacaostatus_cliente: TRzDBCheckBox
         Left = 474
@@ -1172,7 +1168,7 @@ object Form2: TForm2
         ValueChecked = '1'
         ValueUnchecked = '0'
         Caption = 'Ativo'
-        TabOrder = 16
+        TabOrder = 3
       end
     end
   end

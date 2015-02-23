@@ -74,6 +74,7 @@ type
     procedure cbb1Exit(Sender: TObject);
     procedure btn13Click(Sender: TObject);
     procedure btn10Click(Sender: TObject);
+    procedure dbgrd1DblClick(Sender: TObject);
   private
     id_estado: string;
     procedure campofalse();
@@ -369,6 +370,15 @@ begin
   btneditar.Enabled:=False;
 
   campotrue();
+end;
+
+procedure TFuFrmcadastrodemunicipios.dbgrd1DblClick(Sender: TObject);
+begin
+  inherited;
+           pgc1.ActivePage := ts2;
+           cdsmunicipio.Edit;
+           btngravar.Enabled:=True;
+           btngravar.Enabled:=False;
 end;
 
 procedure TFuFrmcadastrodemunicipios.deletar();
