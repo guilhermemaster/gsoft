@@ -139,23 +139,23 @@ implementation
 procedure TTFurmcadastrofornecedor.btn10Click(Sender: TObject);
 begin
   inherited;
-       Relatoriofornecedor.Print;
+  Relatoriofornecedor.Print;
 end;
 
 procedure TTFurmcadastrofornecedor.btn12Click(Sender: TObject);
 begin
   inherited;
-        if (cbb1.Text='PROCURA POR') then
-      begin
-         messagebox (0,'Parâmetro de busca errados','GSoft',mb_ok);
-         Exit;
-      end;
+  if (cbb1.Text='PROCURA POR') then
+  begin
+  messagebox (0,'Parâmetro de busca errados','GSoft',mb_ok);
+  Exit;
+  end;
 
-         if  (cbb2.Text='CRITÉRIO') then
-      begin
-         messagebox (0,'Parâmetro de busca errados','GSoft',mb_ok);
-         Exit;
-      end;
+  if  (cbb2.Text='CRITÉRIO') then
+  begin
+  messagebox (0,'Parâmetro de busca errados','GSoft',mb_ok);
+  Exit;
+  end;
 
 
 
@@ -198,244 +198,227 @@ begin
 
 
 
-            cdsfornecedor.Close;
-            cdsfornecedor.Open;
-            cdsfornecedor.First;
+  cdsfornecedor.Close;
+  cdsfornecedor.Open;
+  cdsfornecedor.First;
 end;
 
 procedure TTFurmcadastrofornecedor.btnanterioClick(Sender: TObject);
 begin
   inherited;
-    cdsfornecedor.Edit;
-    cdsfornecedor.Prior;
+  cdsfornecedor.Edit;
+  cdsfornecedor.Prior;
 end;
 
 procedure TTFurmcadastrofornecedor.btndesistirClick(Sender: TObject);
 begin
   inherited;
-      desistir();
+  desistir();
 end;
 
 procedure TTFurmcadastrofornecedor.btneditarClick(Sender: TObject);
 begin
   inherited;
-       editar();
+  editar();
 end;
 
 procedure TTFurmcadastrofornecedor.btnexcluirClick(Sender: TObject);
 begin
   inherited;
-       deletar();
+  deletar();
 end;
 
 procedure TTFurmcadastrofornecedor.btngravarClick(Sender: TObject);
 begin
   inherited;
-        gravar();
+  gravar();
 end;
 
 procedure TTFurmcadastrofornecedor.btninicioClick(Sender: TObject);
 begin
   inherited;
-
-     cdsfornecedor.Edit;
-     cdsfornecedor.First;
+  cdsfornecedor.Edit;
+  cdsfornecedor.First;
 end;
 
 procedure TTFurmcadastrofornecedor.btnnovoClick(Sender: TObject);
 begin
   inherited;
-         novo();
+  novo();
 end;
 
 procedure TTFurmcadastrofornecedor.btnproximoClick(Sender: TObject);
 begin
   inherited;
-      cdsfornecedor.Edit;
-      cdsfornecedor.Next;
+  cdsfornecedor.Edit;
+  cdsfornecedor.Next;
 end;
 
 procedure TTFurmcadastrofornecedor.btnultimoClick(Sender: TObject);
 begin
   inherited;
-     cdsfornecedor.Edit;
-     cdsfornecedor.Last;
+  cdsfornecedor.Edit;
+  cdsfornecedor.Last;
 end;
 
 procedure TTFurmcadastrofornecedor.dbgrd1DblClick(Sender: TObject);
 begin
   inherited;
-           pgc1.ActivePage := ts2;
-           cdsfornecedor.Edit;
-           btngravar.Enabled:=True;
-           btngravar.Enabled:=False;
+  pgc1.ActivePage := ts2;
+  cdsfornecedor.Edit;
+  btngravar.Enabled:=True;
+  btngravar.Enabled:=False;
 end;
 
 procedure TTFurmcadastrofornecedor.deletar();
 begin
-     try
-         cdsfornecedor.Delete;
-           cdsfornecedor.ApplyUpdates(0);
-             cdsfornecedor.RefreshRecord;
-      except
-
-
-           messagebox (0,'Não pode ser deletado','GSoft',mb_ok);
-
-
-      end;
+  try
+  cdsfornecedor.Delete;
+  cdsfornecedor.ApplyUpdates(0);
+  cdsfornecedor.RefreshRecord;
+  except
+  messagebox (0,'Não pode ser deletado','GSoft',mb_ok);
+  end;
 end;
 
 procedure TTFurmcadastrofornecedor.desistir();
 begin
 
-             cdsfornecedor.Cancel;
+  cdsfornecedor.Cancel;
 
-             inicio();
+  inicio();
 
-             pgc1.ActivePage := ts1;
+  pgc1.ActivePage := ts1;
 end;
 
 procedure TTFurmcadastrofornecedor.editar();
 begin
-      cdsfornecedor.Edit;
-      pgc1.ActivePage := ts2;
+  cdsfornecedor.Edit;
+  pgc1.ActivePage := ts2;
 
-        btngravar.Enabled:=True;
-        btndesistir.Enabled:=True;
-        btneditar.Enabled:=False;
+  btngravar.Enabled:=True;
+  btndesistir.Enabled:=True;
+  btneditar.Enabled:=False;
 
-                      campotrue();
+  campotrue();
 end;
 
 procedure TTFurmcadastrofornecedor.edtcidadeButtonClick(Sender: TObject);
 begin
   inherited;
-        //aqui
-        Form3.ShowModal;
-        edtcidade.Text:=Form3.cidadenome;
-        edtuf.Text:=Form3.estadonome;
+  //aqui
+  Form3.ShowModal;
+  edtcidade.Text:=Form3.cidadenome;
+  edtuf.Text:=Form3.estadonome;
 end;
 
 procedure TTFurmcadastrofornecedor.edtcnpjKeyPress(Sender: TObject;
   var Key: Char);
 begin
   inherited;
-             if not (key in ['0'..'9','.',#8]) then
-
-                         Key:=#0;
+  if not (key in ['0'..'9','.',#8]) then
+    Key:=#0;
 end;
 
 procedure TTFurmcadastrofornecedor.gravar();
 begin
-             if (edtnome.Text = '')  then
-               begin
+  if (edtnome.Text = '')  then
+  begin
+  messagebox (0,'Campo Nome do Fornecedor é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                messagebox (0,'Campo Nome do Fornecedor é obrigatório.','GSoft',mb_ok);
-               Exit;
-                   end;
+  if (edtcep.Text = '     -    ')  then
+  begin
+  messagebox (0,'Campo CEP é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                if (edtcep.Text = '     -    ')  then
-               begin
+  if (edtendereco.Text = '')  then
+  begin
+  messagebox (0,'Campo Endereço do Fornecedor é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                messagebox (0,'Campo CEP é obrigatório.','GSoft',mb_ok);
-               Exit;
-                   end;
+  if (edtcidade.Text = '')  then
+  begin
+  messagebox (0,'Campo Município do Fornecedor é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                 if (edtendereco.Text = '')  then
-               begin
+  if (edtcnpj.Text = '')  then
+  begin
+  messagebox (0,'Campo CNPJ do Fornecedor é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                messagebox (0,'Campo Endereço do Fornecedor é obrigatório.','GSoft',mb_ok);
-               Exit;
-                   end;
+  if (edtinsc_estadual.Text = '')  then
+  begin
+  messagebox (0,'Campo Inscrição Estadual do Fornecedor é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                   if (edtcidade.Text = '')  then
-               begin
+  if (edtemail.Text = '')  then
+  begin
+  messagebox (0,'Campo Email do Fornecedor é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                messagebox (0,'Campo Município do Fornecedor é obrigatório.','GSoft',mb_ok);
-               Exit;
-                   end;
+  if (edtstatus_fornecedor.Text = '(   )   -    ')  then
+  begin
+  messagebox (0,'Campo Telefone do Fornecedor é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
+  if not (Form2.cnpj(edtcnpj.Text)) then
+  begin
+  messagebox (0,'O CNPJ não é válido.','GSoft',mb_ok);
+  Exit;
+  end;
 
-
-                   if (edtcnpj.Text = '')  then
-               begin
-
-                messagebox (0,'Campo CNPJ do Fornecedor é obrigatório.','GSoft',mb_ok);
-               Exit;
-                   end;
-
-                   if (edtinsc_estadual.Text = '')  then
-               begin
-
-                messagebox (0,'Campo Inscrição Estadual do Fornecedor é obrigatório.','GSoft',mb_ok);
-               Exit;
-                   end;
-
-                   if (edtemail.Text = '')  then
-               begin
-
-                messagebox (0,'Campo Email do Fornecedor é obrigatório.','GSoft',mb_ok);
-               Exit;
-                   end;
-
-                   if (edtstatus_fornecedor.Text = '(   )   -    ')  then
-               begin
-
-                messagebox (0,'Campo Telefone do Fornecedor é obrigatório.','GSoft',mb_ok);
-               Exit;
-                   end;
-
-               if not (Form2.cnpj(edtcnpj.Text)) then
-               begin
-                messagebox (0,'O CNPJ não é válido.','GSoft',mb_ok);
-                Exit;
-               end;
-
-               if not (Form2.ValidarEMail(edtemail.Text)) then
-                begin
-                   messagebox (0,'Email Errado.','GSoft',mb_ok);
-                   Exit;
-                end;
+  if not (Form2.ValidarEMail(edtemail.Text)) then
+  begin
+  messagebox (0,'Email Errado.','GSoft',mb_ok);
+  Exit;
+  end;
 
 
-               if  ( StrToIntDef(edtinsc_estadual.Text, 0) = 0 ) and (not (edtinsc_estadual.Text = 'ISENTO')) then
-                   begin
-                       messagebox (0,'Inscrições Estaduais nos Parâmentros Invalidos!!!','GSoft',mb_ok);
-                       Exit;
-                   end;
+  if  ( StrToIntDef(edtinsc_estadual.Text, 0) = 0 ) and (not (edtinsc_estadual.Text = 'ISENTO')) then
+  begin
+  messagebox (0,'Inscrições Estaduais nos Parâmentros Invalidos!!!','GSoft',mb_ok);
+  Exit;
+  end;
 
 
 
-                    cdsfornecedor.Post;
-                    cdsfornecedor.ApplyUpdates(0);
+  cdsfornecedor.Post;
+  cdsfornecedor.ApplyUpdates(0);
 
-                    cdsfornecedor.Insert;
-                    cdsfornecedor.Close;
-                    cdsfornecedor.Open;
-                    cdsfornecedor.Insert;
-
-
-                    pgc1.ActivePage := ts1;
+  cdsfornecedor.Insert;
+  cdsfornecedor.Close;
+  cdsfornecedor.Open;
+  cdsfornecedor.Insert;
 
 
-                    cdsfornecedor.First;
-
-                    btneditar.Enabled:=True;
-                    btnnovo.Enabled:=True;
-                    btninicio.Enabled:=True;
-                    btnproximo.Enabled:=True;
-                    btnanterio.Enabled:=True;
-                    btnultimo.Enabled:=True;
-                    btnexcluir.Enabled:=True;
-
-                    btngravar.Enabled:=False;
-                    btndesistir.Enabled:=False;
+  pgc1.ActivePage := ts1;
 
 
+  cdsfornecedor.First;
 
-                    campofalse();
+  btneditar.Enabled:=True;
+  btnnovo.Enabled:=True;
+  btninicio.Enabled:=True;
+  btnproximo.Enabled:=True;
+  btnanterio.Enabled:=True;
+  btnultimo.Enabled:=True;
+  btnexcluir.Enabled:=True;
 
+  btngravar.Enabled:=False;
+  btndesistir.Enabled:=False;
+
+
+
+  campofalse();
 end;
 
 
@@ -443,61 +426,61 @@ end;
 
 procedure TTFurmcadastrofornecedor.novo();
 begin
-       campotrue();
+  campotrue();
 
-       pgc1.ActivePage := ts2;
+  pgc1.ActivePage := ts2;
 
 
-       btnnovo.Enabled:=False;
-       btngravar.Enabled:=True;
-       btndesistir.Enabled:=True;
+  btnnovo.Enabled:=False;
+  btngravar.Enabled:=True;
+  btndesistir.Enabled:=True;
 
-       btninicio.Enabled:=False;
-       btnproximo.Enabled:=False;
-       btnanterio.Enabled:=False;
-       btnultimo.Enabled:=False;
-       btneditar.Enabled:=False;
-       btnexcluir.Enabled:=False;
+  btninicio.Enabled:=False;
+  btnproximo.Enabled:=False;
+  btnanterio.Enabled:=False;
+  btnultimo.Enabled:=False;
+  btneditar.Enabled:=False;
+  btnexcluir.Enabled:=False;
 
-       cdsfornecedor.Append;
-       cdsfornecedor.FieldByName('status_fornecedor').Text := '1';
+  cdsfornecedor.Append;
+  cdsfornecedor.FieldByName('status_fornecedor').Text := '1';
 
-       edtdata_cadastro.Date:=Date;
+  edtdata_cadastro.Date:=Date;
 
 end;
 
 procedure TTFurmcadastrofornecedor.FormShow(Sender: TObject);
 begin
   inherited;
-        pgc1.ActivePage := ts1;
+  pgc1.ActivePage := ts1;
 
 
-        cdsfornecedor.CommandText:='select * from fornecedores where status_fornecedor ='+QuotedStr('1') ;
-        cdsfornecedor.Close;
-        cdsfornecedor.Open;
-        cdsfornecedor.First;
+  cdsfornecedor.CommandText:='select * from fornecedores where status_fornecedor ='+QuotedStr('1') ;
+  cdsfornecedor.Close;
+  cdsfornecedor.Open;
+  cdsfornecedor.First;
 
-        edt1.Visible:=False;
+  edt1.Visible:=False;
 
-        campofalse();
+  campofalse();
 
-        inicio();
+  inicio();
 end;
 
 procedure TTFurmcadastrofornecedor.campotrue();
  begin
-   edtnome.Enabled:=True;
-   marcacaostatus_fornecedor.Enabled:=True;
-   edtcep.Enabled:=True;
-   edtendereco.Enabled:=True;
-   edtcidade.Enabled:=True;
-   edtcomissao.Enabled:=True;
-   edtcnpj.Enabled:=True;
-   edtinsc_estadual.Enabled:=True;
-   edtemail.Enabled:=True;
-   edtstatus_fornecedor.Enabled:=True;
-   edttelefone_2.Enabled:=True;
-   mmoobser.Enabled:=True;
+  edtnome.Enabled:=True;
+  marcacaostatus_fornecedor.Enabled:=True;
+  edtcep.Enabled:=True;
+  edtendereco.Enabled:=True;
+  edtcidade.Enabled:=True;
+  edtcomissao.Enabled:=True;
+  edtcnpj.Enabled:=True;
+  edtinsc_estadual.Enabled:=True;
+  edtemail.Enabled:=True;
+  edtstatus_fornecedor.Enabled:=True;
+  edttelefone_2.Enabled:=True;
+  mmoobser.Enabled:=True;
  end;
 
  procedure TTFurmcadastrofornecedor.cbb1Exit(Sender: TObject);
@@ -552,37 +535,35 @@ end;
 procedure TTFurmcadastrofornecedor.chk1Click(Sender: TObject);
 begin
   inherited;
-        //aqui
-
   if (chk1.Checked) then
-        begin
+  begin
 
-               cdsfornecedor.CommandText:='select * from fornecedores ';
-               cdsfornecedor.Close;
-               cdsfornecedor.Open;
-        end
-          else
-          begin
-               cdsfornecedor.CommandText:='select * from fornecedores where status_fornecedor='+QuotedStr('1') ;
-               cdsfornecedor.Close;
-               cdsfornecedor.Open;
-          end;
+  cdsfornecedor.CommandText:='select * from fornecedores ';
+  cdsfornecedor.Close;
+  cdsfornecedor.Open;
+  end
+    else
+      begin
+      cdsfornecedor.CommandText:='select * from fornecedores where status_fornecedor='+QuotedStr('1') ;
+      cdsfornecedor.Close;
+      cdsfornecedor.Open;
+      end;
 end;
 
 procedure TTFurmcadastrofornecedor.campofalse();
  begin
-   edtnome.Enabled:=False;
-   marcacaostatus_fornecedor.Enabled:=False;
-   edtcep.Enabled:=False;
-   edtendereco.Enabled:=False;
-   edtcidade.Enabled:=False;
-   edtcomissao.Enabled:=False;
-   edtcnpj.Enabled:=False;
-   edtinsc_estadual.Enabled:=False;
-   edtemail.Enabled:=False;
-   edtstatus_fornecedor.Enabled:=False;
-   edttelefone_2.Enabled:=False;
-   mmoobser.Enabled:=False;
+  edtnome.Enabled:=False;
+  marcacaostatus_fornecedor.Enabled:=False;
+  edtcep.Enabled:=False;
+  edtendereco.Enabled:=False;
+  edtcidade.Enabled:=False;
+  edtcomissao.Enabled:=False;
+  edtcnpj.Enabled:=False;
+  edtinsc_estadual.Enabled:=False;
+  edtemail.Enabled:=False;
+  edtstatus_fornecedor.Enabled:=False;
+  edttelefone_2.Enabled:=False;
+  mmoobser.Enabled:=False;
  end;
 
  procedure TTFurmcadastrofornecedor.busca_porcodigo();

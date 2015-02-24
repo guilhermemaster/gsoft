@@ -3,8 +3,8 @@ object TuFrmkardex: TTuFrmkardex
   Top = 0
   AutoSize = True
   Caption = 'Kardex'
-  ClientHeight = 305
-  ClientWidth = 497
+  ClientHeight = 385
+  ClientWidth = 649
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,11 +18,11 @@ object TuFrmkardex: TTuFrmkardex
   object pnl1: TPanel
     Left = 0
     Top = 0
-    Width = 497
-    Height = 305
+    Width = 649
+    Height = 385
     TabOrder = 0
     object lbl1: TLabel
-      Left = 18
+      Left = 7
       Top = 8
       Width = 103
       Height = 16
@@ -35,8 +35,8 @@ object TuFrmkardex: TTuFrmkardex
       ParentFont = False
     end
     object lbl4: TLabel
-      Left = 327
-      Top = 8
+      Left = 489
+      Top = 7
       Width = 29
       Height = 16
       Caption = 'Tipo '
@@ -48,8 +48,8 @@ object TuFrmkardex: TTuFrmkardex
       ParentFont = False
     end
     object cbbtipo: TComboBox
-      Left = 327
-      Top = 30
+      Left = 489
+      Top = 29
       Width = 145
       Height = 21
       TabOrder = 0
@@ -58,9 +58,9 @@ object TuFrmkardex: TTuFrmkardex
         'S')
     end
     object btn1: TButton
-      Left = 241
-      Top = 257
-      Width = 121
+      Left = 395
+      Top = 339
+      Width = 117
       Height = 41
       Caption = 'Procurar'
       Font.Charset = DEFAULT_CHARSET
@@ -75,9 +75,9 @@ object TuFrmkardex: TTuFrmkardex
       OnClick = btn1Click
     end
     object btncbbproduto: TxButtonEdit
-      Left = 18
+      Left = 7
       Top = 29
-      Width = 303
+      Width = 463
       Height = 21
       Text = ''
       Color = clWhite
@@ -100,7 +100,7 @@ object TuFrmkardex: TTuFrmkardex
     end
     object btn2: TButton
       Left = 18
-      Top = 257
+      Top = 339
       Width = 121
       Height = 41
       Caption = 'Limpar'
@@ -116,10 +116,10 @@ object TuFrmkardex: TTuFrmkardex
       OnClick = btn2Click
     end
     object dbgrd1: TDBGrid
-      Left = 18
+      Left = 7
       Top = 56
-      Width = 471
-      Height = 193
+      Width = 631
+      Height = 277
       DataSource = dskardex
       TabOrder = 4
       TitleFont.Charset = DEFAULT_CHARSET
@@ -174,9 +174,9 @@ object TuFrmkardex: TTuFrmkardex
         end>
     end
     object btn3: TButton
-      Left = 368
-      Top = 257
-      Width = 121
+      Left = 522
+      Top = 339
+      Width = 117
       Height = 41
       Caption = 'Imprimir'
       Font.Charset = DEFAULT_CHARSET

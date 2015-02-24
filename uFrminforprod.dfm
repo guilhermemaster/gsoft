@@ -3,7 +3,7 @@ object Form7: TForm7
   Top = 0
   AutoSize = True
   Caption = 'Informa'#231#245'es Tribut'#225'rias sobre o Produto'
-  ClientHeight = 187
+  ClientHeight = 185
   ClientWidth = 569
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,13 +20,13 @@ object Form7: TForm7
     Left = 0
     Top = 0
     Width = 569
-    Height = 145
+    Height = 185
     TabOrder = 0
     object GroupBox1: TGroupBox
       Left = 13
       Top = 0
       Width = 545
-      Height = 137
+      Height = 129
       Caption = '  Item  '
       TabOrder = 0
       object lbl11: TLabel
@@ -164,23 +164,23 @@ object Form7: TForm7
         TabOrder = 5
       end
     end
-  end
-  object Button1: TButton
-    Left = 420
-    Top = 146
-    Width = 139
-    Height = 41
-    Caption = 'Gravar produto'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = [fsBold]
-    ImageIndex = 9
-    Images = DataModule2.imgmenu
-    ParentFont = False
-    TabOrder = 1
-    OnClick = Button1Click
+    object Button1: TButton
+      Left = 419
+      Top = 135
+      Width = 139
+      Height = 41
+      Caption = 'Gravar produto'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ImageIndex = 9
+      Images = DataModule2.imgmenu
+      ParentFont = False
+      TabOrder = 1
+      OnClick = Button1Click
+    end
   end
   object cdsprodutos: TClientDataSet
     Aggregates = <>

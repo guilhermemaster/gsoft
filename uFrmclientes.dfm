@@ -17,7 +17,6 @@ object Form2: TForm2
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
-  OnKeyDown = FormKeyDown
   OnResize = FormResize
   OnShow = FormShow
   PixelsPerInch = 96
@@ -513,6 +512,10 @@ object Form2: TForm2
         TabOrder = 15
         object ts3: TTabSheet
           Caption = 'Dados do Trabalho'
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object lbl16: TLabel
             Left = 8
             Top = 0
@@ -791,6 +794,10 @@ object Form2: TForm2
         object ts4: TTabSheet
           Caption = 'Refer'#234'ncias Pessoais'
           ImageIndex = 1
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object lbl19: TLabel
             Left = 3
             Top = 3

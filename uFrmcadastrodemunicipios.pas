@@ -115,16 +115,16 @@ begin
 faz a verificação ao buscar se os paramentros estão corretos na busca
 como PORCURA POR e CRITERIO não devem esta selecionado na hora da busca
 }
-if (cbb1.Text='PROCURA POR') then
-begin
-messagebox (0,'Parâmetro de busca errados','GSoft',mb_ok);
-Exit;
-end;
+  if (cbb1.Text='PROCURA POR') then
+  begin
+  messagebox (0,'Parâmetro de busca errados','GSoft',mb_ok);
+  Exit;
+  end;
 
-if  (cbb2.Text='CRITÉRIO') then
-begin
-messagebox (0,'Parâmetro de busca errados','GSoft',mb_ok);
-Exit;
+  if  (cbb2.Text='CRITÉRIO') then
+  begin
+  messagebox (0,'Parâmetro de busca errados','GSoft',mb_ok);
+  Exit;
 end;
 
 
@@ -133,27 +133,27 @@ begin
 //Tradus o que foi colocado para a busca da forma certa para passar p/ o banco
   if cbb2.Text='Contém' then
   begin
-    cdsmunicipio.CommandText:='select cidades.id, cidades.nome, cidades.codigo_ibge, estados.sigla, estados.nome from cidades join estados on cidades.estado_id=estados.id where '+procura_por(cbb1.Text)+' like'+QuotedStr('%'+edt2.Text+'%');
+  cdsmunicipio.CommandText:='select cidades.id, cidades.nome, cidades.codigo_ibge, estados.sigla, estados.nome from cidades join estados on cidades.estado_id=estados.id where '+procura_por(cbb1.Text)+' like'+QuotedStr('%'+edt2.Text+'%');
   end
   else if cbb2.Text='Inicia' then
-       begin
-        cdsmunicipio.CommandText:='select cidades.id, cidades.nome, cidades.codigo_ibge, estados.sigla, estados.nome from cidades join estados on cidades.estado_id=estados.id where '+procura_por(cbb1.Text)+' like'+QuotedStr(edt2.Text+'%');
-       end
-       else if cbb2.Text='Igual' then
-             begin
-              cdsmunicipio.CommandText:='select cidades.id, cidades.nome, cidades.codigo_ibge, estados.sigla, estados.nome from cidades join estados on cidades.estado_id=estados.id where '+procura_por(cbb1.Text)+' like'+QuotedStr(edt2.Text);
-             end
-             else
-               begin
-                cdsmunicipio.CommandText:='select cidades.id, cidades.nome, cidades.codigo_ibge, estados.sigla, estados.nome from cidades join estados on cidades.estado_id=estados.id where '+procura_por(cbb1.Text)+' not like'+QuotedStr('%'+edt2.Text+'%');
-               end;
+    begin
+    cdsmunicipio.CommandText:='select cidades.id, cidades.nome, cidades.codigo_ibge, estados.sigla, estados.nome from cidades join estados on cidades.estado_id=estados.id where '+procura_por(cbb1.Text)+' like'+QuotedStr(edt2.Text+'%');
+    end
+      else if cbb2.Text='Igual' then
+      begin
+      cdsmunicipio.CommandText:='select cidades.id, cidades.nome, cidades.codigo_ibge, estados.sigla, estados.nome from cidades join estados on cidades.estado_id=estados.id where '+procura_por(cbb1.Text)+' like'+QuotedStr(edt2.Text);
+      end
+        else
+        begin
+        cdsmunicipio.CommandText:='select cidades.id, cidades.nome, cidades.codigo_ibge, estados.sigla, estados.nome from cidades join estados on cidades.estado_id=estados.id where '+procura_por(cbb1.Text)+' not like'+QuotedStr('%'+edt2.Text+'%');
+        end;
 
-end
-else
-  begin
-    cdsmunicipio.CommandText:='select cidades.id, cidades.nome, cidades.codigo_ibge, estados.sigla, estados.nome from cidades join estados on cidades.estado_id=estados.id where '+procura_por(cbb1.Text)+cbb2.Text+ edt2.Text;
-  end;
-//é feita à abertura e fechamento do data set com a nova consulta passada.
+          end
+          else
+          begin
+          cdsmunicipio.CommandText:='select cidades.id, cidades.nome, cidades.codigo_ibge, estados.sigla, estados.nome from cidades join estados on cidades.estado_id=estados.id where '+procura_por(cbb1.Text)+cbb2.Text+ edt2.Text;
+          end;
+  //é feita à abertura e fechamento do data set com a nova consulta passada.
   cdsmunicipio.Close;
   cdsmunicipio.Open;
   cdsmunicipio.First;
@@ -163,20 +163,20 @@ end;
 procedure TFuFrmcadastrodemunicipios.btn13Click(Sender: TObject);
 begin
   inherited;
-            cdsmunicipio.CommandText:='select cidades.id, cidades.nome, cidades.codigo_ibge, estados.sigla, estados.nome from cidades join estados on cidades.estado_id=estados.id' ;
-            cdsmunicipio.Close;
-            cdsmunicipio.Open;
-            cdsmunicipio.First;
+  cdsmunicipio.CommandText:='select cidades.id, cidades.nome, cidades.codigo_ibge, estados.sigla, estados.nome from cidades join estados on cidades.estado_id=estados.id' ;
+  cdsmunicipio.Close;
+  cdsmunicipio.Open;
+  cdsmunicipio.First;
 
-            edt1.Clear;
-            edt2.Clear;
+  edt1.Clear;
+  edt2.Clear;
 end;
 
 procedure TFuFrmcadastrodemunicipios.btnanterioClick(Sender: TObject);
 begin
   inherited;
-      cdsmunicipio.Edit;
-      cdsmunicipio.Prior;
+  cdsmunicipio.Edit;
+  cdsmunicipio.Prior;
 end;
 
 procedure TFuFrmcadastrodemunicipios.btndbe1ButtonClick(Sender: TObject);
@@ -215,7 +215,7 @@ end;
 procedure TFuFrmcadastrodemunicipios.FormShow(Sender: TObject);
 begin
   inherited;
-//coloca o dataset em forma inicial, liberando os botões necessários
+  //coloca o dataset em forma inicial, liberando os botões necessários
   pgc1.ActivePage := ts1;
 
   cdsmunicipio.Close;
@@ -276,9 +276,9 @@ end;
 
 procedure TFuFrmcadastrodemunicipios.campotrue();
 begin
-         btndbe1.Enabled:=True;
-         edtcodigo.Enabled:=True;
-         edtnome.Enabled:=True;
+  btndbe1.Enabled:=True;
+  edtcodigo.Enabled:=True;
+  edtnome.Enabled:=True;
 end;
 
 procedure TFuFrmcadastrodemunicipios.cbb1Exit(Sender: TObject);
@@ -315,22 +315,22 @@ var
   sql : TDataSet;
   query : TStringBuilder;
 begin
-//se id_estado for diferente de nada, para poder fazer a inserção
-//id_estado e puxado quando for chamado o estado
-if not (id_estado='') then
-begin
-query := TStringBuilder.Create;
-query.AppendFormat('insert into cidades (nome, codigo_ibge, estado_id) values(%s, %d, %d)',[QuotedStr(edtnome.Text), colun_ibge.AsInteger, StrToInt(id_estado)]);
-ponte.sqlqryparametros.Close;
-ponte.sqlqryparametros.SQL.Clear;
-ponte.sqlqryparametros.SQL.Add(query.ToString);
-ponte.sqlqryparametros.ExecSQL();
-FreeAndNil(query);
-end
-  else
-    begin
-       messagebox (0,'Município já cadastrado.','GSoft',mb_ok);
-    end;
+  //se id_estado for diferente de nada, para poder fazer a inserção
+  //id_estado e puxado quando for chamado o estado
+  if not (id_estado='') then
+  begin
+  query := TStringBuilder.Create;
+  query.AppendFormat('insert into cidades (nome, codigo_ibge, estado_id) values(%s, %d, %d)',[QuotedStr(edtnome.Text), colun_ibge.AsInteger, StrToInt(id_estado)]);
+  ponte.sqlqryparametros.Close;
+  ponte.sqlqryparametros.SQL.Clear;
+  ponte.sqlqryparametros.SQL.Add(query.ToString);
+  ponte.sqlqryparametros.ExecSQL();
+  FreeAndNil(query);
+  end
+    else
+      begin
+         messagebox (0,'Município já cadastrado.','GSoft',mb_ok);
+      end;
 end;
 
 procedure TFuFrmcadastrodemunicipios.novo();
@@ -375,10 +375,10 @@ end;
 procedure TFuFrmcadastrodemunicipios.dbgrd1DblClick(Sender: TObject);
 begin
   inherited;
-           pgc1.ActivePage := ts2;
-           cdsmunicipio.Edit;
-           btngravar.Enabled:=True;
-           btngravar.Enabled:=False;
+  pgc1.ActivePage := ts2;
+  cdsmunicipio.Edit;
+  btngravar.Enabled:=True;
+  btngravar.Enabled:=False;
 end;
 
 procedure TFuFrmcadastrodemunicipios.deletar();

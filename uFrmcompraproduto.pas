@@ -175,7 +175,6 @@ type
     procedure cbbfornecedorButtonClick(Sender: TObject);
     procedure btn2Click(Sender: TObject);
     procedure cdsmemory_itensCalcFields(DataSet: TDataSet);
-    procedure dbgrd1ColEnter(Sender: TObject);
     procedure edtdescontoKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure btn3Click(Sender: TObject);
@@ -203,7 +202,7 @@ implementation
 
 procedure TTuFrmcompraproduto.btn1Click(Sender: TObject);
 begin
-  // aqui
+
   limpar();
 
   edtnumero_nota.Clear;
@@ -224,65 +223,59 @@ begin
 
  
 
-     if cdsmemory_itens.Active then
-   begin
-    cdsmemory_itens.EmptyDataSet;
-   end
-    else
-      begin
-       cdsmemory_itens.CreateDataSet;
-      end;
+  if cdsmemory_itens.Active then
+  begin
+  cdsmemory_itens.EmptyDataSet;
+  end
+  else
+  begin
+  cdsmemory_itens.CreateDataSet;
+  end;
 
   cdsmemory_itens.Insert;
 
   cdscompra_produto.Append;
-edtnumero_nota.SetFocus;
+  edtnumero_nota.SetFocus;
 end;
 
 procedure TTuFrmcompraproduto.btnfinalizaClick(Sender: TObject);
 begin
-  // aqui
-
   edtnumero_nota.Text;
   if colun_produtonumero_nota.IsNull then
   begin
-    messagebox(0, 'Número da nota é obrigatório', 'GSoft', mb_ok);
-    Exit;
+  messagebox(0, 'Número da nota é obrigatório', 'GSoft', mb_ok);
+  Exit;
   end;
 
   if edtdata_emissao.Date > edtdata_entrada.Date then
   begin
-    messagebox(0, 'Data da Emissão maior que a data de Entrada',
-      'GSoft', mb_ok);
+  messagebox(0, 'Data da Emissão maior que a data de Entrada',
+  'GSoft', mb_ok);
   end
   else
-  begin
-
+    begin
     if edtmodelo.Text = '55' then
     begin
 
-      if not validarNFe(edtchave_nfe.Text, edtcnpj_fornecedor.Text) then
-      begin
-        messagebox(0, 'Chave NF-e não coresponde ao CNPJ do fornecedor',
-          'GSoft', mb_ok);
-        Exit;
-      end;
-    end;
-
-    edtnumero_nota.Enabled := False;
-    edtdata_entrada.Enabled := False;
-    edtdata_emissao.Enabled := False;
-    edtmodelo.Enabled := False;
-    edtchave_nfe.Enabled := False;
-    cbbfornecedor.Enabled := False;
-    btnaltera.Enabled := True;
-    btnfinaliza.Enabled := False;
-
-    dbgrd1.Enabled := True;
-
-    
-
+  if not validarNFe(edtchave_nfe.Text, edtcnpj_fornecedor.Text) then
+  begin
+  messagebox(0, 'Chave NF-e não coresponde ao CNPJ do fornecedor',
+  'GSoft', mb_ok);
+  Exit;
   end;
+ end;
+
+  edtnumero_nota.Enabled := False;
+  edtdata_entrada.Enabled := False;
+  edtdata_emissao.Enabled := False;
+  edtmodelo.Enabled := False;
+  edtchave_nfe.Enabled := False;
+  cbbfornecedor.Enabled := False;
+  btnaltera.Enabled := True;
+  btnfinaliza.Enabled := False;
+
+  dbgrd1.Enabled := True;
+end;
 
 end;
 
@@ -298,56 +291,45 @@ begin
   colun_itensvalortotal.AsFloat := colun_itensvalorunitario.AsFloat *colunMemoryQuantidade.AsInteger;
 end;
 
-procedure TTuFrmcompraproduto.dbgrd1ColEnter(Sender: TObject);
-begin
-  // aqui
-  // sub_total();
-
-end;
-
 procedure TTuFrmcompraproduto.dbgrd1KeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
 
   if Key = VK_F1 then
   begin
-    cdsmemory_itens.Open;
-    cdsmemory_itens.Insert;
-    TuFrmbuscarproduto.ShowModal;
+  cdsmemory_itens.Open;
+  cdsmemory_itens.Insert;
+  TuFrmbuscarproduto.ShowModal;
 
-
-    strngfld_itensproduto.AsString := TuFrmbuscarproduto.produto;
-    colun_itensvalorunitario.AsFloat := StrToFloat(TuFrmbuscarproduto.valor);
-
+  strngfld_itensproduto.AsString := TuFrmbuscarproduto.produto;
+  colun_itensvalorunitario.AsFloat := StrToFloat(TuFrmbuscarproduto.valor);
 
   end;
 
   if Key = VK_F2 then
   begin
-    cdsmemory_itens.Edit;
+  cdsmemory_itens.Edit;
   end;
 
   if Key = VK_RETURN then
   begin
-    sub_total();
+  sub_total();
   end;
 
   if Key = VK_DELETE then
   begin
-    cdsmemory_itens.Delete;
-    sub_total();
+  cdsmemory_itens.Delete;
+  sub_total();
   end;
 
-    if Key = VK_ESCAPE then
+  if Key = VK_ESCAPE then
   begin
-    edtdesconto.SetFocus;
+  edtdesconto.SetFocus;
   end;
-
 end;
 
 procedure TTuFrmcompraproduto.btn2Click(Sender: TObject);
 begin
-
   cdsmemory_itens.EmptyDataSet;
 
   edtnumero_nota.Enabled := False;
@@ -370,191 +352,179 @@ end;
 
 procedure TTuFrmcompraproduto.btn3Click(Sender: TObject);
 var
-  sql: TDataSet;
-  query: TStringBuilder;
+sql: TDataSet;
+query: TStringBuilder;
 
-  nota, teste, numero_nota_fim: Integer;
-  produto, anos_passa, numero_estado, antes, depois: string;
-  quantidade: Double;
-  valorfinal : Double;
+nota, teste, numero_nota_fim: Integer;
+produto, anos_passa, numero_estado, antes, depois: string;
+quantidade: Double;
+valorfinal : Double;
 
-  desconto, total, numero_nota, chave_nfe, modelo, data_entrada, data_emissao, fornecedor, cnpj  : String;
+desconto, total, numero_nota, chave_nfe, modelo, data_entrada, data_emissao, fornecedor, cnpj  : String;
 begin
-    desconto:=edtdesconto.Text;
-    total:=edtvalor_da_total_nota.Text;
-    numero_nota:=edtnumero_nota.Text;
-    chave_nfe:=edtchave_nfe.Text;
-    modelo:=edtmodelo.Text;
-    data_entrada:=edtdata_entrada.Text;
-    data_emissao:=edtdata_emissao.Text;
-    fornecedor:=cbbfornecedor.Text;
-    cnpj:=edtcnpj_fornecedor.Text;
+  desconto:=edtdesconto.Text;
+  total:=edtvalor_da_total_nota.Text;
+  numero_nota:=edtnumero_nota.Text;
+  chave_nfe:=edtchave_nfe.Text;
+  modelo:=edtmodelo.Text;
+  data_entrada:=edtdata_entrada.Text;
+  data_emissao:=edtdata_emissao.Text;
+  fornecedor:=cbbfornecedor.Text;
+  cnpj:=edtcnpj_fornecedor.Text;
 
 
-    sub_total();
-    valorfinal := StrToFloat(edttotal.Text) - (StrToFloat(edttotal.Text) * StrToFloat(edtdesconto.Text) / 100);
-    edtvalor_da_total_nota.Text := FloatToStr(valorfinal);
+  sub_total();
+  valorfinal := StrToFloat(edttotal.Text) - (StrToFloat(edttotal.Text) * StrToFloat(edtdesconto.Text) / 100);
+  edtvalor_da_total_nota.Text := FloatToStr(valorfinal);
 
   if edtdesconto.Text = '' then
   begin
-    messagebox(0, 'Valor do Desconto não informado', 'GSoft', mb_ok);
-    Exit;
+  messagebox(0, 'Valor do Desconto não informado', 'GSoft', mb_ok);
+  Exit;
   end
-  else
-  begin
-    sub_total();
-    if (edtnumero_nota.Text = '') then
-    begin
+    else
+      begin
+      sub_total();
+      if (edtnumero_nota.Text = '') then
+      begin
       messagebox(0, 'Número da Nota Fiscal é obrigatório.', 'GSoft', mb_ok);
       Exit;
-    end;
+      end;
 
-    if (edtdata_entrada.Text = '') then
-    begin
-      messagebox(0, 'Data de entrada é obrigatório.', 'GSoft', mb_ok);
-      Exit;
-    end;
+  if (edtdata_entrada.Text = '') then
+  begin
+  messagebox(0, 'Data de entrada é obrigatório.', 'GSoft', mb_ok);
+  Exit;
+  end;
 
-    if (edtdata_emissao.Text = '') then
-    begin
-      messagebox(0, 'Data de emissão é obrigatório.', 'GSoft', mb_ok);
-      Exit;
-    end;
+  if (edtdata_emissao.Text = '') then
+  begin
+  messagebox(0, 'Data de emissão é obrigatório.', 'GSoft', mb_ok);
+  Exit;
+  end;
 
+  if (edtmodelo.Text = '') then
+  begin
+  messagebox(0, 'Modelo é obrigatório.', 'GSoft', mb_ok);
+  Exit;
+  end;
 
+  if (edtchave_nfe.Text = '') and (edtmodelo.Text = '55') then
+  begin
+  messagebox(0, 'NF-e é obrigatório.', 'GSoft', mb_ok);
+  Exit;
+  end;
 
-    if (edtmodelo.Text = '') then
-    begin
-      messagebox(0, 'Modelo é obrigatório.', 'GSoft', mb_ok);
-      Exit;
-    end;
+  if (cbbfornecedor.Text = '') then
+  begin
+  messagebox(0, 'Nome do fornecedor é obrigatório.', 'GSoft', mb_ok);
+  Exit;
+  end;
 
-    if (edtchave_nfe.Text = '') and (edtmodelo.Text = '55') then
-    begin
-      messagebox(0, 'NF-e é obrigatório.', 'GSoft', mb_ok);
-      Exit;
-    end;
+  if (edtcnpj_fornecedor.Text = '') then
+  begin
+  messagebox(0, 'CNPj do fornecedor é obrigatório.', 'GSoft', mb_ok);
+  Exit;
+  end;
 
-    if (cbbfornecedor.Text = '') then
-    begin
-      messagebox(0, 'Nome do fornecedor é obrigatório.', 'GSoft', mb_ok);
-      Exit;
-    end;
-
-    if (edtcnpj_fornecedor.Text = '') then
-    begin
-      messagebox(0, 'CNPj do fornecedor é obrigatório.', 'GSoft', mb_ok);
-      Exit;
-    end;
-
-    numero_nota_fim:=StrToInt(edtnumero_nota.Text);
+  numero_nota_fim:=StrToInt(edtnumero_nota.Text);
 
 
-    cdscompra_produto.Post;
-    try
-      cdscompra_produto.ApplyUpdates(0);
-    except
-      on E: Exception do
-        messagebox(0, 'Nota com esse número já cadastrada', 'GSoft', mb_ok);
+  cdscompra_produto.Post;
+  try
+  cdscompra_produto.ApplyUpdates(0);
+  except
+  on E: Exception do
+  messagebox(0, 'Nota com esse número já cadastrada', 'GSoft', mb_ok);
+  end;
 
-    end;
+  cdscompra_produto.Insert;
+  cdscompra_produto.Close;
+  cdscompra_produto.Open;
+  cdscompra_produto.Insert;
 
-    cdscompra_produto.Insert;
-    cdscompra_produto.Close;
-    cdscompra_produto.Open;
-    cdscompra_produto.Insert;
+  cdsmemory_itens.First;
+  while (not cdsmemory_itens.Eof) do
+  begin
 
-    cdsmemory_itens.First;
-    while (not cdsmemory_itens.Eof) do
-    begin
+  query := TStringBuilder.Create;
+  query.AppendFormat('update produtos set saldo_deposito=%d+(select sum(saldo_deposito) from produtos where descricao=%s ) where descricao=%s',
+  [colunMemoryQuantidade.AsInteger, QuotedStr(strngfld_itensproduto.AsString),
+  QuotedStr(strngfld_itensproduto.AsString)]);
+  ponte.sqlqryparametros.Close;
+  ponte.sqlqryparametros.sql.Clear;
+  ponte.sqlqryparametros.sql.Add(query.ToString);
+  ponte.sqlqryparametros.ExecSQL();
+  FreeAndNil(query);
 
-      query := TStringBuilder.Create;
-      query.AppendFormat('update produtos set saldo_deposito=%d+(select sum(saldo_deposito) from produtos where descricao=%s ) where descricao=%s',
-        [colunMemoryQuantidade.AsInteger, QuotedStr(strngfld_itensproduto.AsString),
-        QuotedStr(strngfld_itensproduto.AsString)]);
-      ponte.sqlqryparametros.Close;
-      ponte.sqlqryparametros.sql.Clear;
-      ponte.sqlqryparametros.sql.Add(query.ToString);
-      ponte.sqlqryparametros.ExecSQL();
-      FreeAndNil(query);
-
-      cdsmemory_itens.Next;
-    end;
-
-      cdsconsultanumeroestado.CommandText:='select fornecedores.uf, estados.id from fornecedores join estados on estados.sigla=fornecedores.uf where fornecedores.cnpj='+QuotedStr(cnpj);
-
-      cdsconsultanumeroestado.Close;
-      cdsconsultanumeroestado.Open;
-      cdsconsultanumeroestado.First;
+  cdsmemory_itens.Next;
+  end;
 
 
 
-      anos_passa:=data_emissao;
-      numero_estado:= IntToStr(coluncdsconsultanumeroestadoid.AsInteger);
+                   cdsconsultanumeroestado.CommandText:='select fornecedores.uf, estados.id from fornecedores join estados on estados.sigla=fornecedores.uf where fornecedores.cnpj='+QuotedStr(cnpj);
+  cdsconsultanumeroestado.Close;
+  cdsconsultanumeroestado.Open;
+  cdsconsultanumeroestado.First;
 
 
 
+  anos_passa:=data_emissao;
+  numero_estado:= IntToStr(coluncdsconsultanumeroestadoid.AsInteger);
 
-    cdsmemory_itens.First;
-    while (not cdsmemory_itens.Eof) do
-    begin
+  cdsmemory_itens.First;
+  while (not cdsmemory_itens.Eof) do
+  begin
 
-     cdsproduto.CommandText:='select * from produtos where descricao like '+ QuotedStr(strngfld_itensproduto.AsString);
+  cdsproduto.CommandText:='select * from produtos where descricao like '+ QuotedStr(strngfld_itensproduto.AsString);
 
-      cdsproduto.Close;
-      cdsproduto.Open;
-      cdsproduto.First;
+  cdsproduto.Close;
+  cdsproduto.Open;
+  cdsproduto.First;
 
+  antes:= FloatToStr(cdsprodutosaldo_deposito.AsFloat);
+  depois:= StringReplace(antes, ',', '.', [rfReplaceAll, rfIgnoreCase]);
 
-      antes:= FloatToStr(cdsprodutosaldo_deposito.AsFloat);
-      depois:= StringReplace(antes, ',', '.', [rfReplaceAll, rfIgnoreCase]);
+  query := TStringBuilder.Create;
+  query.AppendFormat
+  ('insert into kardex (nota_referente, produto, data_lancamento, estoque, tipo, quantidade) values(%d, %s, %s, %s, %s, %d)',
+  [numero_nota_fim, QuotedStr(strngfld_itensproduto.AsString), QuotedStr(anos_passa), depois, QuotedStr('E'), colunMemoryQuantidade.AsInteger]);
+  ponte.sqlqryparametros.Close;
+  ponte.sqlqryparametros.sql.Clear;
+  ponte.sqlqryparametros.sql.Add(query.ToString);
+  ponte.sqlqryparametros.ExecSQL();
+  FreeAndNil(query);
 
-
-
-
-
-      query := TStringBuilder.Create;
-       query.AppendFormat
-       ('insert into kardex (nota_referente, produto, data_lancamento, estoque, tipo, quantidade) values(%d, %s, %s, %s, %s, %d)',
-        [numero_nota_fim, QuotedStr(strngfld_itensproduto.AsString), QuotedStr(anos_passa), depois, QuotedStr('E'), colunMemoryQuantidade.AsInteger]);
-      ponte.sqlqryparametros.Close;
-      ponte.sqlqryparametros.sql.Clear;
-      ponte.sqlqryparametros.sql.Add(query.ToString);
-      ponte.sqlqryparametros.ExecSQL();
-      FreeAndNil(query);
-
-      cdsmemory_itens.Next;
-    end;
+  cdsmemory_itens.Next;
+  end;
 
 
+  cdsmemory_itens.First;
+  while (not cdsmemory_itens.Eof) do
+  begin
 
+  query := TStringBuilder.Create;
+  query.AppendFormat
+  ('insert into intens_nota (numero_da_nota_referencia, item, quantidade) values(%d, %s, %d)',
+  [numero_nota_fim,
+  QuotedStr(strngfld_itensproduto.AsString),
+  colunMemoryQuantidade.AsInteger]);
+  ponte.sqlqryparametros.Close;
+  ponte.sqlqryparametros.sql.Clear;
+  ponte.sqlqryparametros.sql.Add(query.ToString);
+  ponte.sqlqryparametros.ExecSQL();
+  FreeAndNil(query);
 
-    cdsmemory_itens.First;
-    while (not cdsmemory_itens.Eof) do
-    begin
-
-      query := TStringBuilder.Create;
-      query.AppendFormat
-        ('insert into intens_nota (numero_da_nota_referencia, item, quantidade) values(%d, %s, %d)',
-        [numero_nota_fim,
-        QuotedStr(strngfld_itensproduto.AsString),
-        colunMemoryQuantidade.AsInteger]);
-      ponte.sqlqryparametros.Close;
-      ponte.sqlqryparametros.sql.Clear;
-      ponte.sqlqryparametros.sql.Add(query.ToString);
-      ponte.sqlqryparametros.ExecSQL();
-      FreeAndNil(query);
-
-      cdsmemory_itens.Next;
-    end;
+  cdsmemory_itens.Next;
+  end;
 
 
 
-    btn1.Enabled := True;
-    btn2.Enabled := False;
-    btnfinaliza.Enabled := False;
-    btnaltera.Enabled := False;
-    btn3.Enabled := False;
+  btn1.Enabled := True;
+  btn2.Enabled := False;
+  btnfinaliza.Enabled := False;
+  btnaltera.Enabled := False;
+  btn3.Enabled := False;
 
 
   plbldataentrada.Text := data_entrada;
@@ -569,12 +539,11 @@ begin
   plbltotalbruto.Text := total;
   Relatoriorecibo.Print;
 
- cdsmemory_itens.Close;
- cdscompra_produto.Cancel;
- cdsitens_nota.Cancel;
+  cdsmemory_itens.Close;
+  cdscompra_produto.Cancel;
+  cdsitens_nota.Cancel;
 
- limpar();
-
+  limpar();
 end;
 
 
@@ -583,7 +552,6 @@ end;
 
 procedure TTuFrmcompraproduto.btnalteraClick(Sender: TObject);
 begin
-
   edtdata_entrada.Enabled := True;
   edtdata_emissao.Enabled := True;
   edtmodelo.Enabled := True;
@@ -593,9 +561,6 @@ begin
 
   btnfinaliza.Enabled := True;
   btnaltera.Enabled := False;
-
-
-
 end;
 
 procedure TTuFrmcompraproduto.edtchave_nfeKeyPress(Sender: TObject;
@@ -655,11 +620,10 @@ end;
 procedure TTuFrmcompraproduto.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-
-     if cdsmemory_itens.Active then
-     begin
-        cdsmemory_itens.EmptyDataSet;
-     end;
+  if cdsmemory_itens.Active then
+  begin
+  cdsmemory_itens.EmptyDataSet;
+  end;
 end;
 
 procedure TTuFrmcompraproduto.FormShow(Sender: TObject);
@@ -716,10 +680,6 @@ begin
 
   data:=colun_produtodata_emissao.AsDateTime;
 
-
-
-
-
   cdsconsultanumeroestado.CommandText:='select fornecedores.uf, estados.id from fornecedores join estados on estados.sigla=fornecedores.uf where fornecedores.cnpj='+QuotedStr(edtcnpj_fornecedor.Text);
 
   cdsconsultanumeroestado.Close;
@@ -742,7 +702,7 @@ begin
     i:=i+1;
   end;
 
-
+  //verifica ano da nota
   if  anos_passa[9] = nfe[3] then
   begin
     i:=i+1;
@@ -767,7 +727,7 @@ begin
 
 
 
-
+  //verifica cnpj da nota
   if AnsiCompareText(nfe[7], cnpj[1]) = 0 then
   begin
     i := i + 1;
@@ -835,6 +795,7 @@ begin
     i := i + 1;
   end;
 
+  //conferencia numérica
   j:=1;
   w:=23;
   while not (edtnumero_nota.Text[j]  = '') do
@@ -848,14 +809,15 @@ begin
        j:=j+1;
     end;
 
-if i = 22 then
-  begin
-    Result := True;
-  end
-  else
-  begin
-    Result := False;
-  end;
+  //conferencia boleana
+  if i = 22 then
+    begin
+      Result := True;
+    end
+    else
+    begin
+      Result := False;
+    end;
 
 end;
 
@@ -871,7 +833,6 @@ begin
   edttotal.Clear;
   edtdesconto.Clear;
   edtvalor_da_total_nota.Clear;
-
 end;
 
 end.

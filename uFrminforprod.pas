@@ -21,7 +21,6 @@ type
     edtpis: TEdit;
     Label6: TLabel;
     edtconfins: TEdit;
-    Button1: TButton;
     cdsprodutos: TClientDataSet;
     ds_produtos: TDataSource;
     cdsprodutoscodigo: TIntegerField;
@@ -49,6 +48,7 @@ type
     cdsprodutosvalidade_produto: TDateField;
     edtcean: TDBEdit;
     edtprod: TDBEdit;
+    Button1: TButton;
     procedure FormShow(Sender: TObject);
     procedure Button1Click(Sender: TObject);
   private
@@ -91,7 +91,7 @@ begin
   cdsprodutos.Open;
 
   cdsprodutos.Append;
-  cdsprodutos.FieldByName('status_produto').Text := '1';
+  cdsprodutos.FieldByName('status_produto').Text := '0';
 
   edtpis.Text:=Form6.pis;
   edtconfins.Text:=Form6.confins;

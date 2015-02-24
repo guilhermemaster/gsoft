@@ -123,25 +123,26 @@ var
   password : string;
   port : string;
 begin
-     
 
-      ArquivoINI := TIniFile.Create('C:\Configuracao.ini');
+  //Carregando INI para a conexão
 
-        hostname:= ArquivoINI.ReadString('Ajuste', 'Hostname', '');
-        database := ArquivoINI.ReadString('Ajuste', 'DataBase', '');
-        user_name:= ArquivoINI.ReadString('Ajuste', 'User_Name', '');
-        password := ArquivoINI.ReadString('Ajuste', 'Password', '');
-        port := ArquivoINI.ReadString('Ajuste', 'port', '');
+  ArquivoINI := TIniFile.Create('C:\Configuracao.ini');
 
-               ponte.con1.Params.Add('hostname='+ hostname);
-               ponte.con1.Params.Add('Database='+database);
-               ponte.con1.Params.Add('User_Name='+user_name);
-               ponte.con1.Params.Add('Password='+password);
-               ponte.con1.Params.Add('Port='+port);
+  hostname:= ArquivoINI.ReadString('Ajuste', 'Hostname', '');
+  database := ArquivoINI.ReadString('Ajuste', 'DataBase', '');
+  user_name:= ArquivoINI.ReadString('Ajuste', 'User_Name', '');
+  password := ArquivoINI.ReadString('Ajuste', 'Password', '');
+  port := ArquivoINI.ReadString('Ajuste', 'port', '');
 
-                  ponte.con1.Connected := True;
+  ponte.con1.Params.Add('hostname='+ hostname);
+  ponte.con1.Params.Add('Database='+database);
+  ponte.con1.Params.Add('User_Name='+user_name);
+  ponte.con1.Params.Add('Password='+password);
+  ponte.con1.Params.Add('Port='+port);
 
-                  ArquivoINI.Free;
+  ponte.con1.Connected := True;
+
+  ArquivoINI.Free;
 
 end;
 

@@ -140,7 +140,6 @@ type
     procedure btn12Click(Sender: TObject);
     procedure btn10Click(Sender: TObject);
     procedure btn13Click(Sender: TObject);
-    procedure dbgrd1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure cbbfornecedorButtonClick(Sender: TObject);
     procedure dbncmButtonClick(Sender: TObject);
     procedure dbgrd1DblClick(Sender: TObject);
@@ -177,106 +176,95 @@ implementation
 procedure TForm5.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
-        desisti();
+  desisti();
 end;
 
 procedure TForm5.FormShow(Sender: TObject);
 begin
   inherited;
-        pgc1.ActivePage := ts1;
-        pgc2.ActivePage := ts3;
+  pgc1.ActivePage := ts1;
+  pgc2.ActivePage := ts3;
 
-        cdsprodutos.CommandText:='select * from produtos where status_produto='+QuotedStr('1') ;
-        cdsprodutos.Close;
-        cdsprodutos.Open;
-        cdsprodutos.First;
+  cdsprodutos.CommandText:='select * from produtos where status_produto='+QuotedStr('1') ;
+  cdsprodutos.Close;
+  cdsprodutos.Open;
+  cdsprodutos.First;
 
-        edt1.Visible:=False;
+  edt1.Visible:=False;
 
-        campofalse();
+  campofalse();
 
-        inicio();
+  inicio();
 end;
 
 procedure TForm5.inicio();
 begin
-      btnnovo.Enabled:=True;
-      btneditar.Enabled:=True;
-      btngravar.Enabled:=False;
-      btnexcluir.Enabled:=True;
-      btndesistir.Enabled:=False;
+  btnnovo.Enabled:=True;
+  btneditar.Enabled:=True;
+  btngravar.Enabled:=False;
+  btnexcluir.Enabled:=True;
+  btndesistir.Enabled:=False;
 
 
-      btninicio.Enabled:=True;
-      btnanterio.Enabled:=True;
-      btnproximo.Enabled:=True;
-      btnultimo.Enabled:=True;
+  btninicio.Enabled:=True;
+  btnanterio.Enabled:=True;
+  btnproximo.Enabled:=True;
+  btnultimo.Enabled:=True;
 end;
 
 procedure TForm5.btn10Click(Sender: TObject);
 begin
   inherited;
-       RelatorioProdutos.Print;
+  RelatorioProdutos.Print;
 end;
 
 procedure TForm5.btn12Click(Sender: TObject);
 begin
   inherited;
-     if (cbb1.Text='PROCURA POR') then
+  if (cbb1.Text='PROCURA POR') then
+  begin
+  messagebox (0,'Parâmetro de busca errados','GSoft',mb_ok);
+  Exit;
+  end;
+
+  if  (cbb2.Text='CRITÉRIO') then
+  begin
+  messagebox (0,'Parâmetro de busca errados','GSoft',mb_ok);
+  Exit;
+  end;
+
+
+
+  if (cbb1.Text='NOME') OR (cbb1.Text='FORNECEDOR') OR (cbb1.Text='STATUS') then
+  begin
+  if cbb2.Text='Contém' then
+  begin
+  cdsprodutos.CommandText:='select * from produtos where '+procura_por(cbb1.Text)+' like'+QuotedStr('%'+edt2.Text+'%');
+  end
+    else if cbb2.Text='Inicia' then
+    begin
+    cdsprodutos.CommandText:='select * from produtos where '+procura_por(cbb1.Text)+' like'+QuotedStr(edt2.Text+'%');
+    end
+    else if cbb2.Text='Igual' then
       begin
-         messagebox (0,'Parâmetro de busca errados','GSoft',mb_ok);
-         Exit;
-      end;
-
-         if  (cbb2.Text='CRITÉRIO') then
-      begin
-         messagebox (0,'Parâmetro de busca errados','GSoft',mb_ok);
-         Exit;
-      end;
-
-
-
-           if (cbb1.Text='NOME') OR (cbb1.Text='FORNECEDOR') OR (cbb1.Text='STATUS') then
-            begin
-              if cbb2.Text='Contém' then
-                 begin
-                    cdsprodutos.CommandText:='select * from produtos where '+procura_por(cbb1.Text)+' like'+QuotedStr('%'+edt2.Text+'%');
-                   end
-                    else
-                      if cbb2.Text='Inicia' then
-                        begin
-                          cdsprodutos.CommandText:='select * from produtos where '+procura_por(cbb1.Text)+' like'+QuotedStr(edt2.Text+'%');
-                        end
-                          else
-                            if cbb2.Text='Igual' then
-                               begin
-                                 cdsprodutos.CommandText:='select * from produtos where '+procura_por(cbb1.Text)+' like'+QuotedStr(edt2.Text);
-                               end
-                                else
-                                   begin
-                                      cdsprodutos.CommandText:='select * from produtos where '+procura_por(cbb1.Text)+' not like'+QuotedStr('%'+edt2.Text+'%');
-                                         end;
-            end
-              else if cbb1.Text='DATA DO CADASTRO' then
-                begin
-                    cdsprodutos.CommandText:='select * from produtos where '+procura_por(cbb1.Text)+cbb2.Text+QuotedStr(edt1.Text);
-
-
-                end
-                  else
-                    begin
-                       cdsprodutos.CommandText:='select * from produtos where '+procura_por(cbb1.Text)+cbb2.Text+ edt2.Text;
-
-                    end;
-
-
-
-
-
-
-            cdsprodutos.Close;
-            cdsprodutos.Open;
-            cdsprodutos.First;
+      cdsprodutos.CommandText:='select * from produtos where '+procura_por(cbb1.Text)+' like'+QuotedStr(edt2.Text);
+      end
+      else
+        begin
+        cdsprodutos.CommandText:='select * from produtos where '+procura_por(cbb1.Text)+' not like'+QuotedStr('%'+edt2.Text+'%');
+        end;
+          end
+          else if cbb1.Text='DATA DO CADASTRO' then
+          begin
+          cdsprodutos.CommandText:='select * from produtos where '+procura_por(cbb1.Text)+cbb2.Text+QuotedStr(edt1.Text);
+          end
+          else
+          begin
+          cdsprodutos.CommandText:='select * from produtos where '+procura_por(cbb1.Text)+cbb2.Text+ edt2.Text;
+   end;
+  cdsprodutos.Close;
+  cdsprodutos.Open;
+  cdsprodutos.First;
 
 
 end;
@@ -285,76 +273,76 @@ procedure TForm5.btn13Click(Sender: TObject);
 begin
   inherited;
 
-            cdsprodutos.CommandText:='select * from produtos where status_produto='+QuotedStr('1') ;
-            cdsprodutos.Close;
-            cdsprodutos.Open;
-            cdsprodutos.First;
+  cdsprodutos.CommandText:='select * from produtos where status_produto='+QuotedStr('1') ;
+  cdsprodutos.Close;
+  cdsprodutos.Open;
+  cdsprodutos.First;
 
-            edt1.Clear;
-            edt2.Clear;
+  edt1.Clear;
+  edt2.Clear;
 end;
 
 procedure TForm5.btnanterioClick(Sender: TObject);
 begin
   inherited;
-    cdsprodutos.Edit;
-    cdsprodutos.Prior;
-    valores_compra_venda();
+  cdsprodutos.Edit;
+  cdsprodutos.Prior;
+  valores_compra_venda();
 end;
 
 procedure TForm5.btndesistirClick(Sender: TObject);
 begin
   inherited;
-    desisti();
+  desisti();
 end;
 
 procedure TForm5.btneditarClick(Sender: TObject);
 begin
   inherited;
-      edita();
-      valores_compra_venda();
+  edita();
+  valores_compra_venda();
 end;
 
 procedure TForm5.btnexcluirClick(Sender: TObject);
 begin
   inherited;
-      deletar();
+  deletar();
 end;
 
 procedure TForm5.btngravarClick(Sender: TObject);
 begin
   inherited;
-        gravar();
+  gravar();
 end;
 
 procedure TForm5.btninicioClick(Sender: TObject);
 begin
   inherited;
-    cdsprodutos.Edit;
-    cdsprodutos.First;
-    valores_compra_venda();
+  cdsprodutos.Edit;
+  cdsprodutos.First;
+  valores_compra_venda();
 end;
 
 procedure TForm5.btnnovoClick(Sender: TObject);
 begin
   inherited;
-      novo();
+  novo();
 end;
 
 procedure TForm5.btnproximoClick(Sender: TObject);
 begin
   inherited;
-      cdsprodutos.Edit;
-      cdsprodutos.Next;
-      valores_compra_venda();
+  cdsprodutos.Edit;
+  cdsprodutos.Next;
+  valores_compra_venda();
 end;
 
 procedure TForm5.btnultimoClick(Sender: TObject);
 begin
   inherited;
-      cdsprodutos.Edit;
-      cdsprodutos.Last;
-      valores_compra_venda();
+  cdsprodutos.Edit;
+  cdsprodutos.Last;
+  valores_compra_venda();
 end;
 
 procedure  TForm5.campofalse();
@@ -463,64 +451,57 @@ end;
 procedure TForm5.cbbcod_barraKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-           if not (key in ['0'..'9','.',#8]) then
-
-                 Key:=#0;
+  if not (key in ['0'..'9','.',#8]) then
+    Key:=#0;
 end;
 
 procedure TForm5.cbbcompraKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-              if not (key in ['0'..'9','.',#8]) then
-
-                  Key:=#0;
+if not (key in ['0'..'9','.',#8]) then
+  Key:=#0;
 end;
 
 procedure TForm5.cbbdes_maxKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-             if not (key in ['0'..'9','.',#8]) then
-
-                  Key:=#0;
+if not (key in ['0'..'9','.',#8]) then
+  Key:=#0;
 end;
 
 procedure TForm5.cbbfornecedorButtonClick(Sender: TObject);
 begin
   inherited;
-      TuFrmbuscarfornecedor.ShowModal;
-      cbbfornecedor.Text:=TuFrmbuscarfornecedor.nome_fornecedor;
+  TuFrmbuscarfornecedor.ShowModal;
+  cbbfornecedor.Text:=TuFrmbuscarfornecedor.nome_fornecedor;
 end;
 
 procedure TForm5.cbbicmsKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-        if not (key in ['0'..'9','.',#8]) then
-
-              Key:=#0;
+  if not (key in ['0'..'9','.',#8]) then
+    Key:=#0;
 end;
 
 procedure TForm5.cbbsaldo_depositoKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-             if not (key in ['0'..'9','.',#8]) then
-
-                  Key:=#0;
+  if not (key in ['0'..'9','.',#8]) then
+    Key:=#0;
 end;
 
 procedure TForm5.cbbsaldo_lojaKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-             if not (key in ['0'..'9','.',#8]) then
-
-                  Key:=#0;
+  if not (key in ['0'..'9','.',#8]) then
+    Key:=#0;
 end;
 
 procedure TForm5.cbbsit_tributariaKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-            if not (key in ['0'..'9','.',#8]) then
-
-                 Key:=#0;
+  if not (key in ['0'..'9','.',#8]) then
+   Key:=#0;
 end;
 
 procedure TForm5.chk1Click(Sender: TObject);
@@ -529,9 +510,9 @@ begin
          //AQUI
   if (chk1.Checked) then
         begin
-               cdsprodutos.CommandText:='select * from produtos ';
-               cdsprodutos.Close;
-               cdsprodutos.Open;
+         cdsprodutos.CommandText:='select * from produtos ';
+         cdsprodutos.Close;
+         cdsprodutos.Open;
         end
           else
           begin
@@ -543,69 +524,59 @@ end;
 
 procedure TForm5.novo();
 begin
-       campotrue();
+  campotrue();
 
-       pgc1.ActivePage := ts2;
+  pgc1.ActivePage := ts2;
 
 
-       btnnovo.Enabled:=False;
-       btngravar.Enabled:=True;
-       btndesistir.Enabled:=True;
+  btnnovo.Enabled:=False;
+  btngravar.Enabled:=True;
+  btndesistir.Enabled:=True;
 
-       btninicio.Enabled:=False;
-       btnproximo.Enabled:=False;
-       btnanterio.Enabled:=False;
-       btnultimo.Enabled:=False;
-       btneditar.Enabled:=False;
-       btnexcluir.Enabled:=False;
+  btninicio.Enabled:=False;
+  btnproximo.Enabled:=False;
+  btnanterio.Enabled:=False;
+  btnultimo.Enabled:=False;
+  btneditar.Enabled:=False;
+  btnexcluir.Enabled:=False;
 
-       cdsprodutos.Append;
-       cdsprodutos.FieldByName('status_produto').Text := '1';
+  cdsprodutos.Append;
+  cdsprodutos.FieldByName('status_produto').Text := '1';
 
-       edtdata_cadastro.Date:=Date;
-       edtultimo_reajuste.Date:=Date;
+  edtdata_cadastro.Date:=Date;
+  edtultimo_reajuste.Date:=Date;
 end;
 
 procedure TForm5.desisti();
 begin
-     cdsprodutos.Cancel;
+  cdsprodutos.Cancel;
 
-     pgc1.ActivePage := ts1;
+  pgc1.ActivePage := ts1;
 
-     inicio();
+  inicio();
 
 end;
 
 procedure TForm5.edita();
 begin
-      cdsprodutos.Edit;
-      pgc1.ActivePage := ts2;
+  cdsprodutos.Edit;
+  pgc1.ActivePage := ts2;
 
-      btngravar.Enabled:=True;
-      btndesistir.Enabled:=True;
-      btneditar.Enabled:=False;
+  btngravar.Enabled:=True;
+  btndesistir.Enabled:=True;
+  btneditar.Enabled:=False;
 
 
-      campotrue();
+  campotrue();
 end;
 
 procedure TForm5.dbgrd1DblClick(Sender: TObject);
 begin
   inherited;
-           pgc1.ActivePage := ts2;
-           cdsprodutos.Edit;
-           btngravar.Enabled:=True;
-           btngravar.Enabled:=False;
-end;
-
-procedure TForm5.dbgrd1KeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-  inherited;
-               if Key= VK_RETURN then
-                begin
-                   edita();
-                end;
+  pgc1.ActivePage := ts2;
+  cdsprodutos.Edit;
+  btngravar.Enabled:=True;
+  btngravar.Enabled:=False;
 end;
 
 procedure TForm5.dbncmButtonClick(Sender: TObject);
@@ -617,110 +588,98 @@ end;
 
 procedure TForm5.deletar();
 begin
-     try
+  try
 
-          cdsprodutos.Delete;
-          cdsprodutos.ApplyUpdates(0);
-          cdsprodutos.RefreshRecord;
-      except
-
-
-          // messagebox (0,'Não pode ser deletado','GSoft',mb_ok);
-
-
-      end;
+  cdsprodutos.Delete;
+  cdsprodutos.ApplyUpdates(0);
+  cdsprodutos.RefreshRecord;
+  except
+  end;
 end;
 
 procedure TForm5.gravar();
 begin
-             if (cbbdescricao.Text = '')  then
-               begin
+  if (cbbdescricao.Text = '')  then
+  begin
+  messagebox (0,'Campo Descrição é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                messagebox (0,'Campo Descrição é obrigatório.','GSoft',mb_ok);
-               Exit;
-                   end;
-
-             if (cbbespecie.Text = '')  then
-               begin
-
-                messagebox (0,'Campo Espécie é obrigatório.','GSoft',mb_ok);
-               Exit;
-                   end;
+  if (cbbespecie.Text = '')  then
+  begin
+  messagebox (0,'Campo Espécie é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
 
-                   if ( cbbfornecedor.Text = '')  then
-               begin
-
-                messagebox (0,'Campo Fornecedor é obrigatório.','GSoft',mb_ok);
-               Exit;
-                   end;
-                    
-
-                if ( cbbcompra.Text = '')  then
-               begin
-
-                messagebox (0,'Campo Valor de compra é obrigatório.','GSoft',mb_ok);
-               Exit;
-                   end;
-
-                   if ( cbbvenda.Text = '')  then
-               begin
-
-                messagebox (0,'Campo Valor de venda é obrigatório.','GSoft',mb_ok);
-               Exit;
-                   end;
-
-                     if ( dbncm.Text = '')  then
-               begin
-
-                messagebox (0,'Campo Valor de compra é obrigatório.','GSoft',mb_ok);
-               Exit;
-                   end;
-
-                   if ( dbcean.Text = '')  then
-               begin
-
-                messagebox (0,'Campo Valor de venda é obrigatório.','GSoft',mb_ok);
-               Exit;
-                   end;
+  if ( cbbfornecedor.Text = '')  then
+  begin
+  messagebox (0,'Campo Fornecedor é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
 
-                   if not (FloatToStr(valor_compra)=cbbcompra.Text) or not(FloatToStr(valor_venda)=cbbvenda.Text) then
-                     begin
-                          edtultimo_reajuste.Date:=Date;
-                     end;
+  if ( cbbcompra.Text = '')  then
+  begin
+  messagebox (0,'Campo Valor de compra é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
+
+  if ( cbbvenda.Text = '')  then
+  begin
+  messagebox (0,'Campo Valor de venda é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
+
+  if ( dbncm.Text = '')  then
+  begin
+  messagebox (0,'Campo Valor de compra é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
+
+  if ( dbcean.Text = '')  then
+  begin
+  messagebox (0,'Campo Valor de venda é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
+
+
+  if not (FloatToStr(valor_compra)=cbbcompra.Text) or not(FloatToStr(valor_venda)=cbbvenda.Text) then
+  begin
+  edtultimo_reajuste.Date:=Date;
+  end;
 
 
 
 
-                    cdsprodutos.Post;
-                    cdsprodutos.ApplyUpdates(0);
+  cdsprodutos.Post;
+  cdsprodutos.ApplyUpdates(0);
 
-                    cdsprodutos.Insert;
-                    cdsprodutos.Close;
-                    cdsprodutos.Open;
-                    cdsprodutos.Insert;
-
-
-                    pgc1.ActivePage := ts1;
+  cdsprodutos.Insert;
+  cdsprodutos.Close;
+  cdsprodutos.Open;
+  cdsprodutos.Insert;
 
 
-                    cdsprodutos.First;
-
-                    btneditar.Enabled:=True;
-                    btnnovo.Enabled:=True;
-                    btninicio.Enabled:=True;
-                    btnproximo.Enabled:=True;
-                    btnanterio.Enabled:=True;
-                    btnultimo.Enabled:=True;
-                    btnexcluir.Enabled:=True;
-
-                    btngravar.Enabled:=False;
-                    btndesistir.Enabled:=False;
+  pgc1.ActivePage := ts1;
 
 
+  cdsprodutos.First;
 
-                    campofalse();
+  btneditar.Enabled:=True;
+  btnnovo.Enabled:=True;
+  btninicio.Enabled:=True;
+  btnproximo.Enabled:=True;
+  btnanterio.Enabled:=True;
+  btnultimo.Enabled:=True;
+  btnexcluir.Enabled:=True;
+
+  btngravar.Enabled:=False;
+  btndesistir.Enabled:=False;
+
+
+
+  campofalse();
 end;
 
 
@@ -783,8 +742,8 @@ end;
 
 procedure TForm5.valores_compra_venda();
 begin
-      valor_compra:=StrToFloat(cbbcompra.Text);
-      valor_venda:=StrToFloat(cbbvenda.Text);
+  valor_compra:=StrToFloat(cbbcompra.Text);
+  valor_venda:=StrToFloat(cbbvenda.Text);
 end;
 
 end.

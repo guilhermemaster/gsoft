@@ -193,30 +193,17 @@ object TuFrmrapidofornecedor: TTuFrmrapidofornecedor
     TabOrder = 7
     OnClick = Button1Click
   end
-  object RzDBCheckBox1: TRzDBCheckBox
-    Left = 270
-    Top = 42
-    Width = 44
-    Height = 15
-    DataField = 'status_fornecedor'
-    DataSource = ds_fornecedor
-    ValueChecked = '1'
-    ValueUnchecked = '0'
-    Caption = 'Ativo'
-    Enabled = False
-    TabOrder = 8
-  end
   object cdsfornecedor: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dsp_fornecedor'
     RemoteServer = ponte.conponte
-    Left = 208
-    Top = 24
+    Left = 400
+    Top = 16
   end
   object ds_fornecedor: TDataSource
     DataSet = cdsfornecedor
-    Left = 208
+    Left = 400
     Top = 72
   end
 end

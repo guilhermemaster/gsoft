@@ -83,71 +83,58 @@ implementation
 
 procedure TTuFrmkardex.btn1Click(Sender: TObject);
 var
-  produto, tipo, data, data2 : string;
-  passo: Integer;
+produto, tipo, data, data2 : string;
+passo: Integer;
 
 begin
-    passo:=0;
+  passo:=0;
 
-      if not (btncbbproduto.Text='') then
-        begin
-             produto:='produto like '+QuotedStr('%'+btncbbproduto.Text+'%');
-             passo:=1;
-        end;
+  if not (btncbbproduto.Text='') then
+  begin
+  produto:='produto like '+QuotedStr('%'+btncbbproduto.Text+'%');
+  passo:=1;
+  end;
 
-        if not (cbbtipo.Text='') then
-          begin
-            if passo = 1 then
-            begin
-              tipo:='and tipo like '+QuotedStr('%'+cbbtipo.Text+'%');
-            end
-              else
-                begin
-                    tipo:='tipo like '+QuotedStr('%'+cbbtipo.Text+'%');
-                    passo:=passo+1;
-                end;
+  if not (cbbtipo.Text='') then
+  begin
+  if passo = 1 then
+  begin
+  tipo:='and tipo like '+QuotedStr('%'+cbbtipo.Text+'%');
+  end
+    else
+      begin
+      tipo:='tipo like '+QuotedStr('%'+cbbtipo.Text+'%');
+      passo:=passo+1;
+      end;
+  end;
 
-          end;
+  if passo = 0 then
+  begin
+  cdskardex.CommandText:='select * from kardex ';
+  end
+    else
+      begin
+      cdskardex.CommandText:='select * from kardex where '+produto+tipo+data+data2;
+      end;
 
-
-
-
-          if passo = 0 then
-          begin
-              cdskardex.CommandText:='select * from kardex ';
-
-          end
-            else
-              begin
-                 cdskardex.CommandText:='select * from kardex where '+produto+tipo+data+data2;
-
-              end;
-
-
-
-            cdskardex.Close;
-            cdskardex.Open;
-            cdskardex.First;
-
-           // Relatoriokardex.Print;
-
-
+  cdskardex.Close;
+  cdskardex.Open;
+  cdskardex.First;
 end;
 
 procedure TTuFrmkardex.btn2ButtonClick(Sender: TObject);
 begin
-     TuFrmbuscarproduto.showmodal;
-    btncbbproduto.Text:=TuFrmbuscarproduto.produto;
+  TuFrmbuscarproduto.showmodal;
+  btncbbproduto.Text:=TuFrmbuscarproduto.produto;
 end;
 
 procedure TTuFrmkardex.btn2Click(Sender: TObject);
 begin
-      btncbbproduto.Clear;
-      cbbtipo.Clear;
+  btncbbproduto.Clear;
+  cbbtipo.Clear;
 
-
-      cbbtipo.Items.Add('E');
-      cbbtipo.Items.Add('S');
+  cbbtipo.Items.Add('E');
+  cbbtipo.Items.Add('S');
 end;
 
 procedure TTuFrmkardex.btn3Click(Sender: TObject);
@@ -157,15 +144,14 @@ end;
 
 procedure TTuFrmkardex.cbbprodutoButtonClick(Sender: TObject);
 begin
-     TuFrmbuscarproduto.showmodal;
-
-end;
+  TuFrmbuscarproduto.showmodal;
+ end;
 
 procedure TTuFrmkardex.FormShow(Sender: TObject);
 begin
-            cdskardex.Close;
-            cdskardex.Open;
-            cdskardex.First;
+  cdskardex.Close;
+  cdskardex.Open;
+  cdskardex.First;
 end;
 
 end.

@@ -59,56 +59,54 @@ implementation
 
 procedure TTuFrmbuscarproduto.btn1Click(Sender: TObject);
 begin
-             cdsbuscaprodutos.CommandText:='select * from produtos where status_produto like'+QuotedStr('1');
-             cdsbuscaprodutos.Close;
-             cdsbuscaprodutos.Open;
-             cdsbuscaprodutos.First;
+  cdsbuscaprodutos.CommandText:='select * from produtos where status_produto like'+QuotedStr('1');
+  cdsbuscaprodutos.Close;
+  cdsbuscaprodutos.Open;
+  cdsbuscaprodutos.First;
 end;
 
 procedure TTuFrmbuscarproduto.dbgrd1KeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
 
+  if Key=VK_RETURN then
+  begin
+  produto:=cdsbuscaprodutosdescricao.AsString;
+  valor:=cdsbuscaprodutoscompra.AsString;
+  Close;
+  end;
 
-                if Key=VK_RETURN then
-              begin
-                 produto:=cdsbuscaprodutosdescricao.AsString;
-                 valor:=cdsbuscaprodutoscompra.AsString;
-
-                 Close;
-              end;
-
-            if Key = VK_ESCAPE then
-             begin
-               Close;
-             end;
+  if Key = VK_ESCAPE then
+  begin
+  Close;
+  end;
 end;
 
 procedure TTuFrmbuscarproduto.edt1KeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-         if Key=VK_RETURN then
-            begin
-            cdsbuscaprodutos.CommandText:='select * from produtos where status_produto='+QuotedStr('1')+' and descricao like '+QuotedStr('%'+edt1.Text+'%');
+  if Key=VK_RETURN then
+  begin
+  cdsbuscaprodutos.CommandText:='select * from produtos where status_produto='+QuotedStr('1')+' and descricao like '+QuotedStr('%'+edt1.Text+'%');
 
-            cdsbuscaprodutos.Close;
-            cdsbuscaprodutos.Open;
-            cdsbuscaprodutos.First;
-            end;
+  cdsbuscaprodutos.Close;
+  cdsbuscaprodutos.Open;
+  cdsbuscaprodutos.First;
+  end;
 end;
 
 procedure TTuFrmbuscarproduto.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-            edt1.Clear;
+  edt1.Clear;
 end;
 
 procedure TTuFrmbuscarproduto.FormShow(Sender: TObject);
 begin
-            cdsbuscaprodutos.CommandText:='select * from produtos where status_produto like'+QuotedStr('1');
-            cdsbuscaprodutos.Close;
-            cdsbuscaprodutos.Open;
-            cdsbuscaprodutos.First;
+  cdsbuscaprodutos.CommandText:='select * from produtos where status_produto like'+QuotedStr('1');
+  cdsbuscaprodutos.Close;
+  cdsbuscaprodutos.Open;
+  cdsbuscaprodutos.First;
 end;
 
 end.

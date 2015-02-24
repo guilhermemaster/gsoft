@@ -207,7 +207,6 @@ type
     procedure cbb1Exit(Sender: TObject);
     procedure btn2Click(Sender: TObject);
     procedure btn10Click(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormResize(Sender: TObject);
     procedure cdsclientePostError(DataSet: TDataSet; E: EDatabaseError;
       var Action: TDataAction);
@@ -251,129 +250,115 @@ end;
 
 procedure TForm2.btn11Click(Sender: TObject);
 begin
-        Close;
+Close;
 end;
 
 procedure TForm2.btn1Click(Sender: TObject);
 var
 procura : string;
 begin
-      if (cbb1.Text='PROCURA POR') then
-      begin
-         messagebox (0,'Parâmetro de busca errados','GSoft',mb_ok);
-         Exit;
-      end;
+  if (cbb1.Text='PROCURA POR') then
+  begin
+  messagebox (0,'Parâmetro de busca errados','GSoft',mb_ok);
+  Exit;
+  end;
 
-         if  (cbb2.Text='CRITÉRIO') then
-      begin
-         messagebox (0,'Parâmetro de busca errados','GSoft',mb_ok);
-         Exit;
-      end;
+  if  (cbb2.Text='CRITÉRIO') then
+  begin
+  messagebox (0,'Parâmetro de busca errados','GSoft',mb_ok);
+  Exit;
+  end;
 
+ if (cbb1.Text='NOME') OR (cbb1.Text='CPF/CNPJ') OR (cbb1.Text='TELEFONE') then
+ begin
+ if cbb2.Text='Contém' then
+  begin
+  cdscliente.CommandText:='select * from cliente where '+procura_por(cbb1.Text)+' like'+QuotedStr('%'+edt1.Text+'%');
+  end
+   else if cbb2.Text='Inicia' then
+   begin
+   cdscliente.CommandText:='select * from cliente where '+procura_por(cbb1.Text)+' like'+QuotedStr(edt1.Text+'%');
+   end
+    else if cbb2.Text='Igual' then
+    begin
+    cdscliente.CommandText:='select * from cliente where '+procura_por(cbb1.Text)+' like'+QuotedStr(edt1.Text);
+    end
+    else
+     begin
+     cdscliente.CommandText:='select * from cliente where '+procura_por(cbb1.Text)+' not like'+QuotedStr('%'+edt1.Text+'%');
+     end;
 
-
-           if (cbb1.Text='NOME') OR (cbb1.Text='CPF/CNPJ') OR (cbb1.Text='TELEFONE') then
-            begin
-              if cbb2.Text='Contém' then
-                 begin
-                    cdscliente.CommandText:='select * from cliente where '+procura_por(cbb1.Text)+' like'+QuotedStr('%'+edt1.Text+'%');
-                   end
-                    else
-                      if cbb2.Text='Inicia' then
-                        begin
-                          cdscliente.CommandText:='select * from cliente where '+procura_por(cbb1.Text)+' like'+QuotedStr(edt1.Text+'%');
-                        end
-                          else
-                            if cbb2.Text='Igual' then
-                               begin
-                                 cdscliente.CommandText:='select * from cliente where '+procura_por(cbb1.Text)+' like'+QuotedStr(edt1.Text);
-                               end
-                                else
-                                   begin
-                                      cdscliente.CommandText:='select * from cliente where '+procura_por(cbb1.Text)+' not like'+QuotedStr('%'+edt1.Text+'%');
-                                         end;
-            end
-              else if cbb1.Text='DATA DE NASCIMENTO' then
-                begin
-                    cdscliente.CommandText:='select * from cliente where '+procura_por(cbb1.Text)+cbb2.Text+QuotedStr(edt2.Text);
-
-
-                end
-                  else
-                    begin
-                       cdscliente.CommandText:='select * from cliente where '+procura_por(cbb1.Text)+cbb2.Text+ edt1.Text;
-
-                    end;
-
-
-
-
-
-
-           cdscliente.Close;
-            cdscliente.Open;
-            cdscliente.First;
-
+      end
+       else if cbb1.Text='DATA DE NASCIMENTO' then
+       begin
+       cdscliente.CommandText:='select * from cliente where '+procura_por(cbb1.Text)+cbb2.Text+QuotedStr(edt2.Text);
+       end
+        else
+         begin
+           cdscliente.CommandText:='select * from cliente where '+procura_por(cbb1.Text)+cbb2.Text+ edt1.Text;
+         end;
+  cdscliente.Close;
+  cdscliente.Open;
+  cdscliente.First;
 end;
 
 procedure TForm2.btn2Click(Sender: TObject);
 begin
-            cdscliente.CommandText:='select * from cliente where status_cliente='+QuotedStr('1') ;
-            cdscliente.Close;
-            cdscliente.Open;
-            cdscliente.First;
+  cdscliente.CommandText:='select * from cliente where status_cliente='+QuotedStr('1') ;
+  cdscliente.Close;
+  cdscliente.Open;
+  cdscliente.First;
 
-            edt1.Clear;
-            edt2.Clear;
+  edt1.Clear;
+  edt2.Clear;
 end;
 
 procedure TForm2.btnanterioClick(Sender: TObject);
 begin
-           cdscliente.Edit;
-           cdscliente.Prior;
+  cdscliente.Edit;
+  cdscliente.Prior;
 
 
-if cbbtipo_pessoa.Text='JURÍDICA' then
+  if cbbtipo_pessoa.Text='JURÍDICA' then
+    begin
+    lbl4.Caption:='CNPJ *';
+    lbl10.Caption:='I.E. *';
+    end
+      else
         begin
-          lbl4.Caption:='CNPJ *';
-          lbl10.Caption:='I.E. *';
-        end
-          else
-              begin
-          lbl4.Caption:='CPF *';
-          lbl10.Caption:='RG *';
-        end;
+        lbl4.Caption:='CPF *';
+        lbl10.Caption:='RG *';
+  end;
 
 end;
 
 procedure TForm2.btndesistirClick(Sender: TObject);
 begin
-          dbedtnome.Clear;
-            dbedtcpf.Clear;
-             cdscliente.Cancel;
+  dbedtnome.Clear;
+  dbedtcpf.Clear;
+  cdscliente.Cancel;
 
-              inicio();
+  inicio();
 
-               cbbtipo_pessoa.Clear;
-                cbbestado_civil.Clear;
-                  cbbuf.Clear;
-                    cbbuf_trabalho.Clear;
+  cbbtipo_pessoa.Clear;
+  cbbestado_civil.Clear;
+  cbbuf.Clear;
+  cbbuf_trabalho.Clear;
 end;
 
 procedure TForm2.btneditarClick(Sender: TObject);
 begin
-     editar();
-
+  editar();
 end;
 
 procedure TForm2.btnexcluirClick(Sender: TObject);
 begin
-      deletar();
+  deletar();
 end;
 
 procedure TForm2.btngravarClick(Sender: TObject);
 begin
-       gravar();
+  gravar();
 end;
 
 procedure TForm2.gravar();
@@ -386,278 +371,233 @@ var
     Val : Integer;
 begin
          //Obrigatoriedade
+  if (cbbtipo_pessoa.Text = '')  then
+  begin
+  messagebox (0,'Campo Tipo de Pessoa é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-             if (cbbtipo_pessoa.Text = '')  then
-               begin
-               //ShowMessage('Campo Tipo de Pessoa é obrigatório');
-                messagebox (0,'Campo Tipo de Pessoa é obrigatório.','GSoft',mb_ok);
-               Exit;
-             end;
-                   if (dbedtcpf.Text = '')  then
-               begin
-               //ShowMessage('Campo CPF é obrigatório');
-                messagebox (0,'Campo CPF é obrigatório.','GSoft',mb_ok);
-               Exit;
-             end;
+  if (dbedtcpf.Text = '')  then
+  begin
+  messagebox (0,'Campo CPF é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                  if (dbedtnome.Text = '')  then
-               begin
-               //ShowMessage('Campo NOME é obrigatório');
-                messagebox (0,'Campo NOME é obrigatório.','GSoft',mb_ok);
-               Exit;
-             end;
+  if (dbedtnome.Text = '')  then
+  begin
+  messagebox (0,'Campo NOME é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-               if (dbedtrg.Text = '')  then
-               begin
-               //ShowMessage('Campo RG é obrigatório');
-                messagebox (0,'Campo RG é obrigatório.','GSoft',mb_ok);
-               Exit;
-             end;
+  if (dbedtrg.Text = '')  then
+  begin
+  messagebox (0,'Campo RG é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                   if (edtdata_nascimento.Text = '')  then
-               begin
-               //ShowMessage('Campo Data de Nascimento é obrigatório');
-               messagebox (0,'Campo Data de Nascimento é obrigatório.','GSoft',mb_ok);
-               Exit;
-             end;
+  if (edtdata_nascimento.Text = '')  then
+  begin
+  messagebox (0,'Campo Data de Nascimento é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                     if (cbbestado_civil.Text = '')  then
-               begin
-               //ShowMessage('Campo Estado Civíl é obrigatório');
-               messagebox (0,'Campo Estado Civíl é obrigatório.','GSoft',mb_ok);
-               Exit;
-             end;
+  if (cbbestado_civil.Text = '')  then
+  begin
+  messagebox (0,'Campo Estado Civíl é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                           if (dbedtcep.Text = '     -    ')  then
-               begin
-               //ShowMessage('Campo CEP é obrigatório');
-               messagebox (0,'Campo CEP é obrigatório.','GSoft',mb_ok);
-               Exit;
-             end;
+  if (dbedtcep.Text = '     -    ')  then
+  begin
+  messagebox (0,'Campo CEP é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                            if (dbedtendereco.Text = '')  then
-               begin
-               //ShowMessage('Campo Endereço é obrigatório');
-               messagebox (0,'Campo Endereço é obrigatório.','GSoft',mb_ok);
-               Exit;
-             end;
+  if (dbedtendereco.Text = '')  then
+  begin
+  messagebox (0,'Campo Endereço é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                            if (dbedtmunicipio.Text = '')  then
-               begin
-               //ShowMessage('Campo Município é obrigatório');
-               messagebox (0,'Campo Município é obrigatório.','GSoft',mb_ok);
-               Exit;
-             end;
+  if (dbedtmunicipio.Text = '')  then
+  begin
+  messagebox (0,'Campo Município é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
+  if (dbedtbairro.Text = '')  then
+  begin
+  messagebox (0,'Campo Bairro é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                      if (dbedtbairro.Text = '')  then
-               begin
-               messagebox (0,'Campo Bairro é obrigatório.','GSoft',mb_ok);
-               Exit;
-             end;
+  if (cbbuf.Text = '')  then
+  begin
+  messagebox (0,'Campo Unidade Federativa é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
+  if ( dbedttelefone_1.Text = '(   )   -    ')  then
+  begin
+  messagebox (0,'Campo do Primeiro Telefone é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                   if (cbbuf.Text = '')  then
-               begin
-               //ShowMessage('Campo Unidade Federativa é obrigatório');
-               messagebox (0,'Campo Unidade Federativa é obrigatório.','GSoft',mb_ok);
-               Exit;
-             end;
-
-
-                    if ( dbedttelefone_1.Text = '(   )   -    ')  then
-               begin
-               //ShowMessage('Campo do Primeiro Telefone é obrigatório');
-                messagebox (0,'Campo do Primeiro Telefone é obrigatório.','GSoft',mb_ok);
-               Exit;
-             end;
-
-                     if ( dbedtemail.Text = '')  then
-               begin
-               //ShowMessage('Campo EMAIL é obrigatório');
-               messagebox (0,'Campo EMAIL é obrigatório.','GSoft',mb_ok);
-               Exit;
-             end;
+  if ( dbedtemail.Text = '')  then
+  begin
+  messagebox (0,'Campo EMAIL é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
 
              //Dados trabalhistas
 
 
-                       if (dbedtrenda.Text = '')  then
-               begin
-               //ShowMessage('Campo Renda é obrigatório');
-               messagebox (0,'Campo Renda é obrigatório.','GSoft',mb_ok);
-               Exit;
-             end;
+  if (dbedtrenda.Text = '')  then
+  begin
+  messagebox (0,'Campo Renda é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                                 if (dbedtnome_trabalho.Text = '')  then
-               begin
-               //ShowMessage('Campo Renda é obrigatório');
-               messagebox (0,'Campo Nome do Local de Trabalho é obrigatório.','GSoft',mb_ok);
-               Exit;
-             end;
+  if (dbedtnome_trabalho.Text = '')  then
+  begin
+  messagebox (0,'Campo Nome do Local de Trabalho é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                             if (dbedtendereco_trabalho.Text = '')  then
-               begin
-               //ShowMessage('Campo Renda é obrigatório');
-               messagebox (0,'Campo Endereço do Local de Trabalho é obrigatório.','GSoft',mb_ok);
-               Exit;
-             end;
+  if (dbedtendereco_trabalho.Text = '')  then
+  begin
+  messagebox (0,'Campo Endereço do Local de Trabalho é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                             if (dbedtcep_trabalho.Text = '     -    ')  then
-               begin
-               //ShowMessage('Campo Renda é obrigatório');
-               messagebox (0,'Campo CEP do Local de Trabalho é obrigatório.','GSoft',mb_ok);
-               Exit;
-             end;
+  if (dbedtcep_trabalho.Text = '     -    ')  then
+  begin
+  messagebox (0,'Campo CEP do Local de Trabalho é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                             if (cbbuf_trabalho.Text = '')  then
-               begin
-               //ShowMessage('Campo Renda é obrigatório');
-               messagebox (0,'Campo UF do Local de Trabalho é obrigatório.','GSoft',mb_ok);
-               Exit;
-             end;
+  if (cbbuf_trabalho.Text = '')  then
+  begin
+  messagebox (0,'Campo UF do Local de Trabalho é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                             if (dbedtbairro_trabalho.Text = '')  then
-               begin
-               //ShowMessage('Campo Renda é obrigatório');
-               messagebox (0,'Campo Bairro do Local de Trabalho é obrigatório.','GSoft',mb_ok);
-               Exit;
-             end;
+  if (dbedtbairro_trabalho.Text = '')  then
+  begin
+  messagebox (0,'Campo Bairro do Local de Trabalho é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                              if (dbedtmunicipio_trabalho.Text = '')  then
-               begin
-               //ShowMessage('Campo Renda é obrigatório');
-               messagebox (0,'Campo Município do Local de Trabalho é obrigatório.','GSoft',mb_ok);
-               Exit;
-             end;
+  if (dbedtmunicipio_trabalho.Text = '')  then
+  begin
+  messagebox (0,'Campo Município do Local de Trabalho é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
+  if (dbedttelefone_trabalho.Text = '(   )   -    ')  then
+  begin
+  messagebox (0,'Campo Telefone do Local de Trabalho é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
-                  if (dbedttelefone_trabalho.Text = '(   )   -    ')  then
-               begin
-               //ShowMessage('Campo Renda é obrigatório');
-               messagebox (0,'Campo Telefone do Local de Trabalho é obrigatório.','GSoft',mb_ok);
-               Exit;
-             end;
-                                    if (dbedtemail_trabalho.Text = '')  then
-               begin
-               //ShowMessage('Campo Renda é obrigatório');
-               messagebox (0,'Campo Email do Local de Trabalho é obrigatório.','GSoft',mb_ok);
-               Exit;
-             end;
+  if (dbedtemail_trabalho.Text = '')  then
+  begin
+  messagebox (0,'Campo Email do Local de Trabalho é obrigatório.','GSoft',mb_ok);
+  Exit;
+  end;
 
 
+//validação de data
 
+  auxData := StrToDate(edtdata_nascimento.Text);
+  auxDataNow:=Date;
+  if auxData >auxDataNow then
+  begin
+  messagebox (0,'Data inconsistente!!!','GSoft',mb_ok);
+  exit;
+  end;
 
+//Validação de email
 
+  if not ValidarEMail(dbedtemail.Text)  then
+  begin
+  messagebox (0,'Email não é válido','GSoft',mb_ok);
+  Exit;
+  end;
 
-      //validação de data
+//Validar email do trabalho
 
-     auxData := StrToDate(edtdata_nascimento.Text);
-     auxDataNow:=Date;
-     if auxData >auxDataNow then
-      begin
-         //ShowMessage('Data inconsistente!!!');
-         messagebox (0,'Data inconsistente!!!','GSoft',mb_ok);
-          exit;
-
-
-       end;
-     //Validação de email
-
-        if not ValidarEMail(dbedtemail.Text)  then
-          begin
-             messagebox (0,'Email não é válido','GSoft',mb_ok);
-               Exit;
-           end;
-     //Validar email do trabalho
-
-            if not ValidarEMail(dbedtemail_trabalho.Text)  then
-          begin
-             messagebox (0,'Email do local de trabalho não é válido','GSoft',mb_ok);
-               Exit;
-           end;
+  if not ValidarEMail(dbedtemail_trabalho.Text)  then
+  begin
+  messagebox (0,'Email do local de trabalho não é válido','GSoft',mb_ok);
+  Exit;
+  end;
 
 
 
 
 
   if AnsiCompareText(cbbtipo_pessoa.Text, 'FÍSICA') = 0 then
+  begin
+    if not cpf(dbedtcpf.Text) then
     begin
-     if not cpf(dbedtcpf.Text) then
-          begin
-                      messagebox (0,'CPF não é válido','GSoft',mb_ok);
-                        Exit;
-                 end
-
-         end
-          else
-            begin
-                 if not cnpj(dbedtcpf.Text) then
-                    begin
-                        messagebox (0,'CNPJ não é válido','GSoft',mb_ok);
-                           Exit;
-                              end;
-            end;
-
-    if cbbtipo_pessoa.Text = 'JURÍDICA' then
+    messagebox (0,'CPF não é válido','GSoft',mb_ok);
+    Exit;
+    end
+  end
+    else
       begin
-        //verificar CNPJ
+      if not cnpj(dbedtcpf.Text) then
+      begin
+      messagebox (0,'CNPJ não é válido','GSoft',mb_ok);
+      Exit;
+      end;
+  end;
 
-          if  ( StrToIntDef(dbedtrg.Text, 0) = 0 ) and (not (dbedtrg.Text = 'ISENTO')) then
-                   begin
-                       messagebox (0,'Inscrições Estaduais nos Parâmentros Invalidos!!!','GSoft',mb_ok);
-                       Exit;
-                   end;
-
-
-        end;
-
-
-                //Cliente em geral
-
-               // cdscliente.Edit;
-               //  Try
-                      cdscliente.Post;
-
-                    //  Except
-
-
-                     // End;
-
-                cdscliente.ApplyUpdates(0);
+  if cbbtipo_pessoa.Text = 'JURÍDICA' then
+  begin
+    if  ( StrToIntDef(dbedtrg.Text, 0) = 0 ) and (not (dbedtrg.Text = 'ISENTO')) then
+    begin
+    messagebox (0,'Inscrições Estaduais nos Parâmentros Invalidos!!!','GSoft',mb_ok);
+    Exit;
+    end;
+  end;
 
 
 
-                  cdscliente.Insert;
-                  cdscliente.Close;
-                  cdscliente.Open;
-                  cdscliente.Insert;
+  cdscliente.Post;
+  cdscliente.ApplyUpdates(0);
 
-                   //volta para a primeira aba
-                   pgc1.ActivePage := ts1;
+  cdscliente.Insert;
+  cdscliente.Close;
+  cdscliente.Open;
+  cdscliente.Insert;
 
-                   //seta o primeiro do dataset de memória
-                   cdscliente.First;
-                    //Campos do menu principal
-                   //habilita o "Editar, novo, inicio, proximo, anterio, ultimo"
-                    btneditar.Enabled:=True;
-                    btnnovo.Enabled:=True;
-                    btninicio.Enabled:=True;
-                    btnproximo.Enabled:=True;
-                    btnanterio.Enabled:=True;
-                    btnultimo.Enabled:=True;
-                  //desabilita o campo "gravar e desistir"
-                    btngravar.Enabled:=False;
-                    btndesistir.Enabled:=False;
+  //volta para a primeira aba
+  pgc1.ActivePage := ts1;
 
-                   //Campos de cadastro
-                        camposFalse();
-                  //Limpa os campos "Tipo de pessoa e estado civil"
-                       cbbtipo_pessoa.Clear;
-                       cbbestado_civil.Clear;
-                       cbbuf.Clear;
-                       cbbuf_trabalho.Clear;
+  //seta o primeiro do dataset de memória
+  cdscliente.First;
+  //Campos do menu principal
+  //habilita o "Editar, novo, inicio, proximo, anterio, ultimo"
+  btneditar.Enabled:=True;
+  btnnovo.Enabled:=True;
+  btninicio.Enabled:=True;
+  btnproximo.Enabled:=True;
+  btnanterio.Enabled:=True;
+  btnultimo.Enabled:=True;
+  //desabilita o campo "gravar e desistir"
+  btngravar.Enabled:=False;
+  btndesistir.Enabled:=False;
+
+  //Campos de cadastro
+  camposFalse();
+  //Limpa os campos "Tipo de pessoa e estado civil"
+  cbbtipo_pessoa.Clear;
+  cbbestado_civil.Clear;
+  cbbuf.Clear;
+  cbbuf_trabalho.Clear;
 
 end;
 
@@ -674,75 +614,70 @@ end;
 
 procedure TForm2.btnproximoClick(Sender: TObject);
 begin
-      cdscliente.Edit;
-      cdscliente.Next;
+  cdscliente.Edit;
+  cdscliente.Next;
 
-                       if cbbtipo_pessoa.Text='JURÍDICA' then
-        begin
-          lbl4.Caption:='CNPJ *';
-          lbl10.Caption:='I.E. *';
-        end
-          else
-              begin
-          lbl4.Caption:='CPF *';
-          lbl10.Caption:='RG *';
-        end;
+  if cbbtipo_pessoa.Text='JURÍDICA' then
+  begin
+  lbl4.Caption:='CNPJ *';
+  lbl10.Caption:='I.E. *';
+  end
+    else
+      begin
+      lbl4.Caption:='CPF *';
+      lbl10.Caption:='RG *';
+  end;
 
 
 end;
 
 procedure TForm2.btnultimoClick(Sender: TObject);
 begin
-            cdscliente.Edit;
-            cdscliente.Last;
+  cdscliente.Edit;
+  cdscliente.Last;
 end;
 
 function TForm2.cpf(valor : string): Boolean;
 var
-  num: string;
-  i, t, muda, i2: Integer;
-  recebe, fim, fim2: Integer;
-  fim3: Integer;
+num: string;
+i, t, muda, i2: Integer;
+recebe, fim, fim2: Integer;
+fim3: Integer;
+
 begin
-       num:=valor;
+num:=valor;
 t:=1;
 fim:=0;
 muda:=10;
 
 
 
-     for i := muda downto 2  do
-       begin
-            recebe:=i*StrToInt(num[t]);
-            t:=t+1;
-            fim:= recebe+fim;
-        end;
-       fim2:=11-(fim mod 11);
+  for i := muda downto 2  do
+  begin
+  recebe:=i*StrToInt(num[t]);
+  t:=t+1;
+  fim:= recebe+fim;
+  end;
 
+  fim2:=11-(fim mod 11);
+  muda:=muda+1;
 
+  fim:=0;
+  t:=1;
 
+  for i := muda downto 2 do
+  begin
+  recebe:=i*strtoint(num[t]);
+  t:=t+1;
+  fim:=recebe+fim;
+  end;
 
+  fim3:=11-(fim mod 11);
 
-        muda:=muda+1;
-
-        fim:=0;
-        t:=1;
-      for i := muda downto 2 do
-        begin
-               recebe:=i*strtoint(num[t]);
-               t:=t+1;
-               fim:=recebe+fim;
-        end;
-          fim3:=11-(fim mod 11);
-
-          if (fim2=StrToInt(num[10])) and (fim3=StrToInt(num[11])) then
-            Result:=True
-            else
-            Result:=False;
-
-
-
-
+  if (fim2=StrToInt(num[10])) and (fim3=StrToInt(num[11])) then
+  Result:=True
+  else
+  Result:=False;
 end;
 
 
@@ -803,56 +738,6 @@ end;
 
 
 
-procedure TForm2.FormKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-         if Key = VK_INSERT then
-          begin
-              novo();
-          end;
-
-
-
-            if Key = VK_RETURN then
-              begin
-                editar();
-              end;
-
-          if ((Shift = [ssCtrl]) And (Key = Ord('S'))) then
-            begin
-              gravar();
-            end;
-
-          if Key=VK_DELETE then
-              begin
-                deletar();
-              end;
-
-           if Key=VK_DELETE then
-            begin
-              deletar();
-            end;
-
-              if ((Shift = [ssCtrl]) And (Key = Ord('P'))) then
-                begin
-                   RelatorioCliente.Print;
-                end;
-
-      if Key = VK_ESCAPE then
-      begin
-                 dbedtnome.Clear;
-            dbedtcpf.Clear;
-             cdscliente.Cancel;
-
-              inicio();
-
-               cbbtipo_pessoa.Clear;
-                cbbestado_civil.Clear;
-                  cbbuf.Clear;
-                    cbbuf_trabalho.Clear;
-      end;
-end;
-
 procedure TForm2.FormResize(Sender: TObject);
 begin
 //
@@ -860,30 +745,25 @@ end;
 
 procedure TForm2.FormShow(Sender: TObject);
 begin
+  cdscliente.CommandText:='select * from cliente where status_cliente='+QuotedStr('1') ;
+  cdscliente.Close;
+  cdscliente.Open;
+  cdscliente.First;
+  inicio();
+  pgc1.ActivePage := ts1;
+  pgc2.ActivePage := ts3;
 
-
-           cdscliente.CommandText:='select * from cliente where status_cliente='+QuotedStr('1') ;
-             cdscliente.Close;
-           cdscliente.Open;
-            cdscliente.First;
-           inicio();
-             pgc1.ActivePage := ts1;
-             pgc2.ActivePage := ts3;
-
-                       if cbbtipo_pessoa.Text='JURÍDICA' then
-        begin
-          lbl4.Caption:='CNPJ *';
-          lbl10.Caption:='I.E. *';
-        end
-          else
-              begin
-          lbl4.Caption:='CPF *';
-          lbl10.Caption:='RG *';
-        end;
-
-        edt2.Visible:=False;
-
-
+  if cbbtipo_pessoa.Text='JURÍDICA' then
+  begin
+    lbl4.Caption:='CNPJ *';
+    lbl10.Caption:='I.E. *';
+  end
+    else
+      begin
+      lbl4.Caption:='CPF *';
+      lbl10.Caption:='RG *';
+      end;
+  edt2.Visible:=False;
 end;
 
 function  TForm2.ValidarEMail(aStr: string): Boolean;
@@ -899,66 +779,57 @@ begin
 end;
 procedure TForm2.novo();
 begin
-    pgc1.ActivePage := ts2;
-
-  //limpar();
+  pgc1.ActivePage := ts2;
 
   btnnovo.Enabled:=False;
   btngravar.Enabled:=True;
   btndesistir.Enabled:=True;
 
-    btninicio.Enabled:=False;
-    btnproximo.Enabled:=False;
-    btnanterio.Enabled:=False;
-    btnultimo.Enabled:=False;
-    btneditar.Enabled:=False;
-    btnexcluir.Enabled:=False;
+  btninicio.Enabled:=False;
+  btnproximo.Enabled:=False;
+  btnanterio.Enabled:=False;
+  btnultimo.Enabled:=False;
+  btneditar.Enabled:=False;
+  btnexcluir.Enabled:=False;
 
-          camposTrue();
+  camposTrue();
 
-            estadocivil();
-              tipo_pessoa();
+  estadocivil();
+  tipo_pessoa();
+  cdscliente.Append;
+  cdscliente.FieldByName('status_cliente').Text := '1';
+  chkclientes.Checked;
 
-
-
-
-
-
-                  cdscliente.Append;
-                  cdscliente.FieldByName('status_cliente').Text := '1';
-                  chkclientes.Checked;
-
-                     edtdata_cadastro.Date:=Date;
-                     edtdata_cadastro.Enabled:=False;
+  edtdata_cadastro.Date:=Date;
+  edtdata_cadastro.Enabled:=False;
 end;
 procedure TForm2.estadocivil();
 begin
-            cbbestado_civil.Items.Add('SOLTEIRO(A)');
-            cbbestado_civil.Items.Add('CASADO(A)');
-            cbbestado_civil.Items.Add('SEPARAD0(A)');
-            cbbestado_civil.Items.Add('VIÚVO(A)');
+  cbbestado_civil.Items.Add('SOLTEIRO(A)');
+  cbbestado_civil.Items.Add('CASADO(A)');
+  cbbestado_civil.Items.Add('SEPARAD0(A)');
+  cbbestado_civil.Items.Add('VIÚVO(A)');
 
 end;
 procedure TForm2.tipo_pessoa();
 begin
-               cbbtipo_pessoa.Items.Add('FÍSICA');
-                cbbtipo_pessoa.Items.Add('JURÍDICA');
+  cbbtipo_pessoa.Items.Add('FÍSICA');
+  cbbtipo_pessoa.Items.Add('JURÍDICA');
 end;
 
 
 procedure TForm2.ts2Enter(Sender: TObject);
 begin
-                               if cbbtipo_pessoa.Text='JURÍDICA' then
-        begin
-          lbl4.Caption:='CNPJ *';
-          lbl10.Caption:='I.E. *';
-        end
-          else
-              begin
-          lbl4.Caption:='CPF *';
-          lbl10.Caption:='RG *';
-        end;
-
+  if cbbtipo_pessoa.Text='JURÍDICA' then
+  begin
+    lbl4.Caption:='CNPJ *';
+    lbl10.Caption:='I.E. *';
+  end
+    else
+    begin
+      lbl4.Caption:='CPF *';
+      lbl10.Caption:='RG *';
+    end;
 end;
 
 procedure TForm2.ts2Show(Sender: TObject);
@@ -978,30 +849,8 @@ end;
 
 procedure TForm2.limpar();
 begin
-
-      dbedtnome.Clear;
-      dbedtcpf.Clear;
-      {
-      dbedtendereco.Clear;
-      marcacaostatus_cliente.Clear;
-
-      edtdata_cadastro.Clear;
-      edtdata_nascimento.Clear;
-
-      cbbestado_civil.Clear;
-
-      dbedtrg.Clear;
-      dbedtrg.Clear;
-      dbedtlimite_credito.Clear;
-
-      dbedtendereco.Clear;
-      dbedtuf.Clear;
-      dbedtemail.Clear;
-      dbedtcep.Clear;
-      dbedttelefone_1.Clear;
-      dbedtemail_geral.Clear;
-      }
-
+  dbedtnome.Clear;
+  dbedtcpf.Clear;
 end;
 procedure TForm2.camposTrue();
 begin
@@ -1015,7 +864,6 @@ begin
         dbedtcep.Enabled:=True;
         dbedtendereco.Enabled:=True;
         dbedtmunicipio.Enabled:=True;
-       //cbbuf.Enabled:=True;
         dbedttelefone_1.Enabled:=True;
         dbedttelefone_2.Enabled:=True;
         dbedtemail.Enabled:=True;
@@ -1026,7 +874,6 @@ begin
         dbedtnome_trabalho.Enabled:=True;
         dbedtendereco_trabalho.Enabled:=True;
         dbedtcep_trabalho.Enabled:=True;
-        //cbbuf_trabalho.Enabled:=True;
         dbedtbairro_trabalho.Enabled:=True;
         dbedtmunicipio_trabalho.Enabled:=True;
         dbedttelefone_trabalho.Enabled:=True;
@@ -1144,7 +991,6 @@ begin
         dbedtcep.Enabled:=False;
         dbedtendereco.Enabled:=False;
         dbedtmunicipio.Enabled:=False;
-        //cbbuf.Enabled:=False;
         dbedttelefone_1.Enabled:=False;
         dbedttelefone_2.Enabled:=False;
         dbedtemail.Enabled:=False;
@@ -1155,7 +1001,6 @@ begin
         dbedtnome_trabalho.Enabled:=False;
         dbedtendereco_trabalho.Enabled:=False;
         dbedtcep_trabalho.Enabled:=False;
-        //cbbuf_trabalho.Enabled:=False;
         dbedtbairro_trabalho.Enabled:=False;
         dbedtmunicipio_trabalho.Enabled:=False;
         dbedttelefone_trabalho.Enabled:=False;
@@ -1185,12 +1030,7 @@ begin
       btnproximo.Enabled:=True;
       btnultimo.Enabled:=True;
 
-      //campos
       camposFalse();
-
-
-
-
 end;
 procedure TForm2.editar();
 begin
@@ -1201,126 +1041,109 @@ begin
       dbedtcpf.Enabled:=True;
       marcacaostatus_cliente.Enabled:=True;
 
+      btngravar.Enabled:=True;
+      btndesistir.Enabled:=True;
+      btneditar.Enabled:=False;
 
+      estadocivil();
+      tipo_pessoa();
 
-        btngravar.Enabled:=True;
-        btndesistir.Enabled:=True;
-        btneditar.Enabled:=False;
-
-            estadocivil();
-                  tipo_pessoa();
-
-                      camposTrue();
+      camposTrue();
 end;
 procedure TForm2.dbedtcepKeyPress(Sender: TObject; var Key: Char);
 begin
-                  if not (key in ['0'..'9','.',#8]) then
-
-                         Key:=#0;
+  if not (key in ['0'..'9','.',#8]) then
+    Key:=#0;
 end;
 
 procedure TForm2.dbedtcep_trabalhoKeyPress(Sender: TObject; var Key: Char);
 begin
-                if not (key in ['0'..'9','.',#8]) then
-
-                         Key:=#0;
+  if not (key in ['0'..'9','.',#8]) then
+    Key:=#0;
 end;
 
 procedure TForm2.dbedtcpfKeyPress(Sender: TObject; var Key: Char);
 begin
   if not (key in ['0'..'9','.',#8]) then
-
-       Key:=#0;
+    Key:=#0;
 end;
 
 procedure TForm2.dbedtmunicipioButtonClick(Sender: TObject);
 begin
-          Form3.ShowModal;
-          dbedtmunicipio.Text:=Form3.cidadenome;
-          cbbuf.Text:=Form3.estadonome;
+  Form3.ShowModal;
+  dbedtmunicipio.Text:=Form3.cidadenome;
+  cbbuf.Text:=Form3.estadonome;
 end;
 
 procedure TForm2.dbedtmunicipio_trabalhoButtonClick(Sender: TObject);
 begin
-          Form3.ShowModal;
-          dbedtmunicipio_trabalho.Text:=Form3.cidadenome;
-          cbbuf_trabalho.Text:=Form3.estadonome;
+  Form3.ShowModal;
+  dbedtmunicipio_trabalho.Text:=Form3.cidadenome;
+  cbbuf_trabalho.Text:=Form3.estadonome;
 end;
 
 procedure TForm2.dbedtrendaKeyPress(Sender: TObject; var Key: Char);
 begin
-                if not (key in ['0'..'9','.',#8]) then
-
-                         Key:=#0;
+  if not (key in ['0'..'9','.',#8]) then
+    Key:=#0;
 end;
 
 procedure TForm2.dbedttelefone_1KeyPress(Sender: TObject; var Key: Char);
 begin
-                    if not (key in ['0'..'9','.',#8]) then
-
-                         Key:=#0;
+  if not (key in ['0'..'9','.',#8]) then
+    Key:=#0;
 end;
 
 procedure TForm2.dbedttelefone_2KeyPress(Sender: TObject; var Key: Char);
 begin
-                 if not (key in ['0'..'9','.',#8]) then
-
-                         Key:=#0;
+  if not (key in ['0'..'9','.',#8]) then
+    Key:=#0;
 end;
 
 procedure TForm2.dbedttelefone_pessoal_1KeyPress(Sender: TObject;
   var Key: Char);
 begin
-                  if not (key in ['0'..'9','.',#8]) then
-
-                         Key:=#0;
+  if not (key in ['0'..'9','.',#8]) then
+    Key:=#0;
 end;
 
 procedure TForm2.dbedttelefone_pessoal_2KeyPress(Sender: TObject;
   var Key: Char);
 begin
-                     if not (key in ['0'..'9','.',#8]) then
-
-                         Key:=#0;
+if not (key in ['0'..'9','.',#8]) then
+  Key:=#0;
 end;
 
 procedure TForm2.dbedttelefone_trabalhoKeyPress(Sender: TObject; var Key: Char);
 begin
-                   if not (key in ['0'..'9','.',#8]) then
-
-                         Key:=#0;
+if not (key in ['0'..'9','.',#8]) then
+  Key:=#0;
 end;
 
 procedure TForm2.dbgrd1CellClick(Column: TColumn);
 begin
-          btneditar.Enabled:=True;
+  btneditar.Enabled:=True;
 end;
 
 procedure TForm2.dbgrd1DblClick(Sender: TObject);
 begin
-           pgc1.ActivePage := ts2;
-           cdscliente.Edit;
-           btngravar.Enabled:=True;
-           btngravar.Enabled:=False;
+  pgc1.ActivePage := ts2;
+  cdscliente.Edit;
+  btngravar.Enabled:=True;
+  btngravar.Enabled:=False;
 end;
 
 procedure TForm2.deletar();
 
 begin
-
-
-      try
-          cdscliente.Delete;
-           cdscliente.ApplyUpdates(0);
-             cdscliente.RefreshRecord;
-      except
-
-
-           messagebox (0,'Não pode ser deletado','GSoft',mb_ok);
-
-
-      end;
-   end;
+  try
+  cdscliente.Delete;
+  cdscliente.ApplyUpdates(0);
+  cdscliente.RefreshRecord;
+  except
+  messagebox (0,'Não pode ser deletado','GSoft',mb_ok);
+  end;
+end;
 
 function TForm2.procura_por(valor : string) : string;
 begin
@@ -1369,8 +1192,6 @@ begin
   cbb2.Items.Add('Inicia');
   cbb2.Items.Add('Igual');
   cbb2.Items.Add('Não Contém');
-
-
 end;
 
 end.

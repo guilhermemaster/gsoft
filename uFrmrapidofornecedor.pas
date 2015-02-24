@@ -26,7 +26,6 @@ type
     Label8: TLabel;
     DBEdit9: TDBEdit;
     Button1: TButton;
-    RzDBCheckBox1: TRzDBCheckBox;
     procedure Button1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
@@ -67,7 +66,7 @@ begin
                 cdsfornecedor.Open;
 
                   cdsfornecedor.Append;
-                  cdsfornecedor.FieldByName('status_fornecedor').Text := '1';
+                  cdsfornecedor.FieldByName('status_fornecedor').Text := '0';
                   DBEdit1.Text:=Form6.cnpjemit.Text;
                   DBEdit3.Text:=Form6.nomeemit.Text;
                   DBEdit5.Text:=Form6.emitende.Text;

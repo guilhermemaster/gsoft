@@ -214,29 +214,24 @@ end;
 
 procedure TForm6.FormShow(Sender: TObject);
 begin
-        cdsprodutos.CommandText:='select * from produtos where status_produto='+QuotedStr('1') ;
-        cdsprodutos.Close;
-        cdsprodutos.Open;
-        cdsprodutos.First;
+cdsprodutos.CommandText:='select * from produtos where status_produto='+QuotedStr('1') ;
+cdsprodutos.Close;
+cdsprodutos.Open;
+cdsprodutos.First;
 
-        cdsfornecedor.CommandText:='select * from fornecedores where status_fornecedor='+QuotedStr('1');
-        cdsfornecedor.Close;
-        cdsfornecedor.Open;
-        cdsfornecedor.First;
+cdsfornecedor.CommandText:='select * from fornecedores where status_fornecedor='+QuotedStr('1');
+cdsfornecedor.Close;
+cdsfornecedor.Open;
+cdsfornecedor.First;
 
-        Button2.Enabled:=False;
-
-  
+Button2.Enabled:=False;
 end;
 
 procedure TForm6.primordial;
 begin
-
   carregaemit();
   carregadest();
   carregainfornota();
-
-
 end;
 
 procedure TForm6.produtosfinal();
@@ -244,57 +239,53 @@ var
 i : Integer;
 j: Integer;
 begin
-      //j:=ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Count;
-      j:=1;
-     for i := 0 to ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Count - 1 do
-   begin
-    cdsmemory_itens.Open;
-    cdsmemory_itens.Insert;
-     cdsmemory_itensN.AsString:=IntToStr(j);
-    //cdsmemory_itensN.AsString:=IntToStr(ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Count);
-    strngfld_itensproduto.AsString := ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.xProd;
-    cdsmemory_itensquantida.AsFloat:=ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.qCom;
-    cdsmemory_itensolun_itensvalorunitario.AsFloat:=ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.vUnCom;
-    cdsmemory_itenscean.AsString:=ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.cEAN;
-      j:=j+1;
-   end;
+  j:=1;
 
+  for i := 0 to ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Count - 1 do
+  begin
+  cdsmemory_itens.Open;
+  cdsmemory_itens.Insert;
+  cdsmemory_itensN.AsString:=IntToStr(j);
+  strngfld_itensproduto.AsString := ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.xProd;
+  cdsmemory_itensquantida.AsFloat:=ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.qCom;
+  cdsmemory_itensolun_itensvalorunitario.AsFloat:=ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.vUnCom;
+  cdsmemory_itenscean.AsString:=ACBrNFe1.NotasFiscais.Items[0].NFe.Det[i].Prod.cEAN;
+  j:=j+1;
+  end;
 end;
 function TForm6.exitecean(cean : String): Boolean;
 begin
-   cdsprodutos.commandText:='select * from  produtos where cean='+QuotedStr(cean);
-   cdsprodutos.close;
-   cdsprodutos.open;
+  cdsprodutos.commandText:='select * from  produtos where cean='+QuotedStr(cean);
+  cdsprodutos.close;
+  cdsprodutos.open;
 
-   Result:=(cdsprodutos.recordcount>0);
+  Result:=(cdsprodutos.recordcount>0);
 end;
 
 function TForm6.ValidaCeanExistentes(): Boolean;
 var
-  itens : string;
+itens : string;
 begin
   cdsmemory_itens.First;
 
   while not (cdsmemory_itens.Eof) do
   begin
-    if not exitecean(cdsmemory_itenscean.Asstring) then
-		begin
-			Itens := Concat(Itens, cdsmemory_itenscean.Asstring) + ' ';
-		end;
-
-		cdsmemory_itens.Next;
+  if not exitecean(cdsmemory_itenscean.Asstring) then
+  begin
+  Itens := Concat(Itens, cdsmemory_itenscean.Asstring) + ' ';
+  end;
+  cdsmemory_itens.Next;
   end;
 
   if itens <> '' then
   begin
-     Showmessage('itens da nota não cadastrados no sistema:'+itens);
-     Result:=False;
+  Showmessage('itens da nota não cadastrados no sistema:'+itens);
+  Result:=False;
   end
     else
-    begin
+      begin
       Result:=True;
-    end;
-
+      end;
 end;
 
 function TForm6.exiteCNPJ(cnpj : String): Boolean;

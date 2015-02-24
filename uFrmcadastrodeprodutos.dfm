@@ -45,7 +45,10 @@ inherited Form5: TForm5
       ActivePage = ts2
       ExplicitWidth = 697
       inherited ts1: TTabSheet
+        ExplicitLeft = 0
+        ExplicitTop = 0
         ExplicitWidth = 689
+        ExplicitHeight = 0
         inherited edt2: TEdit
           Left = 300
           Top = 24
@@ -100,7 +103,6 @@ inherited Form5: TForm5
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
           OnDblClick = dbgrd1DblClick
-          OnKeyDown = dbgrd1KeyDown
           Columns = <
             item
               Expanded = False
