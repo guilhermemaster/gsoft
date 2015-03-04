@@ -1,0 +1,724 @@
+object Form6: TForm6
+  Left = 146
+  Top = 0
+  AutoSize = True
+  Caption = 'Importa NFe Compra '
+  ClientHeight = 440
+  ClientWidth = 713
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnClose = FormClose
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label8: TLabel
+    Left = 0
+    Top = 205
+    Width = 85
+    Height = 16
+    Caption = 'Itens da Nota: '
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object DBGrid2: TDBGrid
+    Left = 0
+    Top = 227
+    Width = 713
+    Height = 169
+    DataSource = dsmemory_itens
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    OnColEnter = DBGrid2ColEnter
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'N'#186
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'produto'
+        Title.Caption = 'Produto '
+        Width = 250
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'quantida'
+        Title.Caption = 'Quantidade '
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'valorunitario'
+        Title.Caption = 'Valor '
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'cean'
+        Title.Caption = 'CEAN'
+        Visible = True
+      end>
+  end
+  object Button1: TButton
+    Left = 569
+    Top = 398
+    Width = 141
+    Height = 42
+    Caption = 'Carregar NF-e'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ImageIndex = 2
+    Images = DataModule2.imgmenu
+    ParentFont = False
+    TabOrder = 1
+    OnClick = Button1Click
+  end
+  object GroupBox1: TGroupBox
+    Left = 0
+    Top = 0
+    Width = 321
+    Height = 199
+    Caption = '  Fornecedor  '
+    TabOrder = 2
+    object lbl3: TLabel
+      Left = 3
+      Top = 22
+      Width = 37
+      Height = 16
+      Caption = 'CNPJ: '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label1: TLabel
+      Left = 3
+      Top = 51
+      Width = 46
+      Height = 16
+      Caption = 'Nome : '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 3
+      Top = 78
+      Width = 61
+      Height = 16
+      Caption = 'Fantasia : '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 163
+      Top = 22
+      Width = 24
+      Height = 16
+      Caption = 'I.E.:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label9: TLabel
+      Left = 3
+      Top = 102
+      Width = 62
+      Height = 16
+      Caption = 'Endere'#231'o :'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label10: TLabel
+      Left = 3
+      Top = 130
+      Width = 23
+      Height = 16
+      Caption = 'N'#186' :'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label11: TLabel
+      Left = 89
+      Top = 130
+      Width = 62
+      Height = 16
+      Caption = 'Munic'#237'pio :'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label12: TLabel
+      Left = 3
+      Top = 157
+      Width = 20
+      Height = 16
+      Caption = 'UF:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label13: TLabel
+      Left = 89
+      Top = 157
+      Width = 31
+      Height = 16
+      Caption = 'CEP :'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object cnpjemit: TEdit
+      Left = 40
+      Top = 17
+      Width = 121
+      Height = 21
+      Enabled = False
+      TabOrder = 0
+    end
+    object nomeemit: TEdit
+      Left = 55
+      Top = 46
+      Width = 257
+      Height = 21
+      Enabled = False
+      TabOrder = 1
+    end
+    object fantasiaemit: TEdit
+      Left = 64
+      Top = 73
+      Width = 248
+      Height = 21
+      Enabled = False
+      TabOrder = 2
+    end
+    object ieemit: TEdit
+      Left = 191
+      Top = 17
+      Width = 121
+      Height = 21
+      Enabled = False
+      TabOrder = 3
+    end
+    object emitende: TEdit
+      Left = 71
+      Top = 101
+      Width = 241
+      Height = 21
+      Enabled = False
+      TabOrder = 4
+    end
+    object numemit: TEdit
+      Left = 32
+      Top = 125
+      Width = 53
+      Height = 21
+      Enabled = False
+      TabOrder = 5
+    end
+    object bairroemit: TEdit
+      Left = 157
+      Top = 125
+      Width = 155
+      Height = 21
+      Enabled = False
+      TabOrder = 6
+    end
+    object ufemit: TEdit
+      Left = 32
+      Top = 152
+      Width = 53
+      Height = 21
+      Enabled = False
+      TabOrder = 7
+    end
+    object cepemit: TEdit
+      Left = 138
+      Top = 152
+      Width = 87
+      Height = 21
+      Enabled = False
+      TabOrder = 8
+    end
+  end
+  object GroupBox2: TGroupBox
+    Left = 327
+    Top = 94
+    Width = 386
+    Height = 105
+    Caption = '  Destinat'#225'rio  '
+    TabOrder = 3
+    object Label4: TLabel
+      Left = 11
+      Top = 30
+      Width = 64
+      Height = 16
+      Caption = 'CNPJ/CPF: '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label5: TLabel
+      Left = 193
+      Top = 30
+      Width = 24
+      Height = 16
+      Caption = 'I.E.:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label6: TLabel
+      Left = 11
+      Top = 59
+      Width = 46
+      Height = 16
+      Caption = 'Nome : '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label7: TLabel
+      Left = 11
+      Top = 86
+      Width = 44
+      Height = 16
+      Caption = 'Email : '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object cnpjdest: TEdit
+      Left = 72
+      Top = 27
+      Width = 121
+      Height = 21
+      Enabled = False
+      TabOrder = 0
+    end
+    object iedest: TEdit
+      Left = 221
+      Top = 25
+      Width = 162
+      Height = 21
+      Enabled = False
+      TabOrder = 1
+    end
+    object nomedest: TEdit
+      Left = 72
+      Top = 54
+      Width = 311
+      Height = 21
+      Enabled = False
+      TabOrder = 2
+    end
+    object emaildest: TEdit
+      Left = 72
+      Top = 81
+      Width = 311
+      Height = 21
+      Enabled = False
+      TabOrder = 3
+    end
+  end
+  object Button2: TButton
+    Left = 401
+    Top = 398
+    Width = 162
+    Height = 42
+    Caption = 'Finalizar importa'#231#227'o'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ImageIndex = 1
+    Images = DataModule2.imgmenu
+    ParentFont = False
+    TabOrder = 4
+    OnClick = Button2Click
+  end
+  object GroupBox3: TGroupBox
+    Left = 327
+    Top = 0
+    Width = 386
+    Height = 88
+    Caption = '  Inf. da Nota  '
+    TabOrder = 5
+    object Label14: TLabel
+      Left = 2
+      Top = 41
+      Width = 86
+      Height = 16
+      Caption = 'S'#233'rie da nota: '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label15: TLabel
+      Left = 2
+      Top = 18
+      Width = 102
+      Height = 16
+      Caption = 'N'#250'mero da Nota: '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label16: TLabel
+      Left = 2
+      Top = 65
+      Width = 78
+      Height = 16
+      Caption = 'Data da nota:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label17: TLabel
+      Left = 208
+      Top = 41
+      Width = 85
+      Height = 16
+      Caption = 'Total da nota: '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label18: TLabel
+      Left = 208
+      Top = 66
+      Width = 103
+      Height = 16
+      Caption = 'Total de Tributos:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object serienota: TEdit
+      Left = 86
+      Top = 36
+      Width = 121
+      Height = 21
+      Enabled = False
+      TabOrder = 0
+    end
+    object numeronota: TEdit
+      Left = 104
+      Top = 13
+      Width = 279
+      Height = 21
+      Enabled = False
+      TabOrder = 1
+    end
+    object datanota: TEdit
+      Left = 86
+      Top = 60
+      Width = 121
+      Height = 21
+      Enabled = False
+      TabOrder = 2
+    end
+    object totalnota: TEdit
+      Left = 289
+      Top = 36
+      Width = 94
+      Height = 21
+      Enabled = False
+      TabOrder = 3
+    end
+    object tributonota: TEdit
+      Left = 317
+      Top = 63
+      Width = 66
+      Height = 21
+      Enabled = False
+      TabOrder = 4
+    end
+  end
+  object ACBrNFe1: TACBrNFe
+    Configuracoes.Geral.PathSalvar = 'C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\bin\'
+    Configuracoes.Geral.ExibirErroSchema = True
+    Configuracoes.Geral.FormatoAlerta = 'TAG:%TAGNIVEL% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.'
+    Configuracoes.Geral.RetirarAcentos = True
+    Configuracoes.Geral.ValidarDigest = False
+    Configuracoes.WebServices.UF = 'SP'
+    Configuracoes.WebServices.AguardarConsultaRet = 0
+    Configuracoes.WebServices.IntervaloTentativas = 0
+    Configuracoes.WebServices.AjustaAguardaConsultaRet = False
+    Left = 488
+    Top = 112
+  end
+  object OpenDialog1: TOpenDialog
+    Left = 488
+    Top = 168
+  end
+  object dsmemory_itens: TDataSource
+    AutoEdit = False
+    DataSet = cdsmemory_itens
+    Left = 486
+    Top = 284
+  end
+  object cdsmemory_itens: TClientDataSet
+    Aggregates = <>
+    CommandText = #39#39
+    FieldDefs = <>
+    IndexDefs = <>
+    Params = <>
+    StoreDefs = True
+    Left = 486
+    Top = 228
+    object cdsmemory_itensN: TStringField
+      FieldName = 'N'#186
+    end
+    object cdsmemory_itenscodigoproduto: TStringField
+      FieldName = 'codigoproduto'
+      OnGetText = cdsmemory_itenscodigoprodutoGetText
+    end
+    object strngfld_itensproduto: TStringField
+      FieldKind = fkInternalCalc
+      FieldName = 'produto'
+    end
+    object cdsmemory_itensquantida: TStringField
+      FieldName = 'quantida'
+    end
+    object cdsmemory_itensolun_itensvalorunitario: TFloatField
+      FieldKind = fkInternalCalc
+      FieldName = 'valorunitario'
+      DisplayFormat = '#,0.00'
+    end
+    object cdsmemory_itenscean: TStringField
+      FieldName = 'cean'
+    end
+    object cdsmemory_itensolunMemoryQuantidade: TFloatField
+      FieldName = 'Quantidade'
+    end
+  end
+  object cdsprodutos: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspprosutos'
+    RemoteServer = ponte.conponte
+    Left = 304
+    Top = 176
+    object cdsprodutoscodigo: TIntegerField
+      FieldName = 'codigo'
+    end
+    object cdsprodutosdescricao: TWideStringField
+      FieldName = 'descricao'
+      Size = 150
+    end
+    object cdsprodutoscfop: TWideStringField
+      FieldName = 'cfop'
+      Size = 150
+    end
+    object cdsprodutosespecie: TWideStringField
+      FieldName = 'especie'
+      Size = 150
+    end
+    object cdsprodutosdata_cadastro: TDateField
+      FieldName = 'data_cadastro'
+    end
+    object cdsprodutosstatus_produto: TWideStringField
+      FieldName = 'status_produto'
+      Size = 45
+    end
+    object cdsprodutoscomplemento: TWideStringField
+      FieldName = 'complemento'
+      Size = 300
+    end
+    object cdsprodutosmarca: TWideStringField
+      FieldName = 'marca'
+      Size = 150
+    end
+    object cdsprodutosfabricante: TWideStringField
+      FieldName = 'fabricante'
+      Size = 150
+    end
+    object cdsprodutosfornecedor: TWideStringField
+      FieldName = 'fornecedor'
+      Size = 150
+    end
+    object cdsprodutoscod_barra: TWideStringField
+      FieldName = 'cod_barra'
+      Size = 150
+    end
+    object cdsprodutossit_tributaria: TWideStringField
+      FieldName = 'sit_tributaria'
+      Size = 150
+    end
+    object cdsprodutosncm: TWideStringField
+      FieldName = 'ncm'
+      Size = 50
+    end
+    object cdsprodutoscean: TWideStringField
+      FieldName = 'cean'
+      Size = 100
+    end
+    object cdsprodutossaldo_loja: TFloatField
+      FieldName = 'saldo_loja'
+    end
+    object cdsprodutossaldo_deposito: TFloatField
+      FieldName = 'saldo_deposito'
+    end
+    object cdsprodutoscompra: TFloatField
+      FieldName = 'compra'
+    end
+    object cdsprodutosvenda: TFloatField
+      FieldName = 'venda'
+    end
+    object cdsprodutospromocao: TFloatField
+      FieldName = 'promocao'
+    end
+    object cdsprodutosultimo_reajuste: TDateField
+      FieldName = 'ultimo_reajuste'
+    end
+    object cdsprodutosultima_venda: TDateField
+      FieldName = 'ultima_venda'
+    end
+    object cdsprodutosdes_max: TFloatField
+      FieldName = 'des_max'
+    end
+    object cdsprodutosvalidade_produto: TDateField
+      FieldName = 'validade_produto'
+    end
+  end
+  object cdsfornecedor: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dsp_fornecedor'
+    RemoteServer = ponte.conponte
+    Left = 224
+    Top = 176
+    object cdsfornecedoridfornecedor: TIntegerField
+      FieldName = 'idfornecedor'
+    end
+    object cdsfornecedornome: TWideStringField
+      FieldName = 'nome'
+      Size = 150
+    end
+    object cdsfornecedorcep: TWideStringField
+      FieldName = 'cep'
+      Size = 100
+    end
+    object cdsfornecedorendereco: TWideStringField
+      FieldName = 'endereco'
+      Size = 150
+    end
+    object cdsfornecedorcidade: TWideStringField
+      FieldName = 'cidade'
+      Size = 200
+    end
+    object cdsfornecedoruf: TWideStringField
+      FieldName = 'uf'
+      Size = 150
+    end
+    object cdsfornecedorcomissao: TFloatField
+      FieldName = 'comissao'
+    end
+    object cdsfornecedorcnpj: TWideStringField
+      FieldName = 'cnpj'
+    end
+    object cdsfornecedorinsc_estadual: TWideStringField
+      FieldName = 'insc_estadual'
+      Size = 200
+    end
+    object cdsfornecedoremail: TWideStringField
+      FieldName = 'email'
+      Size = 150
+    end
+    object cdsfornecedortelefone_1: TWideStringField
+      FieldName = 'telefone_1'
+      Size = 50
+    end
+    object cdsfornecedortelefone_2: TWideStringField
+      FieldName = 'telefone_2'
+      Size = 50
+    end
+    object cdsfornecedordata_cadastro: TDateField
+      FieldName = 'data_cadastro'
+    end
+    object cdsfornecedorstatus_fornecedor: TWideStringField
+      FieldName = 'status_fornecedor'
+    end
+    object cdsfornecedorobser: TWideStringField
+      FieldName = 'obser'
+      Size = 300
+    end
+  end
+end

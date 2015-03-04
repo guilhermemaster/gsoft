@@ -98,7 +98,6 @@ object buscaNCM: TbuscaNCM
       end>
   end
   object cdsncm: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dsncm'

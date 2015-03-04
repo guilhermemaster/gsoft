@@ -497,26 +497,26 @@ object ponte: Tponte
     SQLConnection = con1
     Left = 16
     Top = 224
-    object colun_kardexidlancamneto: TIntegerField
+    object qry_kardexidlancamneto: TIntegerField
       FieldName = 'idlancamneto'
     end
-    object colun_kardexnota_referente: TIntegerField
+    object qry_kardexnota_referente: TIntegerField
       FieldName = 'nota_referente'
     end
-    object colun_kardexproduto: TWideStringField
+    object qry_kardexproduto: TWideStringField
       FieldName = 'produto'
       Size = 300
     end
-    object colun_kardexdata_lancamento: TDateField
+    object qry_kardexdata_lancamento: TDateField
       FieldName = 'data_lancamento'
     end
-    object colun_kardexestoque: TFloatField
+    object qry_kardexestoque: TFloatField
       FieldName = 'estoque'
     end
-    object colun_kardextipo: TWideStringField
+    object qry_kardextipo: TWideStringField
       FieldName = 'tipo'
     end
-    object colun_kardexquantidade: TIntegerField
+    object qry_kardexquantidade: TIntegerField
       FieldName = 'quantidade'
     end
   end

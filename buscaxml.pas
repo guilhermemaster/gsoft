@@ -64,6 +64,23 @@ type
     tributonota: TEdit;
     cdsmemory_itenscean: TStringField;
     cdsprodutos: TClientDataSet;
+    cdsmemory_itensN: TStringField;
+    cdsfornecedor: TClientDataSet;
+    cdsfornecedoridfornecedor: TIntegerField;
+    cdsfornecedornome: TWideStringField;
+    cdsfornecedorcep: TWideStringField;
+    cdsfornecedorendereco: TWideStringField;
+    cdsfornecedorcidade: TWideStringField;
+    cdsfornecedoruf: TWideStringField;
+    cdsfornecedorcomissao: TFloatField;
+    cdsfornecedorcnpj: TWideStringField;
+    cdsfornecedorinsc_estadual: TWideStringField;
+    cdsfornecedoremail: TWideStringField;
+    cdsfornecedortelefone_1: TWideStringField;
+    cdsfornecedortelefone_2: TWideStringField;
+    cdsfornecedordata_cadastro: TDateField;
+    cdsfornecedorstatus_fornecedor: TWideStringField;
+    cdsfornecedorobser: TWideStringField;
     cdsprodutoscodigo: TIntegerField;
     cdsprodutosdescricao: TWideStringField;
     cdsprodutoscfop: TWideStringField;
@@ -87,23 +104,6 @@ type
     cdsprodutosultima_venda: TDateField;
     cdsprodutosdes_max: TFloatField;
     cdsprodutosvalidade_produto: TDateField;
-    cdsmemory_itensN: TStringField;
-    cdsfornecedor: TClientDataSet;
-    cdsfornecedoridfornecedor: TIntegerField;
-    cdsfornecedornome: TWideStringField;
-    cdsfornecedorcep: TWideStringField;
-    cdsfornecedorendereco: TWideStringField;
-    cdsfornecedorcidade: TWideStringField;
-    cdsfornecedoruf: TWideStringField;
-    cdsfornecedorcomissao: TFloatField;
-    cdsfornecedorcnpj: TWideStringField;
-    cdsfornecedorinsc_estadual: TWideStringField;
-    cdsfornecedoremail: TWideStringField;
-    cdsfornecedortelefone_1: TWideStringField;
-    cdsfornecedortelefone_2: TWideStringField;
-    cdsfornecedordata_cadastro: TDateField;
-    cdsfornecedorstatus_fornecedor: TWideStringField;
-    cdsfornecedorobser: TWideStringField;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -144,9 +144,7 @@ procedure TForm6.Button1Click(Sender: TObject);
 begin
    if OpenDialog1.Execute then
    begin
-   //cdsmemory_itens.Insert;
-
-   if cdsmemory_itens.Active then
+    if cdsmemory_itens.Active then
    begin
     cdsmemory_itens.EmptyDataSet;
    end
@@ -154,12 +152,6 @@ begin
       begin
        cdsmemory_itens.CreateDataSet;
       end;
-
-
-
-
-   //cdsmemory_itens.Open;
-
 
    ACBrNFe1.NotasFiscais.Clear;
    Acbrnfe1.NotasFiscais.LoadFromFile(OpenDialog1.FileName);
@@ -174,24 +166,15 @@ procedure TForm6.Button2Click(Sender: TObject);
 begin
 while not ValidaCNPJExistentes() do
   begin
-       //ValidaCeanExistentes();
-       //Form5.ShowModal;
-       //TFurmcadastrofornecedor.ShowModal;
-
-
        TuFrmrapidofornecedor.ShowModal;
-
   end;
 
 
 while not ValidaCeanExistentes() do
   begin
-    //ValidaCeanExistentes();
-    //Form5.ShowModal;
-    ShowMessage('Cadastre os produtos da lista!!');
+     ShowMessage('Cadastre os produtos da lista!!');
     exit;
   end;
-   //4971850787518
    insercaokardex();
    Button2.Enabled:=False;
 

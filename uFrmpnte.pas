@@ -70,13 +70,6 @@ type
     colunqryconsultaestadofornecedorid: TIntegerField;
     qry_kardex: TSQLDataSet;
     dspkardex: TDataSetProvider;
-    colun_kardexidlancamneto: TIntegerField;
-    colun_kardexnota_referente: TIntegerField;
-    colun_kardexproduto: TWideStringField;
-    colun_kardexdata_lancamento: TDateField;
-    colun_kardexestoque: TFloatField;
-    colun_kardextipo: TWideStringField;
-    colun_kardexquantidade: TIntegerField;
     qry_ncm: TSQLDataSet;
     dsncm: TDataSetProvider;
     qry_ncmc_codigo: TWideStringField;
@@ -110,6 +103,13 @@ type
     qry_intens_tabelaconfins_vconfins: TWideStringField;
     qry_intens_tabelaitem: TWideStringField;
     qry_intens_tabelaquantidade: TFMTBCDField;
+    qry_kardexidlancamneto: TIntegerField;
+    qry_kardexnota_referente: TIntegerField;
+    qry_kardexproduto: TWideStringField;
+    qry_kardexdata_lancamento: TDateField;
+    qry_kardexestoque: TFloatField;
+    qry_kardextipo: TWideStringField;
+    qry_kardexquantidade: TIntegerField;
     qry_produtoscodigo: TIntegerField;
     qry_produtosdescricao: TWideStringField;
     qry_produtoscfop: TWideStringField;

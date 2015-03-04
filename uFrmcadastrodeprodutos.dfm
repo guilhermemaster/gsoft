@@ -1,7 +1,8 @@
 inherited Form5: TForm5
-  Top = 55
+  Left = 128
+  Top = 310
   Caption = 'Cadastro de Produtos'
-  Position = poScreenCenter
+  Position = poDesigned
   OnClose = FormClose
   ExplicitWidth = 713
   ExplicitHeight = 445
@@ -42,13 +43,9 @@ inherited Form5: TForm5
   inherited pnl1: TPanel
     inherited pgc1: TPageControl
       Width = 697
-      ActivePage = ts2
       ExplicitWidth = 697
       inherited ts1: TTabSheet
-        ExplicitLeft = 0
-        ExplicitTop = 0
         ExplicitWidth = 689
-        ExplicitHeight = 0
         inherited edt2: TEdit
           Left = 300
           Top = 24

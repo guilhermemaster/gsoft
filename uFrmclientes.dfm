@@ -295,6 +295,10 @@ object Form2: TForm2
       ImageIndex = 1
       OnEnter = ts2Enter
       OnShow = ts2Show
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lbl11: TLabel
         Left = 3
         Top = -1

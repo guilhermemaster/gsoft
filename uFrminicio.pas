@@ -158,7 +158,7 @@ end;
 
 procedure TForm1.Sair1Click(Sender: TObject);
 begin
-            Close;
+  Close;
 end;
 
 procedure TForm1.ToolButton1Click(Sender: TObject);

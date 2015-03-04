@@ -80,6 +80,7 @@ object TuFrmkardex: TTuFrmkardex
       Width = 463
       Height = 21
       Text = ''
+      CharCase = ecNormal
       Color = clWhite
       FocusColor = 13431548
       ParentShowHint = False
@@ -138,6 +139,7 @@ object TuFrmkardex: TTuFrmkardex
           Expanded = False
           FieldName = 'nota_referente'
           Title.Caption = 'Nota Referente'
+          Width = 64
           Visible = True
         end
         item
@@ -151,6 +153,7 @@ object TuFrmkardex: TTuFrmkardex
           Expanded = False
           FieldName = 'data_lancamento'
           Title.Caption = 'Data de Lan'#231'amento'
+          Width = 64
           Visible = True
         end
         item
@@ -161,15 +164,15 @@ object TuFrmkardex: TTuFrmkardex
         end
         item
           Expanded = False
-          FieldName = 'tipo'
-          Title.Caption = 'Tipo'
-          Width = 70
+          FieldName = 'quantidade'
+          Title.Caption = 'Quantidade'
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'quantidade'
-          Title.Caption = 'Quantidade'
+          FieldName = 'tipo'
+          Title.Caption = 'Tipo'
+          Width = 70
           Visible = True
         end>
     end
@@ -198,26 +201,26 @@ object TuFrmkardex: TTuFrmkardex
     RemoteServer = ponte.conponte
     Left = 450
     Top = 8
-    object coluncdskardexidlancamneto: TIntegerField
+    object cdskardexidlancamneto: TIntegerField
       FieldName = 'idlancamneto'
     end
-    object colun_referente: TIntegerField
+    object cdskardexnota_referente: TIntegerField
       FieldName = 'nota_referente'
     end
-    object coluncdskardexproduto: TWideStringField
+    object cdskardexproduto: TWideStringField
       FieldName = 'produto'
       Size = 300
     end
-    object colun_lancamento: TDateField
+    object cdskardexdata_lancamento: TDateField
       FieldName = 'data_lancamento'
     end
-    object coluncdskardexestoque: TFloatField
+    object cdskardexestoque: TFloatField
       FieldName = 'estoque'
     end
-    object coluncdskardextipo: TWideStringField
+    object cdskardextipo: TWideStringField
       FieldName = 'tipo'
     end
-    object coluncdskardexquantidade: TIntegerField
+    object cdskardexquantidade: TIntegerField
       FieldName = 'quantidade'
     end
   end

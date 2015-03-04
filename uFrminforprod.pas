@@ -51,6 +51,7 @@ type
     Button1: TButton;
     procedure FormShow(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+
   private
     { Private declarations }
   public
@@ -68,13 +69,20 @@ uses buscaxml;
 
 procedure TForm7.Button1Click(Sender: TObject);
 begin
-
+    {
       Try
        cdsprodutos.Post;
   Except
   ShowMessage('Produto já cadastrado');
   Close;
   End;
+    }
+  Try
+  cdsprodutos.Post;
+  except// on EDataBaseError do
+  ShowMessage('Produto já cadastrado');
+  close;
+  end;
 
   cdsprodutos.ApplyUpdates(0);
 
@@ -84,6 +92,8 @@ begin
       cdsprodutos.Insert;
       Close;
 end;
+
+
 
 procedure TForm7.FormShow(Sender: TObject);
 begin

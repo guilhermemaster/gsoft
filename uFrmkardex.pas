@@ -19,13 +19,6 @@ type
     btn1: TButton;
     cdskardex: TClientDataSet;
     dskardex: TDataSource;
-    coluncdskardexidlancamneto: TIntegerField;
-    colun_referente: TIntegerField;
-    coluncdskardexproduto: TWideStringField;
-    colun_lancamento: TDateField;
-    coluncdskardexestoque: TFloatField;
-    coluncdskardextipo: TWideStringField;
-    coluncdskardexquantidade: TIntegerField;
     pdbplnkardex: TppDBPipeline;
     Relatoriokardex: TppReport;
     btncbbproduto: TxButtonEdit;
@@ -59,6 +52,13 @@ type
     plbl9: TppLabel;
     psystmvrbl2: TppSystemVariable;
     btn3: TButton;
+    cdskardexidlancamneto: TIntegerField;
+    cdskardexnota_referente: TIntegerField;
+    cdskardexproduto: TWideStringField;
+    cdskardexdata_lancamento: TDateField;
+    cdskardexestoque: TFloatField;
+    cdskardextipo: TWideStringField;
+    cdskardexquantidade: TIntegerField;
     procedure FormShow(Sender: TObject);
     procedure btn1Click(Sender: TObject);
     procedure cbbprodutoButtonClick(Sender: TObject);
